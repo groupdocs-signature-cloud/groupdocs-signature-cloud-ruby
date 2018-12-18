@@ -1,0 +1,10 @@
+{
+    "//": "Get your AppSID and AppKey at https://dashboard.groupdocs.cloud (free registration is required).",
+    "AppSID": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
+    "AppKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+	"ApiHost": "http://api-qa.groupdocs.cloud",
+    "ApiBaseUrl": "http://api-qa.groupdocs.cloud/v1",
+    "SkipFilesUploading": "True",
+    "UploadOnlyMissingFiles": "False"
+	
+}

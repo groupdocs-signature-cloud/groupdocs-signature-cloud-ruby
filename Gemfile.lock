@@ -1,0 +1,35 @@
+PATH
+  remote: .
+  specs:
+    groupdocs_signature_cloud (18.12)
+      addressable (~> 2.5.0, >= 2.5.0)
+      faraday (~> 0.14.0)
+      mimemagic (~> 0.3.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    faraday (0.14.0)
+      multipart-post (>= 1.2, < 3)
+    groupdocs_signature_cloud (18.11.0)
+      faraday (~> 0.14.0)
+      mimemagic (~> 0.3.2)
+    mimemagic (0.3.2)
+    minitest (5.11.3)
+    multipart-post (2.0.0)
+    public_suffix (3.0.3)
+    rake (12.0.0)
+
+PLATFORMS
+  x64-mingw32
+
+DEPENDENCIES
+  groupdocs_signature_cloud (~> 18.11, >= 18.10)
+  groupdocs_signature_cloud!
+  minitest (~> 5.11, >= 5.11.3)
+  rake (~> 12.0.0)
+
+BUNDLED WITH
+   1.16.5
