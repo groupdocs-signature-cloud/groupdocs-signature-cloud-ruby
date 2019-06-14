@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    groupdocs_signature_cloud (18.8)
+    groupdocs_signature_cloud (19.6)
       addressable (~> 2.5.0, >= 2.5.0)
       faraday (~> 0.14.0)
       mimemagic (~> 0.3.2)
@@ -13,23 +13,19 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
-    groupdocs_storage_cloud (18.6.0)
-      faraday (~> 0.14.0)
-      mimemagic (~> 0.3.2)
-    mimemagic (0.3.2)
+    mimemagic (0.3.3)
     minitest (5.11.3)
-    multipart-post (2.0.0)
-    public_suffix (3.0.3)
+    multipart-post (2.1.1)
+    public_suffix (3.1.0)
     rake (12.0.0)
 
 PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  groupdocs_storage_cloud (~> 18.6, >= 18.5)
   groupdocs_signature_cloud!
   minitest (~> 5.11, >= 5.11.3)
   rake (~> 12.0.0)
 
 BUNDLED WITH
-   1.16.5
+   1.16.6

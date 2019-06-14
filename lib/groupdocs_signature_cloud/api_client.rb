@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="api_client.rb">
-#   Copyright (c) 2003-2018 Aspose Pty Ltd
+#   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,7 +51,7 @@ module GroupDocsSignatureCloud
     def initialize(config)
       @config = config
       @default_headers = {
-        'Content-Type' => "application/json",
+        'Content-Type' => config.api_version == '' ? "application/x-www-form-urlencoded" : "application/json",
         'x-groupdocs-client' => "ruby sdk",
         'x-groupdocs-version' => GroupDocsSignatureCloud::VERSION.to_s
       }
@@ -111,11 +111,13 @@ module GroupDocsSignatureCloud
         end
       end
 
-      conn = Faraday.new url, { :params => query_params, :headers => header_params } do |f|
+      conn = Faraday.new url, { :params => query_params, :headers => header_params} do |f|
       f.request :multipart
       f.request :url_encoded
       f.adapter Faraday.default_adapter
       end
+
+      conn.options.timeout = 30
 
       case http_method
       when :post
@@ -273,7 +275,9 @@ module GroupDocsSignatureCloud
     # @return [String] HTTP body data in the form of string
     def build_request_body(header_params, form_params, body)
       # http form
-      if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
+      if body
+        data = body.is_a?(String) ? body : body.to_json      
+      elsif header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
           header_params['Content-Type'] == 'multipart/form-data'
         data = {}
         form_params.each do |key, value|
@@ -286,8 +290,6 @@ module GroupDocsSignatureCloud
             data[key] = value.to_s
           end
         end
-      elsif body
-        data = body.is_a?(String) ? body : body.to_json
       else
         data = nil
       end

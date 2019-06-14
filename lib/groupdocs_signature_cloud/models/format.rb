@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="format.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,28 +28,28 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Format description.
+  # File format
   class Format
 
-    # File format.
-    attr_accessor :file_format
-
-    # File extension.
+    # File format extension
     attr_accessor :extension
+
+    # File format name
+    attr_accessor :file_format
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'file_format' => :'FileFormat',
-        :'extension' => :'Extension'
+        :'extension' => :'Extension',
+        :'file_format' => :'FileFormat'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'file_format' => :'String',
-        :'extension' => :'String'
+        :'extension' => :'String',
+        :'file_format' => :'String'
       }
     end
 
@@ -61,19 +61,14 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
-      end
-
       if attributes.key?(:'Extension')
         self.extension = attributes[:'Extension']
       end
 
-	  
-	  if !((defined? options_type) == nil)
-        self.options_type = "Format"
+      if attributes.key?(:'FileFormat')
+        self.file_format = attributes[:'FileFormat']
       end
-	  
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -94,8 +89,8 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          file_format == other.file_format &&
-          extension == other.extension
+          extension == other.extension &&
+          file_format == other.file_format
     end
 
     # @see the `==` method
@@ -107,7 +102,13 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_format, extension].hash
+      [extension, file_format].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -116,37 +117,20 @@ module GroupDocsSignatureCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
-
-        attributeName = self.class.attribute_map[key]
-        attributeNameLowerStr = attributeName.to_s
-        attributeNameLowerStr[0] = attributeNameLowerStr[0].downcase
-        attributeNameLower = attributeNameLowerStr.to_sym
-        attributeNameLowerStr2 = attributeName.to_s
-        attributeNameLowerStr2[0] = attributeNameLowerStr[0].downcase
-        attributeNameLowerStr2[1] = attributeNameLowerStr[1].downcase
-        attributeNameLower2 = attributeNameLowerStr2.to_sym
-
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[attributeName].is_a?(Array)
-            self.send("#{key}=", attributes[attributeName].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-          if attributes[attributeNameLower].is_a?(Array)
-            self.send("#{key}=", attributes[attributeNameLower].map { |v| _deserialize($1, v) })
-          end
-          if attributes[attributeNameLower2].is_a?(Array)
-            self.send("#{key}=", attributes[attributeNameLower2].map { |v| _deserialize($1, v) })
-          end
-        elsif !attributes[attributeName].nil?
-          self.send("#{key}=", _deserialize(type, attributes[attributeName]))
-        elsif !attributes[attributeNameLower].nil?
-          self.send("#{key}=", _deserialize(type, attributes[attributeNameLower]))
-        elsif !attributes[attributeNameLower2].nil?
-          self.send("#{key}=", _deserialize(type, attributes[attributeNameLower2]))
+        elsif !value.nil?                  
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end
+
       self
     end
 
@@ -157,9 +141,9 @@ module GroupDocsSignatureCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer
@@ -188,7 +172,12 @@ module GroupDocsSignatureCloud
         end
       else
       # model
-        temp_model = GroupDocsSignatureCloud.const_get(type).new
+        # Signature type fix
+        ttype = type
+        if value.is_a?(Hash) and !value[:signatureType].nil?
+          ttype = value[:signatureType] + 'Signature'
+        end      
+        temp_model = GroupDocsSignatureCloud.const_get(ttype).new
         temp_model.build_from_hash(value)
       end
     end

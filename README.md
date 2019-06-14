@@ -12,7 +12,7 @@ gem install groupdocs_signature_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_signature_cloud", "~> 18.8"
+gem "groupdocs_signature_cloud", "~> 19.5"
 ```
 
 ## Getting Started
@@ -27,14 +27,10 @@ app_sid = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 app_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 # Create instance of the API class
-conf = GroupDocsSignatureCloud::Configuration.new(app_sid, app_key)
-conf.api_host = "http://api-qa.groupdocs.cloud"
-conf.api_base_url = "ApiBaseUrl": "http://api-qa.groupdocs.cloud"
-			
-api = GroupDocsSignatureCloud::SignatureApi.new(conf)
+api = GroupDocsSignatureCloud::InfoApi.from_keys(app_sid, app_key)
 
 # Retrieve supported file-formats
-response = api.get_supported_formats()
+response = api.get_supported_file_formats
 
 # Print out supported file-formats
 puts("Supported file-formats:")

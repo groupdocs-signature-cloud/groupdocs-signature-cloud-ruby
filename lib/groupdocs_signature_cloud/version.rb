@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="version.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,5 +25,5 @@
  # --------------------------------------------------------------------------------------------------------------------
  #
 module GroupDocsSignatureCloud
-  VERSION = "18.12".freeze
+  VERSION = "19.5".freeze
 end

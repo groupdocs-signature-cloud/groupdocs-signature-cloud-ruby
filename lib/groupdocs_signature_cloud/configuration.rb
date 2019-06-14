@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="configuration.rb">
-#   Copyright (c) 2003-2018 Aspose Pty Ltd
+#   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,17 +29,12 @@ module GroupDocsSignatureCloud
   #
   class Configuration
     
-    # Api base url, default is 'https://localhost'
+    # Api base url, default is 'https://api.groupdocs.cloud'
     #
     # @return [String] Api base url
     attr_accessor :api_base_url
 
-    # Api host url'
-    #
-    # @return [String] Api host url
-    attr_accessor :api_host
-
-    # Api version, default is '/v1'
+    # Api version, default is '/v2.0'
     #
     # @return [String] Api version
     attr_accessor :api_version
@@ -53,16 +48,6 @@ module GroupDocsSignatureCloud
     #
     # @return [String] Application private key (App Key)
     attr_accessor :app_key
-
-    # Skip files uploading
-    #
-    # @return [String] Skip files uploading
-    attr_accessor :skip_files_uploading
-
-    # Upload only missing files
-    #
-    # @return [String] Upload only missing files
-    attr_accessor :upload_only_missing_files
 
     # Set this to enable/disable debugging. When enabled (set to true), HTTP request/response
     # details will be logged with `logger.debug` (see the `logger` attribute).
@@ -95,8 +80,8 @@ module GroupDocsSignatureCloud
     # @param [app_key] Application private key (App Key)
     # @return [Configuration] New instance of Configuration
     def initialize(app_sid, app_key)
-      @api_base_url = "https://localhost"
-      @api_version = '/v1'
+      @api_base_url = "https://api.groupdocs.cloud"
+      @api_version = '/v2.0'
       @app_sid = app_sid
       @app_key = app_key
       @client_side_validation = true
