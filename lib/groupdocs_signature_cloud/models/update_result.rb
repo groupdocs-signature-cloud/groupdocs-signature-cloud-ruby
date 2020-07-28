@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="info_result.rb">
+ # <copyright company="Aspose Pty Ltd" file="update_result.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,52 +28,28 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Document info result
-  class InfoResult
+  # Update result information
+  class UpdateResult
 
-    # File info
+    # Source document basic info
     attr_accessor :file_info
 
-    # Document extension
-    attr_accessor :extension
-
-    # Document file format
-    attr_accessor :file_format
-
-    # Document size in bytes
+    # Source document size in bytes
     attr_accessor :size
 
-    # Count of pages in document
-    attr_accessor :pages_count
+    # List of successfully modified signatures
+    attr_accessor :succeeded
 
-    # Document created date
-    attr_accessor :date_created
-
-    # Document modification date
-    attr_accessor :date_modified
-
-    # Specifies width for max height of document page
-    attr_accessor :width_for_max_height
-
-    # Specifies max page height
-    attr_accessor :max_page_height
-
-    # List of document pages descriptions
-    attr_accessor :pages
+    # List of signatures that were not updated
+    attr_accessor :failed
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'file_info' => :'FileInfo',
-        :'extension' => :'Extension',
-        :'file_format' => :'FileFormat',
         :'size' => :'Size',
-        :'pages_count' => :'PagesCount',
-        :'date_created' => :'DateCreated',
-        :'date_modified' => :'DateModified',
-        :'width_for_max_height' => :'WidthForMaxHeight',
-        :'max_page_height' => :'MaxPageHeight',
-        :'pages' => :'Pages'
+        :'succeeded' => :'Succeeded',
+        :'failed' => :'Failed'
       }
     end
 
@@ -81,15 +57,9 @@ module GroupDocsSignatureCloud
     def self.swagger_types
       {
         :'file_info' => :'FileInfo',
-        :'extension' => :'String',
-        :'file_format' => :'String',
         :'size' => :'Integer',
-        :'pages_count' => :'Integer',
-        :'date_created' => :'DateTime',
-        :'date_modified' => :'DateTime',
-        :'width_for_max_height' => :'Integer',
-        :'max_page_height' => :'Integer',
-        :'pages' => :'Array<PageInfo>'
+        :'succeeded' => :'Array<Signature>',
+        :'failed' => :'Array<Signature>'
       }
     end
 
@@ -105,41 +75,19 @@ module GroupDocsSignatureCloud
         self.file_info = attributes[:'FileInfo']
       end
 
-      if attributes.key?(:'Extension')
-        self.extension = attributes[:'Extension']
-      end
-
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
-      end
-
       if attributes.key?(:'Size')
         self.size = attributes[:'Size']
       end
 
-      if attributes.key?(:'PagesCount')
-        self.pages_count = attributes[:'PagesCount']
+      if attributes.key?(:'Succeeded')
+        if (value = attributes[:'Succeeded']).is_a?(Array)
+          self.succeeded = value
+        end
       end
 
-      if attributes.key?(:'DateCreated')
-        self.date_created = attributes[:'DateCreated']
-      end
-
-      if attributes.key?(:'DateModified')
-        self.date_modified = attributes[:'DateModified']
-      end
-
-      if attributes.key?(:'WidthForMaxHeight')
-        self.width_for_max_height = attributes[:'WidthForMaxHeight']
-      end
-
-      if attributes.key?(:'MaxPageHeight')
-        self.max_page_height = attributes[:'MaxPageHeight']
-      end
-
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
+      if attributes.key?(:'Failed')
+        if (value = attributes[:'Failed']).is_a?(Array)
+          self.failed = value
         end
       end
 
@@ -153,26 +101,6 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'size', size cannot be nil.")
       end
 
-      if @pages_count.nil?
-        invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
-      end
-
-      if @date_created.nil?
-        invalid_properties.push("invalid value for 'date_created', date_created cannot be nil.")
-      end
-
-      if @date_modified.nil?
-        invalid_properties.push("invalid value for 'date_modified', date_modified cannot be nil.")
-      end
-
-      if @width_for_max_height.nil?
-        invalid_properties.push("invalid value for 'width_for_max_height', width_for_max_height cannot be nil.")
-      end
-
-      if @max_page_height.nil?
-        invalid_properties.push("invalid value for 'max_page_height', max_page_height cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -180,11 +108,6 @@ module GroupDocsSignatureCloud
     # @return true if the model is valid
     def valid?
       return false if @size.nil?
-      return false if @pages_count.nil?
-      return false if @date_created.nil?
-      return false if @date_modified.nil?
-      return false if @width_for_max_height.nil?
-      return false if @max_page_height.nil?
       return true
     end
 
@@ -194,15 +117,9 @@ module GroupDocsSignatureCloud
       return true if self.equal?(other)
       self.class == other.class &&
           file_info == other.file_info &&
-          extension == other.extension &&
-          file_format == other.file_format &&
           size == other.size &&
-          pages_count == other.pages_count &&
-          date_created == other.date_created &&
-          date_modified == other.date_modified &&
-          width_for_max_height == other.width_for_max_height &&
-          max_page_height == other.max_page_height &&
-          pages == other.pages
+          succeeded == other.succeeded &&
+          failed == other.failed
     end
 
     # @see the `==` method
@@ -214,7 +131,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, extension, file_format, size, pages_count, date_created, date_modified, width_for_max_height, max_page_height, pages].hash
+      [file_info, size, succeeded, failed].hash
     end
 
     # Downcases first letter.

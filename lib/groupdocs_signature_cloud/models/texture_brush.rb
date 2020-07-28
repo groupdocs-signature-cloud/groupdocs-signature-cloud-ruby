@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="texture_brush.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,14 +34,14 @@ module GroupDocsSignatureCloud
     # Internal property that specify the current brush type
     attr_accessor :brush_type
 
-    # Gets or sets the texture image file Guid
-    attr_accessor :image_guid
+    # Gets or sets the texture image file path
+    attr_accessor :image_file_path
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'brush_type' => :'BrushType',
-        :'image_guid' => :'ImageGuid'
+        :'image_file_path' => :'ImageFilePath'
       }
     end
 
@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
     def self.swagger_types
       {
         :'brush_type' => :'String',
-        :'image_guid' => :'String'
+        :'image_file_path' => :'String'
       }
     end
 
@@ -65,8 +65,8 @@ module GroupDocsSignatureCloud
         self.brush_type = attributes[:'BrushType']
       end
 
-      if attributes.key?(:'ImageGuid')
-        self.image_guid = attributes[:'ImageGuid']
+      if attributes.key?(:'ImageFilePath')
+        self.image_file_path = attributes[:'ImageFilePath']
       end
 
     end
@@ -90,7 +90,7 @@ module GroupDocsSignatureCloud
       return true if self.equal?(other)
       self.class == other.class &&
           brush_type == other.brush_type &&
-          image_guid == other.image_guid
+          image_file_path == other.image_file_path
     end
 
     # @see the `==` method
@@ -102,7 +102,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [brush_type, image_guid].hash
+      [brush_type, image_file_path].hash
     end
 
     # Downcases first letter.

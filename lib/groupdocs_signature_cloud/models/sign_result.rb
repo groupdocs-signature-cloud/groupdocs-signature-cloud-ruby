@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="sign_result.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,12 +40,20 @@ module GroupDocsSignatureCloud
     # ULR to retrieve signed file
     attr_accessor :download_url
 
+    # List of newly created signatures
+    attr_accessor :succeeded
+
+    # List of signatures that were failed to create
+    attr_accessor :failed
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'file_info' => :'FileInfo',
         :'size' => :'Size',
-        :'download_url' => :'DownloadUrl'
+        :'download_url' => :'DownloadUrl',
+        :'succeeded' => :'Succeeded',
+        :'failed' => :'Failed'
       }
     end
 
@@ -54,7 +62,9 @@ module GroupDocsSignatureCloud
       {
         :'file_info' => :'FileInfo',
         :'size' => :'Integer',
-        :'download_url' => :'String'
+        :'download_url' => :'String',
+        :'succeeded' => :'Array<Signature>',
+        :'failed' => :'Array<Signature>'
       }
     end
 
@@ -76,6 +86,18 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'DownloadUrl')
         self.download_url = attributes[:'DownloadUrl']
+      end
+
+      if attributes.key?(:'Succeeded')
+        if (value = attributes[:'Succeeded']).is_a?(Array)
+          self.succeeded = value
+        end
+      end
+
+      if attributes.key?(:'Failed')
+        if (value = attributes[:'Failed']).is_a?(Array)
+          self.failed = value
+        end
       end
 
     end
@@ -105,7 +127,9 @@ module GroupDocsSignatureCloud
       self.class == other.class &&
           file_info == other.file_info &&
           size == other.size &&
-          download_url == other.download_url
+          download_url == other.download_url &&
+          succeeded == other.succeeded &&
+          failed == other.failed
     end
 
     # @see the `==` method
@@ -117,7 +141,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, size, download_url].hash
+      [file_info, size, download_url, succeeded, failed].hash
     end
 
     # Downcases first letter.

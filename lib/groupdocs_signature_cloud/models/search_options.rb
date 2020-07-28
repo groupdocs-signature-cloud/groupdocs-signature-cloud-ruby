@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="search_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,9 +30,6 @@ require 'date'
 module GroupDocsSignatureCloud
   # Defines options for signature Search within a document
   class SearchOptions
-
-    # Specifies the type of document to process
-    attr_accessor :document_type
 
     # Specifies the signature type of processing
     attr_accessor :signature_type
@@ -70,7 +67,6 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'document_type' => :'DocumentType',
         :'signature_type' => :'SignatureType',
         :'page' => :'Page',
         :'all_pages' => :'AllPages',
@@ -81,7 +77,6 @@ module GroupDocsSignatureCloud
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'document_type' => :'String',
         :'signature_type' => :'String',
         :'page' => :'Integer',
         :'all_pages' => :'BOOLEAN',
@@ -96,10 +91,6 @@ module GroupDocsSignatureCloud
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.key?(:'DocumentType')
-        self.document_type = attributes[:'DocumentType']
-      end
 
       if attributes.key?(:'SignatureType')
         self.signature_type = attributes[:'SignatureType']
@@ -123,10 +114,6 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @document_type.nil?
-        invalid_properties.push("invalid value for 'document_type', document_type cannot be nil.")
-      end
-
       if @signature_type.nil?
         invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
       end
@@ -141,28 +128,11 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @document_type.nil?
-      document_type_validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      return false unless document_type_validator.valid?(@document_type)
       return false if @signature_type.nil?
       signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
       return false unless signature_type_validator.valid?(@signature_type)
       return false if @all_pages.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] document_type Object to be assigned
-    def document_type=(document_type)
-      validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      if document_type.to_i == 0
-        unless validator.valid?(document_type)
-          raise ArgumentError, "invalid value for 'document_type', must be one of #{validator.allowable_values}."
-        end
-        @document_type = document_type
-      else
-        @document_type = validator.allowable_values[document_type.to_i]
-      end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -184,7 +154,6 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          document_type == other.document_type &&
           signature_type == other.signature_type &&
           page == other.page &&
           all_pages == other.all_pages &&
@@ -200,7 +169,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [document_type, signature_type, page, all_pages, pages_setup].hash
+      [signature_type, page, all_pages, pages_setup].hash
     end
 
     # Downcases first letter.

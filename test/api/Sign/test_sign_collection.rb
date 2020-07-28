@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ module GroupDocsSignatureCloud
     def test_sign_collection_image
       test_file = TestFile.image_jpg
       signedFileName = "Output\\ImageCollectionSigned.jpg"         
-      settings = populate_options(signedFileName, 'Image', test_file)               
+      settings = populate_options_image(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
     end
@@ -42,7 +42,7 @@ module GroupDocsSignatureCloud
     def test_sign_collection_pdf
       test_file = TestFile.pdf_one_page
       signedFileName = "Output\\PdfCollectionSigned.pdf"          
-      settings = populate_options(signedFileName, 'Pdf', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
     end
@@ -50,7 +50,7 @@ module GroupDocsSignatureCloud
     def test_sign_collection_presentation
       test_file = TestFile.presentation_pptx
       signedFileName = "Output\\PresentationCollectionSigned.pptx"       
-      settings = populate_options(signedFileName, 'Presentation', test_file)               
+      settings = populate_options_image(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
     end
@@ -58,7 +58,7 @@ module GroupDocsSignatureCloud
     def test_sign_collection_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
       signedFileName = "Output\\SpreadsheetCollectionSigned.xlsx"
-      settings = populate_options(signedFileName, 'Spreadsheet', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
     end
@@ -66,14 +66,13 @@ module GroupDocsSignatureCloud
     def test_sign_collection_wordprocessing
       test_file = TestFile.word_docx
       signedFileName = "Output\\WordCollectionSigned.docx"
-      settings = populate_options(signedFileName, 'WordProcessing', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     
     end    
 
-    def barcode_opts(documentType)
+    def barcode_opts()
       opts = SignBarcodeOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Barcode'
       opts.barcode_type = 'Code128'
       opts.text = '123456789012'
@@ -97,16 +96,18 @@ module GroupDocsSignatureCloud
       # set signature appearance
       opts.fore_color = Color.new
       opts.fore_color.web = "BlueViolet"
-      opts.border_color = Color.new
-      opts.border_color.web = "DarkOrange"
+      opts.border = BorderLine.new
+      opts.border.color = Color.new
+      opts.border.color.web = "DarkOrange"
+      opts.border.visible = true
+      opts.border.style = "Dash"
+      opts.border.weight = 12
+
       opts.background_color = Color.new
       opts.background_color.web = "DarkOrange"
-      opts.opacity = 0.8
+      opts.transparency = 0.8
       opts.inner_margins = Padding.new
-      opts.inner_margins.all = 2
-      opts.border_visiblity = true
-      opts.border_dash_style = "Dash"
-      opts.border_weight = 12        
+      opts.inner_margins.all = 2       
 
       opts.page = 1
       opts.all_pages = false
@@ -120,9 +121,8 @@ module GroupDocsSignatureCloud
       opts
     end
 
-    def qr_code_opts(documentType)
+    def qr_code_opts()
       opts = SignQRCodeOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'QRCode'
       opts.text = 'John Smit'
       opts.qr_code_type = 'Aztec'  
@@ -145,16 +145,18 @@ module GroupDocsSignatureCloud
       # set signature appearance
       opts.fore_color = Color.new
       opts.fore_color.web = "BlueViolet"
-      opts.border_color = Color.new
-      opts.border_color.web = "DarkOrange"
+      opts.border = BorderLine.new
+      opts.border.color = Color.new
+      opts.border.color.web = "DarkOrange"
+      opts.border.visible = true
+      opts.border.style = "Dash"
+      opts.border.weight = 12
+
       opts.background_color = Color.new
       opts.background_color.web = "DarkOrange"
-      opts.opacity = 0.8
+      opts.transparency = 0.8
       opts.inner_margins = Padding.new
-      opts.inner_margins.all = 2
-      opts.border_visiblity = true
-      opts.border_dash_style = "Dash"
-      opts.border_weight = 12        
+      opts.inner_margins.all = 2   
 
       opts.page = 1
       opts.all_pages = false
@@ -168,21 +170,19 @@ module GroupDocsSignatureCloud
       opts
     end  
 
-    def digital_opts(documentType)
+    def digital_opts()
       opts = SignDigitalOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Digital'
-      opts.image_guid = TestFile.additional_signature01.path
-      opts.certificate_guid = TestFile.additional_pfx.path
+      opts.image_file_path = TestFile.additional_signature01.path
+      opts.certificate_file_path = TestFile.additional_pfx.path
       opts.password = '1234567890'       
       opts
     end      
 
-    def image_opts(documentType)
+    def image_opts()
       opts = SignImageOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Image'
-      opts.image_guid = TestFile.image_sign.path
+      opts.image_file_path = TestFile.image_sign.path
 
       # set signature position on a page
       opts.left = 100
@@ -199,7 +199,7 @@ module GroupDocsSignatureCloud
       opts.margin_measure_type = "Pixels"
 
       # set signature appearance
-      opts.opacity = 0.8
+      opts.transparency = 0.8
 
       opts.page = 1
       opts.all_pages = false
@@ -213,11 +213,10 @@ module GroupDocsSignatureCloud
       opts
     end  
     
-    def stamp_opts(documentType)
+    def stamp_opts()
       opts = SignStampOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Stamp'
-      opts.image_guid = TestFile.image_sign.path
+      opts.image_file_path = TestFile.image_sign.path
 
       # set signature position on a page
       opts.left = 100
@@ -238,7 +237,7 @@ module GroupDocsSignatureCloud
       opts.background_color.web = "CornflowerBlue"   
       opts.background_color_crop_type = "InnerArea"
       opts.background_image_crop_type = "MiddleArea"
-      opts.opacity = 0.8
+      opts.transparency = 0.8
 
       outline = StampLine.new
       outline.text = "John Smith"
@@ -312,9 +311,8 @@ module GroupDocsSignatureCloud
       opts
     end  
     
-    def text_opts(documentType)
+    def text_opts()
       opts = SignTextOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Text'        
       opts.text = 'John Smith'
 
@@ -342,12 +340,14 @@ module GroupDocsSignatureCloud
       opts.font.underline = false        
       opts.fore_color = Color.new
       opts.fore_color.web = "BlueViolet"
-      opts.border_color = Color.new
-      opts.border_color.web = "DarkOrange"
+      opts.border = BorderLine.new
+      opts.border.color = Color.new
+      opts.border.color.web = "DarkOrange"
+      opts.border.visible = true
+      opts.border.style = "Dash"
+
       opts.background_color = Color.new
       opts.background_color.web = "DarkOrange"
-      opts.border_visiblity = true
-      opts.border_dash_style = "Dash"  
 
       opts.page = 1
       opts.all_pages = false
@@ -361,24 +361,28 @@ module GroupDocsSignatureCloud
       opts
     end      
 
-    def populate_options(signedFileName, documentType, testFile)
+    def populate_options_image(signedFileName, testFile)
+      settings = SignSettings.new
+      settings.file_info = testFile.file_info
+      settings.options = [barcode_opts(),
+                          qr_code_opts(),
+                          image_opts(),
+                          stamp_opts(),
+                          text_opts()]
+      settings.save_options = SaveOptions.new
+      settings.save_options.output_file_path = signedFileName
+      settings
+    end
+
+    def populate_options(signedFileName, testFile)
         settings = SignSettings.new
         settings.file_info = testFile.file_info
-        if (documentType == "Image" or documentType == "Presentation")
-          settings.options = [barcode_opts(documentType),
-                              qr_code_opts(documentType),
-                              image_opts(documentType),
-                              stamp_opts(documentType),
-                              text_opts(documentType)]
-                              
-        else
-          settings.options = [barcode_opts(documentType),
-                              qr_code_opts(documentType),
-                              digital_opts(documentType),
-                              image_opts(documentType),
-                              stamp_opts(documentType),
-                              text_opts(documentType)]
-        end
+        settings.options = [barcode_opts(),
+                            qr_code_opts(),
+                            digital_opts(),
+                            image_opts(),
+                            stamp_opts(),
+                            text_opts()]
         settings.save_options = SaveOptions.new
         settings.save_options.output_file_path = signedFileName
         settings

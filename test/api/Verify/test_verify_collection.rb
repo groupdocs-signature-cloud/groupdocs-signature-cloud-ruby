@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,42 +33,41 @@ module GroupDocsSignatureCloud
     
     def test_verify_collection_image
       test_file = TestFile.image_signed
-      settings = populate_options('Image', test_file)               
+      settings = populate_options_image(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)    
     end
 
     def test_verify_collection_pdf
       test_file = TestFile.pdf_signed
-      settings = populate_options('Pdf', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)        
     end
     
     def test_verify_collection_presentation
       test_file = TestFile.presentation_signed
-      settings = populate_options('Presentation', test_file)               
+      settings = populate_options_image(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)       
     end
     
     def test_verify_collection_spreadsheet
       test_file = TestFile.spreadsheet_signed
-      settings = populate_options('Spreadsheet', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)      
     end
     
     def test_verify_collection_wordprocessing
       test_file = TestFile.wordprocessing_signed
-      settings = populate_options('WordProcessing', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)     
     end    
 
-    def barcode_opts(documentType)
+    def barcode_opts()
       opts = VerifyBarcodeOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Barcode'
       opts.barcode_type = 'Code39Standard'
       opts.text = '123456789012'
@@ -87,9 +86,8 @@ module GroupDocsSignatureCloud
       opts
     end
 
-    def qr_code_opts(documentType)
+    def qr_code_opts()
       opts = VerifyQRCodeOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'QRCode'
       opts.qr_code_type = 'Aztec'
       opts.text = 'John Smith'
@@ -108,9 +106,8 @@ module GroupDocsSignatureCloud
       opts
     end    
 
-    def digital_opts(documentType)
+    def digital_opts()
       opts = VerifyDigitalOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Digital' 
 
       opts.page = 1
@@ -126,9 +123,8 @@ module GroupDocsSignatureCloud
       opts
     end  
     
-    def text_opts(documentType)
+    def text_opts()
       opts = VerifyTextOptions.new
-      opts.document_type = documentType
       opts.signature_type = 'Text'
       opts.text = 'John Smith'
       opts.match_type = 'Contains' 
@@ -146,22 +142,21 @@ module GroupDocsSignatureCloud
       opts
     end      
 
-    def populate_options(documentType, testFile)
+    def populate_options_image(testFile)
+      settings = VerifySettings.new
+      settings.file_info = testFile.file_info      
+      settings.options = [barcode_opts(),
+                          qr_code_opts()]
+      settings
+    end
+
+    def populate_options(testFile)
       settings = VerifySettings.new
       settings.file_info = testFile.file_info
-      if (documentType == "Image")
-        settings.options = [barcode_opts(documentType),
-                            qr_code_opts(documentType)]
-      elsif (documentType == "Presentation")
-        settings.options = [barcode_opts(documentType),
-                            qr_code_opts(documentType),
-                            text_opts(documentType)]                                
-      else
-        settings.options = [barcode_opts(documentType),
-                            qr_code_opts(documentType),
-                            digital_opts(documentType),
-                            text_opts(documentType)]
-      end
+      settings.options = [barcode_opts(),
+                          qr_code_opts(),
+                          digital_opts(),
+                          text_opts()]
       settings
     end
 

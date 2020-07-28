@@ -12,7 +12,7 @@ gem install groupdocs_signature_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_signature_cloud", "~> 19.5"
+gem "groupdocs_signature_cloud", "~> 20.7"
 ```
 
 ## Getting Started
@@ -45,7 +45,7 @@ GroupDocs.Signature Cloud Ruby SDK licensed under [MIT License](LICENSE).
 ## Resources
 + [**Website**](https://www.groupdocs.cloud)
 + [**Product Home**](https://products.groupdocs.cloud/signature)
-+ [**Documentation**](https://docs.groupdocs.cloud/display/signaturecloud/Home)
++ [**Documentation**](https://wiki.groupdocs.cloud/display/signaturecloud/Home)
 + [**Free Support Forum**](https://forum.groupdocs.cloud/c/signature)
 + [**Blog**](https://blog.groupdocs.cloud/category/signature)
 

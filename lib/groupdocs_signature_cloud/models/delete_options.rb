@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="info_result.rb">
+ # <copyright company="Aspose Pty Ltd" file="delete_options.rb">
  #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,68 +28,49 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Document info result
-  class InfoResult
+  # Base container class for delete signature options
+  class DeleteOptions
 
-    # File info
-    attr_accessor :file_info
+    # Specifies the type of signature
+    attr_accessor :signature_type
 
-    # Document extension
-    attr_accessor :extension
+    # Unique signature identifier to modify signature in the document over Update or Delete methods. This property will be set automatically after Sign or Search method being called. If this property was saved before it can be set manually to manipulate the signature.              
+    attr_accessor :signature_id
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
 
-    # Document file format
-    attr_accessor :file_format
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
 
-    # Document size in bytes
-    attr_accessor :size
-
-    # Count of pages in document
-    attr_accessor :pages_count
-
-    # Document created date
-    attr_accessor :date_created
-
-    # Document modification date
-    attr_accessor :date_modified
-
-    # Specifies width for max height of document page
-    attr_accessor :width_for_max_height
-
-    # Specifies max page height
-    attr_accessor :max_page_height
-
-    # List of document pages descriptions
-    attr_accessor :pages
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'file_info' => :'FileInfo',
-        :'extension' => :'Extension',
-        :'file_format' => :'FileFormat',
-        :'size' => :'Size',
-        :'pages_count' => :'PagesCount',
-        :'date_created' => :'DateCreated',
-        :'date_modified' => :'DateModified',
-        :'width_for_max_height' => :'WidthForMaxHeight',
-        :'max_page_height' => :'MaxPageHeight',
-        :'pages' => :'Pages'
+        :'signature_type' => :'SignatureType',
+        :'signature_id' => :'SignatureId'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'file_info' => :'FileInfo',
-        :'extension' => :'String',
-        :'file_format' => :'String',
-        :'size' => :'Integer',
-        :'pages_count' => :'Integer',
-        :'date_created' => :'DateTime',
-        :'date_modified' => :'DateTime',
-        :'width_for_max_height' => :'Integer',
-        :'max_page_height' => :'Integer',
-        :'pages' => :'Array<PageInfo>'
+        :'signature_type' => :'String',
+        :'signature_id' => :'String'
       }
     end
 
@@ -101,46 +82,12 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FileInfo')
-        self.file_info = attributes[:'FileInfo']
+      if attributes.key?(:'SignatureType')
+        self.signature_type = attributes[:'SignatureType']
       end
 
-      if attributes.key?(:'Extension')
-        self.extension = attributes[:'Extension']
-      end
-
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
-      end
-
-      if attributes.key?(:'Size')
-        self.size = attributes[:'Size']
-      end
-
-      if attributes.key?(:'PagesCount')
-        self.pages_count = attributes[:'PagesCount']
-      end
-
-      if attributes.key?(:'DateCreated')
-        self.date_created = attributes[:'DateCreated']
-      end
-
-      if attributes.key?(:'DateModified')
-        self.date_modified = attributes[:'DateModified']
-      end
-
-      if attributes.key?(:'WidthForMaxHeight')
-        self.width_for_max_height = attributes[:'WidthForMaxHeight']
-      end
-
-      if attributes.key?(:'MaxPageHeight')
-        self.max_page_height = attributes[:'MaxPageHeight']
-      end
-
-      if attributes.key?(:'Pages')
-        if (value = attributes[:'Pages']).is_a?(Array)
-          self.pages = value
-        end
+      if attributes.key?(:'SignatureId')
+        self.signature_id = attributes[:'SignatureId']
       end
 
     end
@@ -149,28 +96,8 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @size.nil?
-        invalid_properties.push("invalid value for 'size', size cannot be nil.")
-      end
-
-      if @pages_count.nil?
-        invalid_properties.push("invalid value for 'pages_count', pages_count cannot be nil.")
-      end
-
-      if @date_created.nil?
-        invalid_properties.push("invalid value for 'date_created', date_created cannot be nil.")
-      end
-
-      if @date_modified.nil?
-        invalid_properties.push("invalid value for 'date_modified', date_modified cannot be nil.")
-      end
-
-      if @width_for_max_height.nil?
-        invalid_properties.push("invalid value for 'width_for_max_height', width_for_max_height cannot be nil.")
-      end
-
-      if @max_page_height.nil?
-        invalid_properties.push("invalid value for 'max_page_height', max_page_height cannot be nil.")
+      if @signature_type.nil?
+        invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
       end
 
       return invalid_properties
@@ -179,13 +106,24 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @size.nil?
-      return false if @pages_count.nil?
-      return false if @date_created.nil?
-      return false if @date_modified.nil?
-      return false if @width_for_max_height.nil?
-      return false if @max_page_height.nil?
+      return false if @signature_type.nil?
+      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
+      return false unless signature_type_validator.valid?(@signature_type)
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] signature_type Object to be assigned
+    def signature_type=(signature_type)
+      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
+      if signature_type.to_i == 0
+        unless validator.valid?(signature_type)
+          raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
+        end
+        @signature_type = signature_type
+      else
+        @signature_type = validator.allowable_values[signature_type.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -193,16 +131,8 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          file_info == other.file_info &&
-          extension == other.extension &&
-          file_format == other.file_format &&
-          size == other.size &&
-          pages_count == other.pages_count &&
-          date_created == other.date_created &&
-          date_modified == other.date_modified &&
-          width_for_max_height == other.width_for_max_height &&
-          max_page_height == other.max_page_height &&
-          pages == other.pages
+          signature_type == other.signature_type &&
+          signature_id == other.signature_id
     end
 
     # @see the `==` method
@@ -214,7 +144,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, extension, file_format, size, pages_count, date_created, date_modified, width_for_max_height, max_page_height, pages].hash
+      [signature_type, signature_id].hash
     end
 
     # Downcases first letter.

@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="sign_image_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,9 +31,6 @@ module GroupDocsSignatureCloud
   # Represents the Image sign options
   class SignImageOptions
 
-    # Specifies the type of document to process
-    attr_accessor :document_type
-
     # Specifies the signature type of processing
     attr_accessor :signature_type
 
@@ -47,7 +44,7 @@ module GroupDocsSignatureCloud
     attr_accessor :pages_setup
 
     # Gets or sets the signature image file name. This property is used only if ImageStream is not specified
-    attr_accessor :image_guid
+    attr_accessor :image_file_path
 
     # Left X position of Signature on Document Page in Measure values (pixels or percent see MeasureType LocationMeasureType). (works if horizontal alignment is not specified). For Spreadsheet documents this property is mutually exclusive with Column property. If Left property is set ColumnNumber will be reset to 0
     attr_accessor :left
@@ -82,8 +79,11 @@ module GroupDocsSignatureCloud
     # Gets or sets the measure type (pixels or percent) for Margin
     attr_accessor :margin_measure_type
 
-    # Gets or sets the additional opacity for sign image (value from 0.0 (clear) through 1.0 (opaque)). By default the value is 1.0
-    attr_accessor :opacity
+    # Gets or sets the signature transparency(value from 0.0 (opaque) through 1.0 (clear)). Default value is 0 (opaque).
+    attr_accessor :transparency
+
+    # Gets or sets the signature border properties
+    attr_accessor :border
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -109,12 +109,11 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'document_type' => :'DocumentType',
         :'signature_type' => :'SignatureType',
         :'page' => :'Page',
         :'all_pages' => :'AllPages',
         :'pages_setup' => :'PagesSetup',
-        :'image_guid' => :'ImageGuid',
+        :'image_file_path' => :'ImageFilePath',
         :'left' => :'Left',
         :'top' => :'Top',
         :'width' => :'Width',
@@ -126,19 +125,19 @@ module GroupDocsSignatureCloud
         :'vertical_alignment' => :'VerticalAlignment',
         :'margin' => :'Margin',
         :'margin_measure_type' => :'MarginMeasureType',
-        :'opacity' => :'Opacity'
+        :'transparency' => :'Transparency',
+        :'border' => :'Border'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'document_type' => :'String',
         :'signature_type' => :'String',
         :'page' => :'Integer',
         :'all_pages' => :'BOOLEAN',
         :'pages_setup' => :'PagesSetup',
-        :'image_guid' => :'String',
+        :'image_file_path' => :'String',
         :'left' => :'Integer',
         :'top' => :'Integer',
         :'width' => :'Integer',
@@ -150,7 +149,8 @@ module GroupDocsSignatureCloud
         :'vertical_alignment' => :'String',
         :'margin' => :'Padding',
         :'margin_measure_type' => :'String',
-        :'opacity' => :'Float'
+        :'transparency' => :'Float',
+        :'border' => :'BorderLine'
       }
     end
 
@@ -161,10 +161,6 @@ module GroupDocsSignatureCloud
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.key?(:'DocumentType')
-        self.document_type = attributes[:'DocumentType']
-      end
 
       if attributes.key?(:'SignatureType')
         self.signature_type = attributes[:'SignatureType']
@@ -182,8 +178,8 @@ module GroupDocsSignatureCloud
         self.pages_setup = attributes[:'PagesSetup']
       end
 
-      if attributes.key?(:'ImageGuid')
-        self.image_guid = attributes[:'ImageGuid']
+      if attributes.key?(:'ImageFilePath')
+        self.image_file_path = attributes[:'ImageFilePath']
       end
 
       if attributes.key?(:'Left')
@@ -230,8 +226,12 @@ module GroupDocsSignatureCloud
         self.margin_measure_type = attributes[:'MarginMeasureType']
       end
 
-      if attributes.key?(:'Opacity')
-        self.opacity = attributes[:'Opacity']
+      if attributes.key?(:'Transparency')
+        self.transparency = attributes[:'Transparency']
+      end
+
+      if attributes.key?(:'Border')
+        self.border = attributes[:'Border']
       end
 
     end
@@ -240,10 +240,6 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @document_type.nil?
-        invalid_properties.push("invalid value for 'document_type', document_type cannot be nil.")
-      end
-
       if @signature_type.nil?
         invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
       end
@@ -292,8 +288,8 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'margin_measure_type', margin_measure_type cannot be nil.")
       end
 
-      if @opacity.nil?
-        invalid_properties.push("invalid value for 'opacity', opacity cannot be nil.")
+      if @transparency.nil?
+        invalid_properties.push("invalid value for 'transparency', transparency cannot be nil.")
       end
 
       return invalid_properties
@@ -302,9 +298,6 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @document_type.nil?
-      document_type_validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      return false unless document_type_validator.valid?(@document_type)
       return false if @signature_type.nil?
       signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
       return false unless signature_type_validator.valid?(@signature_type)
@@ -321,30 +314,16 @@ module GroupDocsSignatureCloud
       return false unless size_measure_type_validator.valid?(@size_measure_type)
       return false if @rotation_angle.nil?
       return false if @horizontal_alignment.nil?
-      horizontal_alignment_validator = EnumAttributeValidator.new('String', ["Default", "None", "Left", "Center", "Right"])
+      horizontal_alignment_validator = EnumAttributeValidator.new('String', ["None", "Left", "Center", "Right"])
       return false unless horizontal_alignment_validator.valid?(@horizontal_alignment)
       return false if @vertical_alignment.nil?
-      vertical_alignment_validator = EnumAttributeValidator.new('String', ["Default", "None", "Top", "Center", "Bottom"])
+      vertical_alignment_validator = EnumAttributeValidator.new('String', ["None", "Top", "Center", "Bottom"])
       return false unless vertical_alignment_validator.valid?(@vertical_alignment)
       return false if @margin_measure_type.nil?
       margin_measure_type_validator = EnumAttributeValidator.new('String', ["Pixels", "Percents", "Millimeters"])
       return false unless margin_measure_type_validator.valid?(@margin_measure_type)
-      return false if @opacity.nil?
+      return false if @transparency.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] document_type Object to be assigned
-    def document_type=(document_type)
-      validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      if document_type.to_i == 0
-        unless validator.valid?(document_type)
-          raise ArgumentError, "invalid value for 'document_type', must be one of #{validator.allowable_values}."
-        end
-        @document_type = document_type
-      else
-        @document_type = validator.allowable_values[document_type.to_i]
-      end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -392,7 +371,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] horizontal_alignment Object to be assigned
     def horizontal_alignment=(horizontal_alignment)
-      validator = EnumAttributeValidator.new('String', ["Default", "None", "Left", "Center", "Right"])
+      validator = EnumAttributeValidator.new('String', ["None", "Left", "Center", "Right"])
       if horizontal_alignment.to_i == 0
         unless validator.valid?(horizontal_alignment)
           raise ArgumentError, "invalid value for 'horizontal_alignment', must be one of #{validator.allowable_values}."
@@ -406,7 +385,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] vertical_alignment Object to be assigned
     def vertical_alignment=(vertical_alignment)
-      validator = EnumAttributeValidator.new('String', ["Default", "None", "Top", "Center", "Bottom"])
+      validator = EnumAttributeValidator.new('String', ["None", "Top", "Center", "Bottom"])
       if vertical_alignment.to_i == 0
         unless validator.valid?(vertical_alignment)
           raise ArgumentError, "invalid value for 'vertical_alignment', must be one of #{validator.allowable_values}."
@@ -436,12 +415,11 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          document_type == other.document_type &&
           signature_type == other.signature_type &&
           page == other.page &&
           all_pages == other.all_pages &&
           pages_setup == other.pages_setup &&
-          image_guid == other.image_guid &&
+          image_file_path == other.image_file_path &&
           left == other.left &&
           top == other.top &&
           width == other.width &&
@@ -453,7 +431,8 @@ module GroupDocsSignatureCloud
           vertical_alignment == other.vertical_alignment &&
           margin == other.margin &&
           margin_measure_type == other.margin_measure_type &&
-          opacity == other.opacity
+          transparency == other.transparency &&
+          border == other.border
     end
 
     # @see the `==` method
@@ -465,7 +444,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [document_type, signature_type, page, all_pages, pages_setup, image_guid, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, opacity].hash
+      [signature_type, page, all_pages, pages_setup, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border].hash
     end
 
     # Downcases first letter.

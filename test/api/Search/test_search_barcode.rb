@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -35,7 +35,6 @@ module GroupDocsSignatureCloud
       test_file = TestFile.image_signed
       opts = SearchBarcodeOptions.new
       populate_options(opts)
-      opts.document_type = 'Image'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts]
@@ -47,7 +46,6 @@ module GroupDocsSignatureCloud
       test_file = TestFile.pdf_signed
       opts = SearchBarcodeOptions.new
       populate_options(opts)
-      opts.document_type = 'Pdf'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts]
@@ -59,7 +57,6 @@ module GroupDocsSignatureCloud
       test_file = TestFile.presentation_signed
       opts = SearchBarcodeOptions.new
       populate_options(opts)
-      opts.document_type = 'Presentation'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts]
@@ -71,7 +68,6 @@ module GroupDocsSignatureCloud
       test_file = TestFile.spreadsheet_signed
       opts = SearchBarcodeOptions.new
       populate_options(opts)
-      opts.document_type = 'Spreadsheet'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts]
@@ -83,7 +79,6 @@ module GroupDocsSignatureCloud
       test_file = TestFile.wordprocessing_signed
       opts = SearchBarcodeOptions.new
       populate_options(opts)
-      opts.document_type = 'WordProcessing'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts]

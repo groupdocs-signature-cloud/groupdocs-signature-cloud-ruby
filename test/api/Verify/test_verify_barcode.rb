@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,42 +33,41 @@ module GroupDocsSignatureCloud
     
     def test_verify_barcode_image
       test_file = TestFile.image_signed
-      settings = populate_options('Image', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)    
     end
 
     def test_verify_barcode_pdf
       test_file = TestFile.pdf_signed
-      settings = populate_options('Pdf', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)        
     end
     
     def test_verify_barcode_presentation
       test_file = TestFile.presentation_signed
-      settings = populate_options('Presentation', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)       
     end
     
     def test_verify_barcode_spreadsheet
       test_file = TestFile.spreadsheet_signed
-      settings = populate_options('Spreadsheet', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)      
     end
     
     def test_verify_barcode_wordprocessing
       test_file = TestFile.wordprocessing_signed
-      settings = populate_options('WordProcessing', test_file)               
+      settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)     
     end    
 
-    def populate_options(documentType, testFile)
+    def populate_options(testFile)
         opts = VerifyBarcodeOptions.new
-        opts.document_type = documentType
         opts.signature_type = 'Barcode'
         opts.barcode_type = 'Code39Standard'
         opts.text = '123456789012'

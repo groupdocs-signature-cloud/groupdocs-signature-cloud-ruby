@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ module GroupDocsSignatureCloud
     def test_sign_barcode_image
       test_file = TestFile.image_jpg
       signedFileName = "Output\\ImageBarcodeSigned.jpg"         
-      settings = populate_options(signedFileName, 'Image', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
     end
@@ -42,7 +42,7 @@ module GroupDocsSignatureCloud
     def test_sign_barcode_pdf
       test_file = TestFile.pdf_one_page
       signedFileName = "Output\\PdfBarcodeSigned.pdf"          
-      settings = populate_options(signedFileName, 'Pdf', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
     end
@@ -50,7 +50,7 @@ module GroupDocsSignatureCloud
     def test_sign_barcode_presentation
       test_file = TestFile.presentation_pptx
       signedFileName = "Output\\PresentationBarcodeSigned.pptx"       
-      settings = populate_options(signedFileName, 'Presentation', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
     end
@@ -58,7 +58,7 @@ module GroupDocsSignatureCloud
     def test_sign_barcode_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
       signedFileName = "Output\\SpreadsheetBarcodeSigned.xlsx"
-      settings = populate_options(signedFileName, 'Spreadsheet', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
     end
@@ -66,14 +66,13 @@ module GroupDocsSignatureCloud
     def test_sign_barcode_wordprocessing
       test_file = TestFile.word_docx
       signedFileName = "Output\\WordBarcodeSigned.docx"
-      settings = populate_options(signedFileName, 'WordProcessing', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     
     end    
 
-    def populate_options(signedFileName, documentType, testFile)
+    def populate_options(signedFileName, testFile)
         opts = SignBarcodeOptions.new
-        opts.document_type = documentType
         opts.signature_type = 'Barcode'
         opts.barcode_type = 'Code128'
         opts.text = '123456789012'
@@ -97,16 +96,18 @@ module GroupDocsSignatureCloud
         # set signature appearance
         opts.fore_color = Color.new
         opts.fore_color.web = "BlueViolet"
-        opts.border_color = Color.new
-        opts.border_color.web = "DarkOrange"
+        opts.border = BorderLine.new
+        opts.border.color = Color.new
+        opts.border.color.web = "DarkOrange"
+        opts.border.visible = true
+        opts.border.style = "Dash"
+        opts.border.weight = 1
+
         opts.background_color = Color.new
         opts.background_color.web = "DarkOrange"
-        opts.opacity = 0.8
+        opts.transparency = 0.8
         opts.inner_margins = Padding.new
-        opts.inner_margins.all = 2
-        opts.border_visiblity = true
-        opts.border_dash_style = "Dash"
-        opts.border_weight = 12        
+        opts.inner_margins.all = 22        
 
         opts.page = 1
         opts.all_pages = false

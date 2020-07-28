@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="sign_text_options.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,9 +30,6 @@ require 'date'
 module GroupDocsSignatureCloud
   # Base container class for signature options data
   class SignTextOptions
-
-    # Specifies the type of document to process
-    attr_accessor :document_type
 
     # Specifies the signature type of processing
     attr_accessor :signature_type
@@ -91,29 +88,23 @@ module GroupDocsSignatureCloud
     # Gets or sets the fore color of signature
     attr_accessor :fore_color
 
-    # Gets or sets the border color of signature
-    attr_accessor :border_color
-
     # Gets or sets the background color of signature
     attr_accessor :background_color
 
     # Gets or sets the signature background brush. Value by default is null.  If this property has a value it will be used instead BackgroundBrush property. For Spreadsheet documents TextStamp implementation RadialGradientBrush is not applicable, it is replaced by LinearGradientBrush. Spreadsheets, Images, Presentations It is not used for Watermark implementation. PDF For Stamp implementation LinearGradientBrush (ColorStart) and RadialGradientBrush (ColorInner) are used as SolidBrush. PDF It is not used for Annotation, Sticker, TextToFormField and Watermark implementations. Presentations For TextStamp implementation RadialGradientBrush is not applicable, it is replaced by LinearGradientBrush. Word Processing For TextStamp implementation LinearGradientBrush (ColorStart) and RadialGradientBrush (ColorInner) are used as SolidBrush. Word Processing It is not used for TextToFormField and Watermark implementations
     attr_accessor :background_brush
 
-    # Gets or sets the signature border visibility It is not suitable for PDF
-    attr_accessor :border_visiblity
-
-    # Gets or sets the signature border style It is not suitable for PDF
-    attr_accessor :border_dash_style
-
-    # Gets or sets the signature border transparency (value from 0.0 (opaque) through 1.0 (clear)) It is not suitable for PDF
-    attr_accessor :border_transparency
+    # Gets or sets the signature border properties
+    attr_accessor :border
 
     # Horizontal alignment of text inside a signature
     attr_accessor :text_horizontal_alignment
 
     # Vertical alignment of text inside a signature
     attr_accessor :text_vertical_alignment
+
+    # Gets or sets the Z-order position of text signature. Determines the display order of overlapping signatures.             
+    attr_accessor :z_order
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -139,7 +130,6 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'document_type' => :'DocumentType',
         :'signature_type' => :'SignatureType',
         :'page' => :'Page',
         :'all_pages' => :'AllPages',
@@ -159,21 +149,18 @@ module GroupDocsSignatureCloud
         :'text' => :'Text',
         :'font' => :'Font',
         :'fore_color' => :'ForeColor',
-        :'border_color' => :'BorderColor',
         :'background_color' => :'BackgroundColor',
         :'background_brush' => :'BackgroundBrush',
-        :'border_visiblity' => :'BorderVisiblity',
-        :'border_dash_style' => :'BorderDashStyle',
-        :'border_transparency' => :'BorderTransparency',
+        :'border' => :'Border',
         :'text_horizontal_alignment' => :'TextHorizontalAlignment',
-        :'text_vertical_alignment' => :'TextVerticalAlignment'
+        :'text_vertical_alignment' => :'TextVerticalAlignment',
+        :'z_order' => :'ZOrder'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'document_type' => :'String',
         :'signature_type' => :'String',
         :'page' => :'Integer',
         :'all_pages' => :'BOOLEAN',
@@ -193,14 +180,12 @@ module GroupDocsSignatureCloud
         :'text' => :'String',
         :'font' => :'SignatureFont',
         :'fore_color' => :'Color',
-        :'border_color' => :'Color',
         :'background_color' => :'Color',
         :'background_brush' => :'Brush',
-        :'border_visiblity' => :'BOOLEAN',
-        :'border_dash_style' => :'String',
-        :'border_transparency' => :'Float',
+        :'border' => :'BorderLine',
         :'text_horizontal_alignment' => :'String',
-        :'text_vertical_alignment' => :'String'
+        :'text_vertical_alignment' => :'String',
+        :'z_order' => :'Integer'
       }
     end
 
@@ -211,10 +196,6 @@ module GroupDocsSignatureCloud
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
-
-      if attributes.key?(:'DocumentType')
-        self.document_type = attributes[:'DocumentType']
-      end
 
       if attributes.key?(:'SignatureType')
         self.signature_type = attributes[:'SignatureType']
@@ -292,10 +273,6 @@ module GroupDocsSignatureCloud
         self.fore_color = attributes[:'ForeColor']
       end
 
-      if attributes.key?(:'BorderColor')
-        self.border_color = attributes[:'BorderColor']
-      end
-
       if attributes.key?(:'BackgroundColor')
         self.background_color = attributes[:'BackgroundColor']
       end
@@ -304,16 +281,8 @@ module GroupDocsSignatureCloud
         self.background_brush = attributes[:'BackgroundBrush']
       end
 
-      if attributes.key?(:'BorderVisiblity')
-        self.border_visiblity = attributes[:'BorderVisiblity']
-      end
-
-      if attributes.key?(:'BorderDashStyle')
-        self.border_dash_style = attributes[:'BorderDashStyle']
-      end
-
-      if attributes.key?(:'BorderTransparency')
-        self.border_transparency = attributes[:'BorderTransparency']
+      if attributes.key?(:'Border')
+        self.border = attributes[:'Border']
       end
 
       if attributes.key?(:'TextHorizontalAlignment')
@@ -324,16 +293,16 @@ module GroupDocsSignatureCloud
         self.text_vertical_alignment = attributes[:'TextVerticalAlignment']
       end
 
+      if attributes.key?(:'ZOrder')
+        self.z_order = attributes[:'ZOrder']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @document_type.nil?
-        invalid_properties.push("invalid value for 'document_type', document_type cannot be nil.")
-      end
-
       if @signature_type.nil?
         invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
       end
@@ -386,18 +355,6 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'margin_measure_type', margin_measure_type cannot be nil.")
       end
 
-      if @border_visiblity.nil?
-        invalid_properties.push("invalid value for 'border_visiblity', border_visiblity cannot be nil.")
-      end
-
-      if @border_dash_style.nil?
-        invalid_properties.push("invalid value for 'border_dash_style', border_dash_style cannot be nil.")
-      end
-
-      if @border_transparency.nil?
-        invalid_properties.push("invalid value for 'border_transparency', border_transparency cannot be nil.")
-      end
-
       if @text_horizontal_alignment.nil?
         invalid_properties.push("invalid value for 'text_horizontal_alignment', text_horizontal_alignment cannot be nil.")
       end
@@ -406,15 +363,16 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'text_vertical_alignment', text_vertical_alignment cannot be nil.")
       end
 
+      if @z_order.nil?
+        invalid_properties.push("invalid value for 'z_order', z_order cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @document_type.nil?
-      document_type_validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      return false unless document_type_validator.valid?(@document_type)
       return false if @signature_type.nil?
       signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
       return false unless signature_type_validator.valid?(@signature_type)
@@ -434,40 +392,22 @@ module GroupDocsSignatureCloud
       return false unless stretch_validator.valid?(@stretch)
       return false if @rotation_angle.nil?
       return false if @horizontal_alignment.nil?
-      horizontal_alignment_validator = EnumAttributeValidator.new('String', ["Default", "None", "Left", "Center", "Right"])
+      horizontal_alignment_validator = EnumAttributeValidator.new('String', ["None", "Left", "Center", "Right"])
       return false unless horizontal_alignment_validator.valid?(@horizontal_alignment)
       return false if @vertical_alignment.nil?
-      vertical_alignment_validator = EnumAttributeValidator.new('String', ["Default", "None", "Top", "Center", "Bottom"])
+      vertical_alignment_validator = EnumAttributeValidator.new('String', ["None", "Top", "Center", "Bottom"])
       return false unless vertical_alignment_validator.valid?(@vertical_alignment)
       return false if @margin_measure_type.nil?
       margin_measure_type_validator = EnumAttributeValidator.new('String', ["Pixels", "Percents", "Millimeters"])
       return false unless margin_measure_type_validator.valid?(@margin_measure_type)
-      return false if @border_visiblity.nil?
-      return false if @border_dash_style.nil?
-      border_dash_style_validator = EnumAttributeValidator.new('String', ["Dash", "DashDot", "DashDotDot", "DashLongDash", "DashLongDashDot", "RoundDot", "Solid", "SquareDot"])
-      return false unless border_dash_style_validator.valid?(@border_dash_style)
-      return false if @border_transparency.nil?
       return false if @text_horizontal_alignment.nil?
       text_horizontal_alignment_validator = EnumAttributeValidator.new('String', ["Left", "Center", "Right"])
       return false unless text_horizontal_alignment_validator.valid?(@text_horizontal_alignment)
       return false if @text_vertical_alignment.nil?
       text_vertical_alignment_validator = EnumAttributeValidator.new('String', ["Top", "Center", "Bottom"])
       return false unless text_vertical_alignment_validator.valid?(@text_vertical_alignment)
+      return false if @z_order.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] document_type Object to be assigned
-    def document_type=(document_type)
-      validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      if document_type.to_i == 0
-        unless validator.valid?(document_type)
-          raise ArgumentError, "invalid value for 'document_type', must be one of #{validator.allowable_values}."
-        end
-        @document_type = document_type
-      else
-        @document_type = validator.allowable_values[document_type.to_i]
-      end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -529,7 +469,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] horizontal_alignment Object to be assigned
     def horizontal_alignment=(horizontal_alignment)
-      validator = EnumAttributeValidator.new('String', ["Default", "None", "Left", "Center", "Right"])
+      validator = EnumAttributeValidator.new('String', ["None", "Left", "Center", "Right"])
       if horizontal_alignment.to_i == 0
         unless validator.valid?(horizontal_alignment)
           raise ArgumentError, "invalid value for 'horizontal_alignment', must be one of #{validator.allowable_values}."
@@ -543,7 +483,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] vertical_alignment Object to be assigned
     def vertical_alignment=(vertical_alignment)
-      validator = EnumAttributeValidator.new('String', ["Default", "None", "Top", "Center", "Bottom"])
+      validator = EnumAttributeValidator.new('String', ["None", "Top", "Center", "Bottom"])
       if vertical_alignment.to_i == 0
         unless validator.valid?(vertical_alignment)
           raise ArgumentError, "invalid value for 'vertical_alignment', must be one of #{validator.allowable_values}."
@@ -565,20 +505,6 @@ module GroupDocsSignatureCloud
         @margin_measure_type = margin_measure_type
       else
         @margin_measure_type = validator.allowable_values[margin_measure_type.to_i]
-      end
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] border_dash_style Object to be assigned
-    def border_dash_style=(border_dash_style)
-      validator = EnumAttributeValidator.new('String', ["Dash", "DashDot", "DashDotDot", "DashLongDash", "DashLongDashDot", "RoundDot", "Solid", "SquareDot"])
-      if border_dash_style.to_i == 0
-        unless validator.valid?(border_dash_style)
-          raise ArgumentError, "invalid value for 'border_dash_style', must be one of #{validator.allowable_values}."
-        end
-        @border_dash_style = border_dash_style
-      else
-        @border_dash_style = validator.allowable_values[border_dash_style.to_i]
       end
     end
 
@@ -615,7 +541,6 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          document_type == other.document_type &&
           signature_type == other.signature_type &&
           page == other.page &&
           all_pages == other.all_pages &&
@@ -635,14 +560,12 @@ module GroupDocsSignatureCloud
           text == other.text &&
           font == other.font &&
           fore_color == other.fore_color &&
-          border_color == other.border_color &&
           background_color == other.background_color &&
           background_brush == other.background_brush &&
-          border_visiblity == other.border_visiblity &&
-          border_dash_style == other.border_dash_style &&
-          border_transparency == other.border_transparency &&
+          border == other.border &&
           text_horizontal_alignment == other.text_horizontal_alignment &&
-          text_vertical_alignment == other.text_vertical_alignment
+          text_vertical_alignment == other.text_vertical_alignment &&
+          z_order == other.z_order
     end
 
     # @see the `==` method
@@ -654,7 +577,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [document_type, signature_type, page, all_pages, pages_setup, left, top, width, height, location_measure_type, size_measure_type, stretch, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, text, font, fore_color, border_color, background_color, background_brush, border_visiblity, border_dash_style, border_transparency, text_horizontal_alignment, text_vertical_alignment].hash
+      [signature_type, page, all_pages, pages_setup, left, top, width, height, location_measure_type, size_measure_type, stretch, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, text, font, fore_color, background_color, background_brush, border, text_horizontal_alignment, text_vertical_alignment, z_order].hash
     end
 
     # Downcases first letter.

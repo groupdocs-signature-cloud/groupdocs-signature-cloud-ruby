@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ module GroupDocsSignatureCloud
     def test_sign_stamp_image
       test_file = TestFile.image_jpg
       signedFileName = "Output\\ImageStampSigned.jpg"         
-      settings = populate_options(signedFileName, 'Image', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
     end
@@ -42,7 +42,7 @@ module GroupDocsSignatureCloud
     def test_sign_stamp_pdf
       test_file = TestFile.pdf_one_page
       signedFileName = "Output\\PdfStampSigned.pdf"          
-      settings = populate_options(signedFileName, 'Pdf', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
     end
@@ -50,7 +50,7 @@ module GroupDocsSignatureCloud
     def test_sign_stamp_presentation
       test_file = TestFile.presentation_pptx
       signedFileName = "Output\\PresentationStampSigned.pptx"       
-      settings = populate_options(signedFileName, 'Presentation', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
     end
@@ -58,7 +58,7 @@ module GroupDocsSignatureCloud
     def test_sign_stamp_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
       signedFileName = "Output\\SpreadsheetStampSigned.xlsx"
-      settings = populate_options(signedFileName, 'Spreadsheet', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
     end
@@ -66,16 +66,15 @@ module GroupDocsSignatureCloud
     def test_sign_stamp_wordprocessing
       test_file = TestFile.word_docx
       signedFileName = "Output\\WordStampSigned.docx"
-      settings = populate_options(signedFileName, 'WordProcessing', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     
     end    
 
-    def populate_options(signedFileName, documentType, testFile)
+    def populate_options(signedFileName, testFile)
         opts = SignStampOptions.new
-        opts.document_type = documentType
         opts.signature_type = 'Stamp'
-        opts.image_guid = TestFile.image_sign.path
+        opts.image_file_path = TestFile.image_sign.path
 
         # set signature position on a page
         opts.left = 100
@@ -96,7 +95,7 @@ module GroupDocsSignatureCloud
         opts.background_color.web = "CornflowerBlue"   
         opts.background_color_crop_type = "InnerArea"
         opts.background_image_crop_type = "MiddleArea"
-        opts.opacity = 0.8
+        opts.transparency = 0.8
 
         outline = StampLine.new
         outline.text = "John Smith"

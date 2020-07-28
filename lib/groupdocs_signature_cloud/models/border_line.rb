@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="border_line.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,6 +42,9 @@ module GroupDocsSignatureCloud
 
     # Gets or sets the border color of signature
     attr_accessor :color
+
+    # Gets or sets the border visibility
+    attr_accessor :visible
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -70,7 +73,8 @@ module GroupDocsSignatureCloud
         :'style' => :'Style',
         :'transparency' => :'Transparency',
         :'weight' => :'Weight',
-        :'color' => :'Color'
+        :'color' => :'Color',
+        :'visible' => :'Visible'
       }
     end
 
@@ -80,7 +84,8 @@ module GroupDocsSignatureCloud
         :'style' => :'String',
         :'transparency' => :'Float',
         :'weight' => :'Float',
-        :'color' => :'Color'
+        :'color' => :'Color',
+        :'visible' => :'BOOLEAN'
       }
     end
 
@@ -108,6 +113,10 @@ module GroupDocsSignatureCloud
         self.color = attributes[:'Color']
       end
 
+      if attributes.key?(:'Visible')
+        self.visible = attributes[:'Visible']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -126,6 +135,10 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'weight', weight cannot be nil.")
       end
 
+      if @visible.nil?
+        invalid_properties.push("invalid value for 'visible', visible cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -133,17 +146,18 @@ module GroupDocsSignatureCloud
     # @return true if the model is valid
     def valid?
       return false if @style.nil?
-      style_validator = EnumAttributeValidator.new('String', ["Default", "Solid", "ShortDash", "ShortDot", "ShortDashDot", "ShortDashDotDot", "Dot", "Dash", "LongDash", "DashDot", "LongDashDot", "LongDashDotDot"])
+      style_validator = EnumAttributeValidator.new('String', ["Solid", "ShortDash", "ShortDot", "ShortDashDot", "ShortDashDotDot", "Dot", "Dash", "LongDash", "DashDot", "LongDashDot", "LongDashDotDot", "RoundDot", "SquareDot", "DashDotDot", "DashLongDash", "DashLongDashDot"])
       return false unless style_validator.valid?(@style)
       return false if @transparency.nil?
       return false if @weight.nil?
+      return false if @visible.nil?
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] style Object to be assigned
     def style=(style)
-      validator = EnumAttributeValidator.new('String', ["Default", "Solid", "ShortDash", "ShortDot", "ShortDashDot", "ShortDashDotDot", "Dot", "Dash", "LongDash", "DashDot", "LongDashDot", "LongDashDotDot"])
+      validator = EnumAttributeValidator.new('String', ["Solid", "ShortDash", "ShortDot", "ShortDashDot", "ShortDashDotDot", "Dot", "Dash", "LongDash", "DashDot", "LongDashDot", "LongDashDotDot", "RoundDot", "SquareDot", "DashDotDot", "DashLongDash", "DashLongDashDot"])
       if style.to_i == 0
         unless validator.valid?(style)
           raise ArgumentError, "invalid value for 'style', must be one of #{validator.allowable_values}."
@@ -162,7 +176,8 @@ module GroupDocsSignatureCloud
           style == other.style &&
           transparency == other.transparency &&
           weight == other.weight &&
-          color == other.color
+          color == other.color &&
+          visible == other.visible
     end
 
     # @see the `==` method
@@ -174,7 +189,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [style, transparency, weight, color].hash
+      [style, transparency, weight, color, visible].hash
     end
 
     # Downcases first letter.

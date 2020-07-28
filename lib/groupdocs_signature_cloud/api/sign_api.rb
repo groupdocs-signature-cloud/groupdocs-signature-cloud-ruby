@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="sign.rb">
-#   Copyright (c) 2003-2019 Aspose Pty Ltd
+#   Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -116,6 +116,58 @@ module GroupDocsSignatureCloud
       [data, status_code, headers]
     end
 
+    # Deletes signatures in the document
+    # 
+    # @param request delete_signatures_request
+    # @return [DeleteResult]
+    def delete_signatures(request)
+      data, _status_code, _headers = delete_signatures_with_http_info(request)
+      data
+    end
+
+    # Deletes signatures in the document
+    # 
+    # @param request delete_signatures_request
+    # @return [Array<(DeleteResult, Fixnum, Hash)>]
+    # DeleteResult data, response status code and response headers
+    def delete_signatures_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? DeleteSignaturesRequest
+
+      @api_client.config.logger.debug 'Calling API: SignApi.delete_signatures ...' if @api_client.config.debugging
+      # verify the required parameter 'delete_settings' is set
+      raise ArgumentError, 'Missing the required parameter delete_settings when calling SignApi.delete_signatures' if @api_client.config.client_side_validation && request.delete_settings.nil?
+      # resource path
+      local_var_path = '/signature/delete'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request.delete_settings)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+                                                        header_params: header_params,
+                                                        query_params: query_params,
+                                                        form_params: form_params,
+                                                        body: post_body,
+                                                        access_token: get_access_token,
+                                                        return_type: 'DeleteResult')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called:
+        SignApi#delete_signatures\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      [data, status_code, headers]
+    end
+
     # Searches for signatures applied to the document
     # 
     # @param request search_signatures_request
@@ -164,6 +216,58 @@ module GroupDocsSignatureCloud
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
         SignApi#search_signatures\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      [data, status_code, headers]
+    end
+
+    # Updates signatures in the document
+    # 
+    # @param request update_signatures_request
+    # @return [UpdateResult]
+    def update_signatures(request)
+      data, _status_code, _headers = update_signatures_with_http_info(request)
+      data
+    end
+
+    # Updates signatures in the document
+    # 
+    # @param request update_signatures_request
+    # @return [Array<(UpdateResult, Fixnum, Hash)>]
+    # UpdateResult data, response status code and response headers
+    def update_signatures_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? UpdateSignaturesRequest
+
+      @api_client.config.logger.debug 'Calling API: SignApi.update_signatures ...' if @api_client.config.debugging
+      # verify the required parameter 'update_settings' is set
+      raise ArgumentError, 'Missing the required parameter update_settings when calling SignApi.update_signatures' if @api_client.config.client_side_validation && request.update_settings.nil?
+      # resource path
+      local_var_path = '/signature/update'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(request.update_settings)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+                                                        header_params: header_params,
+                                                        query_params: query_params,
+                                                        form_params: form_params,
+                                                        body: post_body,
+                                                        access_token: get_access_token,
+                                                        return_type: 'UpdateResult')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called:
+        SignApi#update_signatures\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
@@ -277,7 +381,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="create_signatures_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -321,8 +425,53 @@ module GroupDocsSignatureCloud
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
+ # <copyright company="Aspose Pty Ltd" file="delete_signatures_request.rb">
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ # </copyright>
+ # <summary>
+ #  Permission is hereby granted, free of charge, to any person obtaining a copy
+ #  of this software and associated documentation files (the "Software"), to deal
+ #  in the Software without restriction, including without limitation the rights
+ #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ #  copies of the Software, and to permit persons to whom the Software is
+ #  furnished to do so, subject to the following conditions:
+ # 
+ #  The above copyright notice and this permission notice shall be included in all
+ #  copies or substantial portions of the Software.
+ # 
+ #  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ #  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ #  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ #  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ #  SOFTWARE.
+ # </summary>
+ # --------------------------------------------------------------------------------------------------------------------
+ #
+
+module GroupDocsSignatureCloud
+
+  #
+  # Request model for delete_signatures operation.
+  #
+  class DeleteSignaturesRequest
+
+        # Delete signatures settings
+        attr_accessor :delete_settings
+	
+        #
+        # Initializes a new instance.
+        # @param delete_settings Delete signatures settings
+        def initialize(delete_settings)
+           self.delete_settings = delete_settings
+        end
+  end
+end
+ #
+ # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="search_signatures_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -366,8 +515,53 @@ module GroupDocsSignatureCloud
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
+ # <copyright company="Aspose Pty Ltd" file="update_signatures_request.rb">
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ # </copyright>
+ # <summary>
+ #  Permission is hereby granted, free of charge, to any person obtaining a copy
+ #  of this software and associated documentation files (the "Software"), to deal
+ #  in the Software without restriction, including without limitation the rights
+ #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ #  copies of the Software, and to permit persons to whom the Software is
+ #  furnished to do so, subject to the following conditions:
+ # 
+ #  The above copyright notice and this permission notice shall be included in all
+ #  copies or substantial portions of the Software.
+ # 
+ #  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ #  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ #  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ #  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ #  SOFTWARE.
+ # </summary>
+ # --------------------------------------------------------------------------------------------------------------------
+ #
+
+module GroupDocsSignatureCloud
+
+  #
+  # Request model for update_signatures operation.
+  #
+  class UpdateSignaturesRequest
+
+        # Update signatures settings
+        attr_accessor :update_settings
+	
+        #
+        # Initializes a new instance.
+        # @param update_settings Update signatures settings
+        def initialize(update_settings)
+           self.update_settings = update_settings
+        end
+  end
+end
+ #
+ # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="verify_signatures_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ module GroupDocsSignatureCloud
     def test_sign_text_image
       test_file = TestFile.image_jpg
       signedFileName = "Output\\ImageTextSigned.jpg"         
-      settings = populate_options(signedFileName, 'Image', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
     end
@@ -42,7 +42,7 @@ module GroupDocsSignatureCloud
     def test_sign_text_pdf
       test_file = TestFile.pdf_one_page
       signedFileName = "Output\\PdfTextSigned.pdf"          
-      settings = populate_options(signedFileName, 'Pdf', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
     end
@@ -50,7 +50,7 @@ module GroupDocsSignatureCloud
     def test_sign_text_presentation
       test_file = TestFile.presentation_pptx
       signedFileName = "Output\\PresentationTextSigned.pptx"       
-      settings = populate_options(signedFileName, 'Presentation', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
     end
@@ -58,7 +58,7 @@ module GroupDocsSignatureCloud
     def test_sign_text_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
       signedFileName = "Output\\SpreadsheetTextSigned.xlsx"
-      settings = populate_options(signedFileName, 'Spreadsheet', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
     end
@@ -66,14 +66,13 @@ module GroupDocsSignatureCloud
     def test_sign_text_wordprocessing
       test_file = TestFile.word_docx
       signedFileName = "Output\\WordTextSigned.docx"
-      settings = populate_options(signedFileName, 'WordProcessing', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     
     end    
 
-    def populate_options(signedFileName, documentType, testFile)
+    def populate_options(signedFileName, testFile)
         opts = SignTextOptions.new
-        opts.document_type = documentType
         opts.signature_type = 'Text'        
         opts.text = 'John Smith'
 
@@ -101,12 +100,15 @@ module GroupDocsSignatureCloud
         opts.font.underline = false        
         opts.fore_color = Color.new
         opts.fore_color.web = "BlueViolet"
-        opts.border_color = Color.new
-        opts.border_color.web = "DarkOrange"
+        opts.border = BorderLine.new
+        opts.border.color = Color.new
+        opts.border.color.web = "DarkOrange"
+        opts.border.visible = true
+        opts.border.style = "Dash"
+        opts.border.weight = 1
+
         opts.background_color = Color.new
         opts.background_color.web = "DarkOrange"
-        opts.border_visiblity = true
-        opts.border_dash_style = "Dash"  
 
         opts.page = 1
         opts.all_pages = false

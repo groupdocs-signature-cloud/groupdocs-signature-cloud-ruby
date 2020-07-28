@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,49 +31,38 @@ module GroupDocsSignatureCloud
 
   class TestSearchDigital < TestContext
     
-    def test_search_digital_image
-      # Digital search is not supported for images      
+    def test_search_digital_pdf
+      test_file = TestFile.pdf_signed
+      opts = SearchDigitalOptions.new
+      populate_options(opts)
+      settings = SearchSettings.new
+      settings.file_info = test_file.file_info
+      settings.options = [opts]
+      response = @sign_api.search_signatures(SearchSignaturesRequest.new settings)
+      check_response([opts], response, test_file)      
     end
-
-    # def test_search_digital_pdf
-    #   test_file = TestFile.pdf_signed
-    #   opts = SearchDigitalOptions.new
-    #   populate_options(opts)
-    #   opts.document_type = 'Pdf'
-    #   settings = SearchSettings.new
-    #   settings.file_info = test_file.file_info
-    #   settings.options = [opts]
-    #   response = @sign_api.search_signatures(SearchSignaturesRequest.new settings)
-    #   check_response([opts], response, test_file)      
-    # end
     
-    # def test_search_digital_presentation
-    #   # Digital search is not supported for presentations     
-    # end
+    def test_search_digital_spreadsheet
+      test_file = TestFile.spreadsheet_signed
+      opts = SearchDigitalOptions.new
+      populate_options(opts)
+      settings = SearchSettings.new
+      settings.file_info = test_file.file_info
+      settings.options = [opts]
+      response = @sign_api.search_signatures(SearchSignaturesRequest.new settings)
+      check_response([opts], response, test_file)      
+    end
     
-    # def test_search_digital_spreadsheet
-    #   test_file = TestFile.spreadsheet_signed
-    #   opts = SearchDigitalOptions.new
-    #   populate_options(opts)
-    #   opts.document_type = 'Spreadsheet'
-    #   settings = SearchSettings.new
-    #   settings.file_info = test_file.file_info
-    #   settings.options = [opts]
-    #   response = @sign_api.search_signatures(SearchSignaturesRequest.new settings)
-    #   check_response([opts], response, test_file)      
-    # end
-    
-    # def test_search_digital_wordprocessing
-    #   test_file = TestFile.wordprocessing_signed
-    #   opts = SearchDigitalOptions.new
-    #   populate_options(opts)
-    #   opts.document_type = 'WordProcessing'
-    #   settings = SearchSettings.new
-    #   settings.file_info = test_file.file_info
-    #   settings.options = [opts]
-    #   response = @sign_api.search_signatures(SearchSignaturesRequest.new settings)
-    #   check_response([opts], response, test_file)      
-    # end    
+    def test_search_digital_wordprocessing
+      test_file = TestFile.wordprocessing_signed
+      opts = SearchDigitalOptions.new
+      populate_options(opts)
+      settings = SearchSettings.new
+      settings.file_info = test_file.file_info
+      settings.options = [opts]
+      response = @sign_api.search_signatures(SearchSignaturesRequest.new settings)
+      check_response([opts], response, test_file)      
+    end    
 
     def populate_options(opts)
         opts.signature_type = 'Digital'

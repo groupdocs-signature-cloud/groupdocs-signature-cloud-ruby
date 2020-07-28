@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_signature_cloud.rb">
-#   Copyright (c) 2003-2019 Aspose Pty Ltd
+#   Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,6 +36,8 @@ require_relative 'groupdocs_signature_cloud/models/base_settings'
 require_relative 'groupdocs_signature_cloud/models/border_line'
 require_relative 'groupdocs_signature_cloud/models/brush'
 require_relative 'groupdocs_signature_cloud/models/color'
+require_relative 'groupdocs_signature_cloud/models/delete_options'
+require_relative 'groupdocs_signature_cloud/models/delete_result'
 require_relative 'groupdocs_signature_cloud/models/disc_usage'
 require_relative 'groupdocs_signature_cloud/models/error'
 require_relative 'groupdocs_signature_cloud/models/error_details'
@@ -61,10 +63,14 @@ require_relative 'groupdocs_signature_cloud/models/signature_font'
 require_relative 'groupdocs_signature_cloud/models/stamp_line'
 require_relative 'groupdocs_signature_cloud/models/storage_exist'
 require_relative 'groupdocs_signature_cloud/models/storage_file'
+require_relative 'groupdocs_signature_cloud/models/update_options'
+require_relative 'groupdocs_signature_cloud/models/update_result'
 require_relative 'groupdocs_signature_cloud/models/verify_result'
 require_relative 'groupdocs_signature_cloud/models/barcode_signature'
+require_relative 'groupdocs_signature_cloud/models/delete_settings'
 require_relative 'groupdocs_signature_cloud/models/digital_signature'
 require_relative 'groupdocs_signature_cloud/models/file_version'
+require_relative 'groupdocs_signature_cloud/models/image_signature'
 require_relative 'groupdocs_signature_cloud/models/info_settings'
 require_relative 'groupdocs_signature_cloud/models/linear_gradient_brush'
 require_relative 'groupdocs_signature_cloud/models/qr_code_signature'
@@ -74,7 +80,9 @@ require_relative 'groupdocs_signature_cloud/models/search_settings'
 require_relative 'groupdocs_signature_cloud/models/sign_options'
 require_relative 'groupdocs_signature_cloud/models/sign_settings'
 require_relative 'groupdocs_signature_cloud/models/solid_brush'
+require_relative 'groupdocs_signature_cloud/models/text_signature'
 require_relative 'groupdocs_signature_cloud/models/texture_brush'
+require_relative 'groupdocs_signature_cloud/models/update_settings'
 require_relative 'groupdocs_signature_cloud/models/verify_options'
 require_relative 'groupdocs_signature_cloud/models/verify_settings'
 require_relative 'groupdocs_signature_cloud/models/search_barcode_options'

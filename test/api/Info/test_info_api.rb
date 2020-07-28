@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -62,7 +62,7 @@ module GroupDocsSignatureCloud
       response = @info_api.get_info(GetInfoRequest.new settings)
       assert_equal response.size, 55321      
       assert_equal response.extension, "pdf"
-      assert_equal response.file_format, "Pdf"
+      assert_equal response.file_format, "Portable Document Format File"
       assert_equal response.max_page_height, 792
       assert_equal response.width_for_max_height, 612
       assert_equal response.pages_count, 1

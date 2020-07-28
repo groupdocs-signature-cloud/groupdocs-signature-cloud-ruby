@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -35,10 +35,8 @@ module GroupDocsSignatureCloud
       test_file = TestFile.image_signed
       opts1 = SearchBarcodeOptions.new
       populate_barcode_options(opts1)
-      opts1.document_type = 'Image'
       opts2 = SearchQRCodeOptions.new
       populate_qr_code_options(opts2)
-      opts2.document_type = 'Image'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts1, opts2]
@@ -50,10 +48,8 @@ module GroupDocsSignatureCloud
       test_file = TestFile.pdf_signed
       opts1 = SearchBarcodeOptions.new
       populate_barcode_options(opts1)
-      opts1.document_type = 'Pdf'
       opts2 = SearchQRCodeOptions.new
       populate_qr_code_options(opts2)
-      opts2.document_type = 'Pdf'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts1, opts2]
@@ -65,10 +61,8 @@ module GroupDocsSignatureCloud
       test_file = TestFile.presentation_signed
       opts1 = SearchBarcodeOptions.new
       populate_barcode_options(opts1)
-      opts1.document_type = 'Presentation'
       opts2 = SearchQRCodeOptions.new
       populate_qr_code_options(opts2)
-      opts2.document_type = 'Presentation'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts1, opts2]
@@ -80,10 +74,8 @@ module GroupDocsSignatureCloud
       test_file = TestFile.spreadsheet_signed
       opts1 = SearchBarcodeOptions.new
       populate_barcode_options(opts1)
-      opts1.document_type = 'Spreadsheet'
       opts2 = SearchQRCodeOptions.new
       populate_qr_code_options(opts2)
-      opts2.document_type = 'Spreadsheet'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts1, opts2]
@@ -95,10 +87,8 @@ module GroupDocsSignatureCloud
       test_file = TestFile.wordprocessing_signed
       opts1 = SearchBarcodeOptions.new
       populate_barcode_options(opts1)
-      opts1.document_type = 'WordProcessing'
       opts2 = SearchQRCodeOptions.new
       populate_qr_code_options(opts2)
-      opts2.document_type = 'WordProcessing'
       settings = SearchSettings.new
       settings.file_info = test_file.file_info
       settings.options = [opts1, opts2]

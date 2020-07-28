@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="signature.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,11 +31,35 @@ module GroupDocsSignatureCloud
   # Describes base class for signatures
   class Signature
 
-    # Specifies the type of document to process (Image, Pdf, Presentation, Spreadsheet, WordProcessing)
-    attr_accessor :document_type
-
     # Specifies the signature type (Text, Image, Digital, Barcode, QRCode, Stamp)
     attr_accessor :signature_type
+
+    # Specifies the page signature was found on
+    attr_accessor :page_number
+
+    # Unique signature identifier to modify signature in the document over Update or Delete methods. This property will be set automatically after Sign or Search method being called. If this property was saved before it can be set manually to manipulate the signature.
+    attr_accessor :signature_id
+
+    # Get or set flag to indicate if this component is Signature or document content. This property is being used with Update method to set element as signature (true) or document element (false).             
+    attr_accessor :is_signature
+
+    # Get or set the signature creation date
+    attr_accessor :created_on
+
+    # Get or set the signature modification date
+    attr_accessor :modified_on
+
+    # Specifies top position of signature
+    attr_accessor :top
+
+    # Specifies left position of signature
+    attr_accessor :left
+
+    # Specifies width of signature
+    attr_accessor :width
+
+    # Specifies height of signature
+    attr_accessor :height
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -61,16 +85,32 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'document_type' => :'DocumentType',
-        :'signature_type' => :'SignatureType'
+        :'signature_type' => :'SignatureType',
+        :'page_number' => :'PageNumber',
+        :'signature_id' => :'SignatureId',
+        :'is_signature' => :'IsSignature',
+        :'created_on' => :'CreatedOn',
+        :'modified_on' => :'ModifiedOn',
+        :'top' => :'Top',
+        :'left' => :'Left',
+        :'width' => :'Width',
+        :'height' => :'Height'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'document_type' => :'String',
-        :'signature_type' => :'String'
+        :'signature_type' => :'String',
+        :'page_number' => :'Integer',
+        :'signature_id' => :'String',
+        :'is_signature' => :'BOOLEAN',
+        :'created_on' => :'DateTime',
+        :'modified_on' => :'DateTime',
+        :'top' => :'Integer',
+        :'left' => :'Integer',
+        :'width' => :'Integer',
+        :'height' => :'Integer'
       }
     end
 
@@ -82,12 +122,44 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'DocumentType')
-        self.document_type = attributes[:'DocumentType']
-      end
-
       if attributes.key?(:'SignatureType')
         self.signature_type = attributes[:'SignatureType']
+      end
+
+      if attributes.key?(:'PageNumber')
+        self.page_number = attributes[:'PageNumber']
+      end
+
+      if attributes.key?(:'SignatureId')
+        self.signature_id = attributes[:'SignatureId']
+      end
+
+      if attributes.key?(:'IsSignature')
+        self.is_signature = attributes[:'IsSignature']
+      end
+
+      if attributes.key?(:'CreatedOn')
+        self.created_on = attributes[:'CreatedOn']
+      end
+
+      if attributes.key?(:'ModifiedOn')
+        self.modified_on = attributes[:'ModifiedOn']
+      end
+
+      if attributes.key?(:'Top')
+        self.top = attributes[:'Top']
+      end
+
+      if attributes.key?(:'Left')
+        self.left = attributes[:'Left']
+      end
+
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
+      end
+
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
       end
 
     end
@@ -96,12 +168,36 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @document_type.nil?
-        invalid_properties.push("invalid value for 'document_type', document_type cannot be nil.")
-      end
-
       if @signature_type.nil?
         invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
+      end
+
+      if @is_signature.nil?
+        invalid_properties.push("invalid value for 'is_signature', is_signature cannot be nil.")
+      end
+
+      if @created_on.nil?
+        invalid_properties.push("invalid value for 'created_on', created_on cannot be nil.")
+      end
+
+      if @modified_on.nil?
+        invalid_properties.push("invalid value for 'modified_on', modified_on cannot be nil.")
+      end
+
+      if @top.nil?
+        invalid_properties.push("invalid value for 'top', top cannot be nil.")
+      end
+
+      if @left.nil?
+        invalid_properties.push("invalid value for 'left', left cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
       return invalid_properties
@@ -110,27 +206,17 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @document_type.nil?
-      document_type_validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      return false unless document_type_validator.valid?(@document_type)
       return false if @signature_type.nil?
       signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
       return false unless signature_type_validator.valid?(@signature_type)
+      return false if @is_signature.nil?
+      return false if @created_on.nil?
+      return false if @modified_on.nil?
+      return false if @top.nil?
+      return false if @left.nil?
+      return false if @width.nil?
+      return false if @height.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] document_type Object to be assigned
-    def document_type=(document_type)
-      validator = EnumAttributeValidator.new('String', ["Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
-      if document_type.to_i == 0
-        unless validator.valid?(document_type)
-          raise ArgumentError, "invalid value for 'document_type', must be one of #{validator.allowable_values}."
-        end
-        @document_type = document_type
-      else
-        @document_type = validator.allowable_values[document_type.to_i]
-      end
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -152,8 +238,16 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          document_type == other.document_type &&
-          signature_type == other.signature_type
+          signature_type == other.signature_type &&
+          page_number == other.page_number &&
+          signature_id == other.signature_id &&
+          is_signature == other.is_signature &&
+          created_on == other.created_on &&
+          modified_on == other.modified_on &&
+          top == other.top &&
+          left == other.left &&
+          width == other.width &&
+          height == other.height
     end
 
     # @see the `==` method
@@ -165,7 +259,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [document_type, signature_type].hash
+      [signature_type, page_number, signature_id, is_signature, created_on, modified_on, top, left, width, height].hash
     end
 
     # Downcases first letter.

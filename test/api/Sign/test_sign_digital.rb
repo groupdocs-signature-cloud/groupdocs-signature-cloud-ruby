@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -38,7 +38,7 @@ module GroupDocsSignatureCloud
     def test_sign_digital_pdf
       test_file = TestFile.pdf_one_page
       signedFileName = "Output\\PdfDigitalSigned.pdf"          
-      settings = populate_options(signedFileName, 'Pdf', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
     end
@@ -50,7 +50,7 @@ module GroupDocsSignatureCloud
     def test_sign_digital_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
       signedFileName = "Output\\SpreadsheetDigitalSigned.xlsx"
-      settings = populate_options(signedFileName, 'Spreadsheet', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
     end
@@ -58,17 +58,16 @@ module GroupDocsSignatureCloud
     def test_sign_digital_wordprocessing
       test_file = TestFile.word_docx
       signedFileName = "Output\\WordDigitalSigned.docx"
-      settings = populate_options(signedFileName, 'WordProcessing', test_file)               
+      settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     
     end    
 
-    def populate_options(signedFileName, documentType, testFile)
+    def populate_options(signedFileName, testFile)
         opts = SignDigitalOptions.new
-        opts.document_type = documentType
         opts.signature_type = 'Digital'
-        opts.image_guid = TestFile.additional_signature01.path
-        opts.certificate_guid = TestFile.additional_pfx.path
+        opts.image_file_path = TestFile.additional_signature01.path
+        opts.certificate_file_path = TestFile.additional_pfx.path
         opts.password = '1234567890'                
 
         settings = SignSettings.new
