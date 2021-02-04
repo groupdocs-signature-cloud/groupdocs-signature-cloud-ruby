@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/api-v2.0-lightgrey) ![Gem](https://img.shields.io/gem/v/groupdocs_signature_cloud) ![Gem](https://img.shields.io/gem/dt/groupdocs_signature_cloud) [![GitHub license](https://img.shields.io/github/license/groupdocs-signature-cloud/groupdocs-signature-cloud-ruby)](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-ruby/blob/master/LICENSE) 
+![](https://img.shields.io/badge/api-v2.0-lightgrey) ![Gem](https://img.shields.io/gem/v/groupdocs_signature_cloud) ![Gem](https://img.shields.io/gem/dt/groupdocs_signature_cloud) [![GitHub license](https://img.shields.io/github/license/groupdocs-signature-cloud/groupdocs-signature-cloud-ruby)](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-ruby/blob/master/LICENSE)
 
 # Ruby SDK to Document Signature REST API
 
@@ -20,11 +20,11 @@ Check out the [Developer's Guide](https://docs.groupdocs.cloud/signature/develop
 
 ## Supported Signature Types
 
-- **Text Signature** 
-- **Image Signature** 
-- **Barcode Signature** 
+- **Text Signature**
+- **Image Signature**
+- **Barcode Signature**
 - **QR-Code Signature**
-- **Digital Signature** 
+- **Digital Signature**
 - **Stamp Signature**
 
 ## Microsoft Office Formats
@@ -64,12 +64,13 @@ gem "groupdocs_signature_cloud", "~> 20.7"
 # Load the gem
 require 'groupdocs_signature_cloud'
 
-# Get your app_sid and app_key at https://dashboard.groupdocs.cloud (free registration is required).
-app_sid = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-app_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+# Get Client Id and Client Secret from https://dashboard.groupdocs.cloud
+$my_client_id = ""
+$my_client_secret = ""
 
-# Create instance of the API class
-api = GroupDocsSignatureCloud::InfoApi.from_keys(app_sid, app_key)
+# Create instance of the API
+$configuration = GroupDocsSignatureCloud::Configuration.new($my_client_id, $my_client_secret)
+api = GroupDocsSignatureCloud::InfoApi.from_config($configuration)
 
 # Retrieve supported file-formats
 response = api.get_supported_file_formats
@@ -77,7 +78,7 @@ response = api.get_supported_file_formats
 # Print out supported file-formats
 puts("Supported file-formats:")
 response.formats.each do |format|
-  puts("#{format.file_format} (#{format.extension})") 
+  puts("#{format.file_format} (#{format.extension})")
 end
 ```
 
@@ -86,6 +87,6 @@ end
 | .NET | Java | PHP | Python | Ruby | Node.js |
 |---|---|---|---|---|---|
 | [GitHub](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-dotnet) | [GitHub](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-java) | [GitHub](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-php) | [GitHub](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-python) | [GitHub](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-ruby)  | [GitHub](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-node) |
-| [NuGet](https://www.nuget.org/packages/GroupDocs.Signature-Cloud/) | [Maven](https://repository.groupdocs.cloud/webapp/#/artifacts/browse/tree/General/repo/com/groupdocs/groupdocs-signature-cloud) | [Composer](https://packagist.org/packages/groupdocscloud/groupdocs-signature-cloud) | [PIP](https://pypi.org/project/groupdocs-signature-cloud/) | [GEM](https://rubygems.org/gems/groupdocs_signature_cloud)  | [NPM](https://www.npmjs.com/package/groupdocs-signature-cloud) | 
+| [NuGet](https://www.nuget.org/packages/GroupDocs.Signature-Cloud/) | [Maven](https://repository.groupdocs.cloud/webapp/#/artifacts/browse/tree/General/repo/com/groupdocs/groupdocs-signature-cloud) | [Composer](https://packagist.org/packages/groupdocscloud/groupdocs-signature-cloud) | [PIP](https://pypi.org/project/groupdocs-signature-cloud/) | [GEM](https://rubygems.org/gems/groupdocs_signature_cloud)  | [NPM](https://www.npmjs.com/package/groupdocs-signature-cloud) |
 
 [Home](https://www.groupdocs.cloud/) | [Product Page](https://products.groupdocs.cloud/signature/ruby) | [Documentation](https://docs.groupdocs.cloud/signature/) | [Live Demo](https://products.groupdocs.app/signature/total) | [API Reference](https://apireference.groupdocs.cloud/signature/) | [Code Samples](https://github.com/groupdocs-signature-cloud/groupdocs-signature-cloud-ruby-samples) | [Blog](https://blog.groupdocs.cloud/category/signature/) | [Free Support](https://forum.groupdocs.cloud/c/signature) | [Free Trial](https://dashboard.groupdocs.cloud)
