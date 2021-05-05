@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="verify_result.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +31,7 @@ module GroupDocsSignatureCloud
   # Verification result information
   class VerifyResult
 
-    # Processed document basic info
+    # Processed document file info
     attr_accessor :file_info
 
     # Processed document size in bytes

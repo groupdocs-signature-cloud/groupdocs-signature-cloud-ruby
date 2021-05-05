@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="pages_setup.rb">
+ # <copyright company="Aspose Pty Ltd" file="time_stamp.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,43 +28,33 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Describes special pages of document to process
-  class PagesSetup
+  # Represents data to get time stamp from third-party site.
+  class TimeStamp
 
-    # Get or set flag to use first document page
-    attr_accessor :first_page
+    # Url of third-party site.
+    attr_accessor :url
 
-    # Get or set flag to use last document page
-    attr_accessor :last_page
+    # User.
+    attr_accessor :user
 
-    # Get or set flag to use odd pages of document
-    attr_accessor :odd_pages
-
-    # Get or set flag to use even pages of document
-    attr_accessor :even_pages
-
-    # Set arbitrary pages of document to use
-    attr_accessor :page_numbers
+    # Password.
+    attr_accessor :password
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'first_page' => :'FirstPage',
-        :'last_page' => :'LastPage',
-        :'odd_pages' => :'OddPages',
-        :'even_pages' => :'EvenPages',
-        :'page_numbers' => :'PageNumbers'
+        :'url' => :'Url',
+        :'user' => :'User',
+        :'password' => :'Password'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'first_page' => :'BOOLEAN',
-        :'last_page' => :'BOOLEAN',
-        :'odd_pages' => :'BOOLEAN',
-        :'even_pages' => :'BOOLEAN',
-        :'page_numbers' => :'Array<Integer>'
+        :'url' => :'String',
+        :'user' => :'String',
+        :'password' => :'String'
       }
     end
 
@@ -76,26 +66,16 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FirstPage')
-        self.first_page = attributes[:'FirstPage']
+      if attributes.key?(:'Url')
+        self.url = attributes[:'Url']
       end
 
-      if attributes.key?(:'LastPage')
-        self.last_page = attributes[:'LastPage']
+      if attributes.key?(:'User')
+        self.user = attributes[:'User']
       end
 
-      if attributes.key?(:'OddPages')
-        self.odd_pages = attributes[:'OddPages']
-      end
-
-      if attributes.key?(:'EvenPages')
-        self.even_pages = attributes[:'EvenPages']
-      end
-
-      if attributes.key?(:'PageNumbers')
-        if (value = attributes[:'PageNumbers']).is_a?(Array)
-          self.page_numbers = value
-        end
+      if attributes.key?(:'Password')
+        self.password = attributes[:'Password']
       end
 
     end
@@ -104,32 +84,12 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @first_page.nil?
-        invalid_properties.push("invalid value for 'first_page', first_page cannot be nil.")
-      end
-
-      if @last_page.nil?
-        invalid_properties.push("invalid value for 'last_page', last_page cannot be nil.")
-      end
-
-      if @odd_pages.nil?
-        invalid_properties.push("invalid value for 'odd_pages', odd_pages cannot be nil.")
-      end
-
-      if @even_pages.nil?
-        invalid_properties.push("invalid value for 'even_pages', even_pages cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_page.nil?
-      return false if @last_page.nil?
-      return false if @odd_pages.nil?
-      return false if @even_pages.nil?
       return true
     end
 
@@ -138,11 +98,9 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          first_page == other.first_page &&
-          last_page == other.last_page &&
-          odd_pages == other.odd_pages &&
-          even_pages == other.even_pages &&
-          page_numbers == other.page_numbers
+          url == other.url &&
+          user == other.user &&
+          password == other.password
     end
 
     # @see the `==` method
@@ -154,7 +112,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [first_page, last_page, odd_pages, even_pages, page_numbers].hash
+      [url, user, password].hash
     end
 
     # Downcases first letter.

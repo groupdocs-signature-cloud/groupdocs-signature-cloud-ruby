@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="info_result.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +31,7 @@ module GroupDocsSignatureCloud
   # Document info result
   class InfoResult
 
-    # File info
+    # Input File info
     attr_accessor :file_info
 
     # Document extension

@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="sign_qr_code_options.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -106,6 +106,9 @@ module GroupDocsSignatureCloud
     # Gets or sets the Z-order position of text signature. Determines the display order of overlapping signatures.             
     attr_accessor :z_order
 
+    # Gets or sets the native attribute. If it is set document specific signatures could be used. Native text watermark for WordProcessing documents is different than regular, for example.             
+    attr_accessor :native
+
     # Get or set QRCode type. Value should be one from supported QRCode types list
     attr_accessor :qr_code_type
 
@@ -170,6 +173,7 @@ module GroupDocsSignatureCloud
         :'text_horizontal_alignment' => :'TextHorizontalAlignment',
         :'text_vertical_alignment' => :'TextVerticalAlignment',
         :'z_order' => :'ZOrder',
+        :'native' => :'Native',
         :'qr_code_type' => :'QRCodeType',
         :'transparency' => :'Transparency',
         :'code_text_alignment' => :'CodeTextAlignment',
@@ -206,6 +210,7 @@ module GroupDocsSignatureCloud
         :'text_horizontal_alignment' => :'String',
         :'text_vertical_alignment' => :'String',
         :'z_order' => :'Integer',
+        :'native' => :'BOOLEAN',
         :'qr_code_type' => :'String',
         :'transparency' => :'Float',
         :'code_text_alignment' => :'String',
@@ -322,6 +327,10 @@ module GroupDocsSignatureCloud
         self.z_order = attributes[:'ZOrder']
       end
 
+      if attributes.key?(:'Native')
+        self.native = attributes[:'Native']
+      end
+
       if attributes.key?(:'QRCodeType')
         self.qr_code_type = attributes[:'QRCodeType']
       end
@@ -412,6 +421,10 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'z_order', z_order cannot be nil.")
       end
 
+      if @native.nil?
+        invalid_properties.push("invalid value for 'native', native cannot be nil.")
+      end
+
       if @transparency.nil?
         invalid_properties.push("invalid value for 'transparency', transparency cannot be nil.")
       end
@@ -460,6 +473,7 @@ module GroupDocsSignatureCloud
       text_vertical_alignment_validator = EnumAttributeValidator.new('String', ["Top", "Center", "Bottom"])
       return false unless text_vertical_alignment_validator.valid?(@text_vertical_alignment)
       return false if @z_order.nil?
+      return false if @native.nil?
       return false if @transparency.nil?
       return false if @code_text_alignment.nil?
       code_text_alignment_validator = EnumAttributeValidator.new('String', ["None", "Above", "Below", "Right"])
@@ -637,6 +651,7 @@ module GroupDocsSignatureCloud
           text_horizontal_alignment == other.text_horizontal_alignment &&
           text_vertical_alignment == other.text_vertical_alignment &&
           z_order == other.z_order &&
+          native == other.native &&
           qr_code_type == other.qr_code_type &&
           transparency == other.transparency &&
           code_text_alignment == other.code_text_alignment &&
@@ -653,7 +668,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, left, top, width, height, location_measure_type, size_measure_type, stretch, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, text, font, fore_color, background_color, background_brush, border, text_horizontal_alignment, text_vertical_alignment, z_order, qr_code_type, transparency, code_text_alignment, inner_margins, logo_file_path].hash
+      [signature_type, page, all_pages, pages_setup, left, top, width, height, location_measure_type, size_measure_type, stretch, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, text, font, fore_color, background_color, background_brush, border, text_horizontal_alignment, text_vertical_alignment, z_order, native, qr_code_type, transparency, code_text_alignment, inner_margins, logo_file_path].hash
     end
 
     # Downcases first letter.

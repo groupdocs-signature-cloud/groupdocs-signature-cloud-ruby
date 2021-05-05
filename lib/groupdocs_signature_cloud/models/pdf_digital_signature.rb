@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="pages_setup.rb">
+ # <copyright company="Aspose Pty Ltd" file="pdf_digital_signature.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,43 +28,69 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Describes special pages of document to process
-  class PagesSetup
+  # Contains pdf digital Signature properties
+  class PdfDigitalSignature
 
-    # Get or set flag to use first document page
-    attr_accessor :first_page
+    # Information provided by the signer to enable a recipient to contact the signer
+    attr_accessor :contact_info
 
-    # Get or set flag to use last document page
-    attr_accessor :last_page
+    # The CPU host name or physical location of the signing.
+    attr_accessor :location
 
-    # Get or set flag to use odd pages of document
-    attr_accessor :odd_pages
+    # The reason for the signing, such as (I agreeРІР‚В¦).
+    attr_accessor :reason
 
-    # Get or set flag to use even pages of document
-    attr_accessor :even_pages
+    # Type of Pdf digital signature.
+    attr_accessor :type
 
-    # Set arbitrary pages of document to use
-    attr_accessor :page_numbers
+    # Time stamp for Pdf digital signature. Default value is null.
+    attr_accessor :time_stamp
+
+    # Force to show/hide signature properties
+    attr_accessor :show_properties
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'first_page' => :'FirstPage',
-        :'last_page' => :'LastPage',
-        :'odd_pages' => :'OddPages',
-        :'even_pages' => :'EvenPages',
-        :'page_numbers' => :'PageNumbers'
+        :'contact_info' => :'ContactInfo',
+        :'location' => :'Location',
+        :'reason' => :'Reason',
+        :'type' => :'Type',
+        :'time_stamp' => :'TimeStamp',
+        :'show_properties' => :'ShowProperties'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'first_page' => :'BOOLEAN',
-        :'last_page' => :'BOOLEAN',
-        :'odd_pages' => :'BOOLEAN',
-        :'even_pages' => :'BOOLEAN',
-        :'page_numbers' => :'Array<Integer>'
+        :'contact_info' => :'String',
+        :'location' => :'String',
+        :'reason' => :'String',
+        :'type' => :'String',
+        :'time_stamp' => :'TimeStamp',
+        :'show_properties' => :'BOOLEAN'
       }
     end
 
@@ -76,26 +102,28 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FirstPage')
-        self.first_page = attributes[:'FirstPage']
+      if attributes.key?(:'ContactInfo')
+        self.contact_info = attributes[:'ContactInfo']
       end
 
-      if attributes.key?(:'LastPage')
-        self.last_page = attributes[:'LastPage']
+      if attributes.key?(:'Location')
+        self.location = attributes[:'Location']
       end
 
-      if attributes.key?(:'OddPages')
-        self.odd_pages = attributes[:'OddPages']
+      if attributes.key?(:'Reason')
+        self.reason = attributes[:'Reason']
       end
 
-      if attributes.key?(:'EvenPages')
-        self.even_pages = attributes[:'EvenPages']
+      if attributes.key?(:'Type')
+        self.type = attributes[:'Type']
       end
 
-      if attributes.key?(:'PageNumbers')
-        if (value = attributes[:'PageNumbers']).is_a?(Array)
-          self.page_numbers = value
-        end
+      if attributes.key?(:'TimeStamp')
+        self.time_stamp = attributes[:'TimeStamp']
+      end
+
+      if attributes.key?(:'ShowProperties')
+        self.show_properties = attributes[:'ShowProperties']
       end
 
     end
@@ -104,20 +132,16 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @first_page.nil?
-        invalid_properties.push("invalid value for 'first_page', first_page cannot be nil.")
+      if @type.nil?
+        invalid_properties.push("invalid value for 'type', type cannot be nil.")
       end
 
-      if @last_page.nil?
-        invalid_properties.push("invalid value for 'last_page', last_page cannot be nil.")
+      if @time_stamp.nil?
+        invalid_properties.push("invalid value for 'time_stamp', time_stamp cannot be nil.")
       end
 
-      if @odd_pages.nil?
-        invalid_properties.push("invalid value for 'odd_pages', odd_pages cannot be nil.")
-      end
-
-      if @even_pages.nil?
-        invalid_properties.push("invalid value for 'even_pages', even_pages cannot be nil.")
+      if @show_properties.nil?
+        invalid_properties.push("invalid value for 'show_properties', show_properties cannot be nil.")
       end
 
       return invalid_properties
@@ -126,11 +150,26 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_page.nil?
-      return false if @last_page.nil?
-      return false if @odd_pages.nil?
-      return false if @even_pages.nil?
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["Signature", "Certificate"])
+      return false unless type_validator.valid?(@type)
+      return false if @time_stamp.nil?
+      return false if @show_properties.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["Signature", "Certificate"])
+      if type.to_i == 0
+        unless validator.valid?(type)
+          raise ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
+        end
+        @type = type
+      else
+        @type = validator.allowable_values[type.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -138,11 +177,12 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          first_page == other.first_page &&
-          last_page == other.last_page &&
-          odd_pages == other.odd_pages &&
-          even_pages == other.even_pages &&
-          page_numbers == other.page_numbers
+          contact_info == other.contact_info &&
+          location == other.location &&
+          reason == other.reason &&
+          type == other.type &&
+          time_stamp == other.time_stamp &&
+          show_properties == other.show_properties
     end
 
     # @see the `==` method
@@ -154,7 +194,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [first_page, last_page, odd_pages, even_pages, page_numbers].hash
+      [contact_info, location, reason, type, time_stamp, show_properties].hash
     end
 
     # Downcases first letter.

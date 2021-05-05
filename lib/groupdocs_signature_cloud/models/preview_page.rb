@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="pages_setup.rb">
+ # <copyright company="Aspose Pty Ltd" file="preview_page.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,43 +28,38 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Describes special pages of document to process
-  class PagesSetup
+  # Document preview page
+  class PreviewPage
 
-    # Get or set flag to use first document page
-    attr_accessor :first_page
+    # Page number
+    attr_accessor :page_number
 
-    # Get or set flag to use last document page
-    attr_accessor :last_page
+    # Page file path in storage
+    attr_accessor :file_path
 
-    # Get or set flag to use odd pages of document
-    attr_accessor :odd_pages
+    # Page file size
+    attr_accessor :size
 
-    # Get or set flag to use even pages of document
-    attr_accessor :even_pages
-
-    # Set arbitrary pages of document to use
-    attr_accessor :page_numbers
+    # Download url
+    attr_accessor :download_url
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'first_page' => :'FirstPage',
-        :'last_page' => :'LastPage',
-        :'odd_pages' => :'OddPages',
-        :'even_pages' => :'EvenPages',
-        :'page_numbers' => :'PageNumbers'
+        :'page_number' => :'PageNumber',
+        :'file_path' => :'FilePath',
+        :'size' => :'Size',
+        :'download_url' => :'DownloadUrl'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'first_page' => :'BOOLEAN',
-        :'last_page' => :'BOOLEAN',
-        :'odd_pages' => :'BOOLEAN',
-        :'even_pages' => :'BOOLEAN',
-        :'page_numbers' => :'Array<Integer>'
+        :'page_number' => :'Integer',
+        :'file_path' => :'String',
+        :'size' => :'Integer',
+        :'download_url' => :'String'
       }
     end
 
@@ -76,26 +71,20 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FirstPage')
-        self.first_page = attributes[:'FirstPage']
+      if attributes.key?(:'PageNumber')
+        self.page_number = attributes[:'PageNumber']
       end
 
-      if attributes.key?(:'LastPage')
-        self.last_page = attributes[:'LastPage']
+      if attributes.key?(:'FilePath')
+        self.file_path = attributes[:'FilePath']
       end
 
-      if attributes.key?(:'OddPages')
-        self.odd_pages = attributes[:'OddPages']
+      if attributes.key?(:'Size')
+        self.size = attributes[:'Size']
       end
 
-      if attributes.key?(:'EvenPages')
-        self.even_pages = attributes[:'EvenPages']
-      end
-
-      if attributes.key?(:'PageNumbers')
-        if (value = attributes[:'PageNumbers']).is_a?(Array)
-          self.page_numbers = value
-        end
+      if attributes.key?(:'DownloadUrl')
+        self.download_url = attributes[:'DownloadUrl']
       end
 
     end
@@ -104,20 +93,12 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @first_page.nil?
-        invalid_properties.push("invalid value for 'first_page', first_page cannot be nil.")
+      if @page_number.nil?
+        invalid_properties.push("invalid value for 'page_number', page_number cannot be nil.")
       end
 
-      if @last_page.nil?
-        invalid_properties.push("invalid value for 'last_page', last_page cannot be nil.")
-      end
-
-      if @odd_pages.nil?
-        invalid_properties.push("invalid value for 'odd_pages', odd_pages cannot be nil.")
-      end
-
-      if @even_pages.nil?
-        invalid_properties.push("invalid value for 'even_pages', even_pages cannot be nil.")
+      if @size.nil?
+        invalid_properties.push("invalid value for 'size', size cannot be nil.")
       end
 
       return invalid_properties
@@ -126,10 +107,8 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_page.nil?
-      return false if @last_page.nil?
-      return false if @odd_pages.nil?
-      return false if @even_pages.nil?
+      return false if @page_number.nil?
+      return false if @size.nil?
       return true
     end
 
@@ -138,11 +117,10 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          first_page == other.first_page &&
-          last_page == other.last_page &&
-          odd_pages == other.odd_pages &&
-          even_pages == other.even_pages &&
-          page_numbers == other.page_numbers
+          page_number == other.page_number &&
+          file_path == other.file_path &&
+          size == other.size &&
+          download_url == other.download_url
     end
 
     # @see the `==` method
@@ -154,7 +132,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [first_page, last_page, odd_pages, even_pages, page_numbers].hash
+      [page_number, file_path, size, download_url].hash
     end
 
     # Downcases first letter.

@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="digital_signature.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -69,6 +69,9 @@ module GroupDocsSignatureCloud
 
     # Gets or sets the time the document was signed
     attr_accessor :sign_time
+
+    # Pdf digital signature properties
+    attr_accessor :pdf_digital_signature
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -106,7 +109,8 @@ module GroupDocsSignatureCloud
         :'height' => :'Height',
         :'comments' => :'Comments',
         :'is_valid' => :'IsValid',
-        :'sign_time' => :'SignTime'
+        :'sign_time' => :'SignTime',
+        :'pdf_digital_signature' => :'PdfDigitalSignature'
       }
     end
 
@@ -125,7 +129,8 @@ module GroupDocsSignatureCloud
         :'height' => :'Integer',
         :'comments' => :'String',
         :'is_valid' => :'BOOLEAN',
-        :'sign_time' => :'DateTime'
+        :'sign_time' => :'DateTime',
+        :'pdf_digital_signature' => :'PdfDigitalSignature'
       }
     end
 
@@ -187,6 +192,10 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'SignTime')
         self.sign_time = attributes[:'SignTime']
+      end
+
+      if attributes.key?(:'PdfDigitalSignature')
+        self.pdf_digital_signature = attributes[:'PdfDigitalSignature']
       end
 
     end
@@ -287,7 +296,8 @@ module GroupDocsSignatureCloud
           height == other.height &&
           comments == other.comments &&
           is_valid == other.is_valid &&
-          sign_time == other.sign_time
+          sign_time == other.sign_time &&
+          pdf_digital_signature == other.pdf_digital_signature
     end
 
     # @see the `==` method
@@ -299,7 +309,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page_number, signature_id, is_signature, created_on, modified_on, top, left, width, height, comments, is_valid, sign_time].hash
+      [signature_type, page_number, signature_id, is_signature, created_on, modified_on, top, left, width, height, comments, is_valid, sign_time, pdf_digital_signature].hash
     end
 
     # Downcases first letter.

@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="sign_result.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,7 +31,7 @@ module GroupDocsSignatureCloud
   # Sign result information
   class SignResult
 
-    # Source document basic info
+    # Signed file info
     attr_accessor :file_info
 
     # Source document size in bytes

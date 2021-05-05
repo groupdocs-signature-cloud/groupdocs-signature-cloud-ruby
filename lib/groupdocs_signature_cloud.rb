@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_signature_cloud.rb">
-#   Copyright (c) 2003-2020 Aspose Pty Ltd
+#   Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -53,6 +53,9 @@ require_relative 'groupdocs_signature_cloud/models/options_base'
 require_relative 'groupdocs_signature_cloud/models/padding'
 require_relative 'groupdocs_signature_cloud/models/page_info'
 require_relative 'groupdocs_signature_cloud/models/pages_setup'
+require_relative 'groupdocs_signature_cloud/models/pdf_digital_signature'
+require_relative 'groupdocs_signature_cloud/models/preview_page'
+require_relative 'groupdocs_signature_cloud/models/preview_result'
 require_relative 'groupdocs_signature_cloud/models/qr_code_type'
 require_relative 'groupdocs_signature_cloud/models/qr_codes_result'
 require_relative 'groupdocs_signature_cloud/models/save_options'
@@ -63,6 +66,7 @@ require_relative 'groupdocs_signature_cloud/models/signature_font'
 require_relative 'groupdocs_signature_cloud/models/stamp_line'
 require_relative 'groupdocs_signature_cloud/models/storage_exist'
 require_relative 'groupdocs_signature_cloud/models/storage_file'
+require_relative 'groupdocs_signature_cloud/models/time_stamp'
 require_relative 'groupdocs_signature_cloud/models/update_options'
 require_relative 'groupdocs_signature_cloud/models/update_result'
 require_relative 'groupdocs_signature_cloud/models/verify_result'
@@ -73,6 +77,7 @@ require_relative 'groupdocs_signature_cloud/models/file_version'
 require_relative 'groupdocs_signature_cloud/models/image_signature'
 require_relative 'groupdocs_signature_cloud/models/info_settings'
 require_relative 'groupdocs_signature_cloud/models/linear_gradient_brush'
+require_relative 'groupdocs_signature_cloud/models/preview_settings'
 require_relative 'groupdocs_signature_cloud/models/qr_code_signature'
 require_relative 'groupdocs_signature_cloud/models/radial_gradient_brush'
 require_relative 'groupdocs_signature_cloud/models/search_options'
@@ -103,5 +108,6 @@ require_relative 'groupdocs_signature_cloud/models/verify_qr_code_options'
 require_relative 'groupdocs_signature_cloud/api/file_api'
 require_relative 'groupdocs_signature_cloud/api/folder_api'
 require_relative 'groupdocs_signature_cloud/api/info_api'
+require_relative 'groupdocs_signature_cloud/api/preview_api'
 require_relative 'groupdocs_signature_cloud/api/sign_api'
 require_relative 'groupdocs_signature_cloud/api/storage_api'

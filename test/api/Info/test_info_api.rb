@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -68,6 +68,17 @@ module GroupDocsSignatureCloud
       assert_equal response.pages_count, 1
       assert_equal response.file_info.file_path, settings.file_info.file_path
     end
+
+    def test_GetInfoReturnsFileNotFound
+      test_file = TestFile.not_exist      
+      settings = InfoSettings.new
+      settings.file_info = test_file.file_info
+      request = GetInfoRequest.new(settings)
+      error = assert_raises ApiError do
+        @info_api.get_info(request)
+      end
+      assert_equal "Can't find file located at 'some-folder\\notexist.docx'.", error.message            
+    end    
 
   end
 end

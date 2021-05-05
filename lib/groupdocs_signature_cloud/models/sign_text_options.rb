@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="sign_text_options.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -105,6 +105,9 @@ module GroupDocsSignatureCloud
 
     # Gets or sets the Z-order position of text signature. Determines the display order of overlapping signatures.             
     attr_accessor :z_order
+
+    # Gets or sets the native attribute. If it is set document specific signatures could be used. Native text watermark for WordProcessing documents is different than regular, for example.             
+    attr_accessor :native
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -154,7 +157,8 @@ module GroupDocsSignatureCloud
         :'border' => :'Border',
         :'text_horizontal_alignment' => :'TextHorizontalAlignment',
         :'text_vertical_alignment' => :'TextVerticalAlignment',
-        :'z_order' => :'ZOrder'
+        :'z_order' => :'ZOrder',
+        :'native' => :'Native'
       }
     end
 
@@ -185,7 +189,8 @@ module GroupDocsSignatureCloud
         :'border' => :'BorderLine',
         :'text_horizontal_alignment' => :'String',
         :'text_vertical_alignment' => :'String',
-        :'z_order' => :'Integer'
+        :'z_order' => :'Integer',
+        :'native' => :'BOOLEAN'
       }
     end
 
@@ -297,6 +302,10 @@ module GroupDocsSignatureCloud
         self.z_order = attributes[:'ZOrder']
       end
 
+      if attributes.key?(:'Native')
+        self.native = attributes[:'Native']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -367,6 +376,10 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'z_order', z_order cannot be nil.")
       end
 
+      if @native.nil?
+        invalid_properties.push("invalid value for 'native', native cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -407,6 +420,7 @@ module GroupDocsSignatureCloud
       text_vertical_alignment_validator = EnumAttributeValidator.new('String', ["Top", "Center", "Bottom"])
       return false unless text_vertical_alignment_validator.valid?(@text_vertical_alignment)
       return false if @z_order.nil?
+      return false if @native.nil?
       return true
     end
 
@@ -565,7 +579,8 @@ module GroupDocsSignatureCloud
           border == other.border &&
           text_horizontal_alignment == other.text_horizontal_alignment &&
           text_vertical_alignment == other.text_vertical_alignment &&
-          z_order == other.z_order
+          z_order == other.z_order &&
+          native == other.native
     end
 
     # @see the `==` method
@@ -577,7 +592,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, left, top, width, height, location_measure_type, size_measure_type, stretch, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, text, font, fore_color, background_color, background_brush, border, text_horizontal_alignment, text_vertical_alignment, z_order].hash
+      [signature_type, page, all_pages, pages_setup, left, top, width, height, location_measure_type, size_measure_type, stretch, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, text, font, fore_color, background_color, background_brush, border, text_horizontal_alignment, text_vertical_alignment, z_order, native].hash
     end
 
     # Downcases first letter.

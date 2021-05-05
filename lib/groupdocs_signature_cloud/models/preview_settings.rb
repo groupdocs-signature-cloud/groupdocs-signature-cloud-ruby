@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="pages_setup.rb">
+ # <copyright company="Aspose Pty Ltd" file="preview_settings.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,43 +28,74 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Describes special pages of document to process
-  class PagesSetup
+  # Defines preview request settings
+  class PreviewSettings
 
-    # Get or set flag to use first document page
-    attr_accessor :first_page
+    # File info
+    attr_accessor :file_info
 
-    # Get or set flag to use last document page
-    attr_accessor :last_page
+    # Preview images width
+    attr_accessor :width
 
-    # Get or set flag to use odd pages of document
-    attr_accessor :odd_pages
+    # Preview images height
+    attr_accessor :height
 
-    # Get or set flag to use even pages of document
-    attr_accessor :even_pages
-
-    # Set arbitrary pages of document to use
+    # Preview page numbers
     attr_accessor :page_numbers
+
+    # Preview format
+    attr_accessor :preview_format
+
+    # Flag to hide signatures from page preview image. Only signatures are marked as IsSignature will be hidden from generated document page image
+    attr_accessor :hide_signatures
+
+    # Set path for output pages. If not set then default path used.
+    attr_accessor :output_path
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'first_page' => :'FirstPage',
-        :'last_page' => :'LastPage',
-        :'odd_pages' => :'OddPages',
-        :'even_pages' => :'EvenPages',
-        :'page_numbers' => :'PageNumbers'
+        :'file_info' => :'FileInfo',
+        :'width' => :'Width',
+        :'height' => :'Height',
+        :'page_numbers' => :'PageNumbers',
+        :'preview_format' => :'PreviewFormat',
+        :'hide_signatures' => :'HideSignatures',
+        :'output_path' => :'OutputPath'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'first_page' => :'BOOLEAN',
-        :'last_page' => :'BOOLEAN',
-        :'odd_pages' => :'BOOLEAN',
-        :'even_pages' => :'BOOLEAN',
-        :'page_numbers' => :'Array<Integer>'
+        :'file_info' => :'FileInfo',
+        :'width' => :'Integer',
+        :'height' => :'Integer',
+        :'page_numbers' => :'Array<Integer>',
+        :'preview_format' => :'String',
+        :'hide_signatures' => :'BOOLEAN',
+        :'output_path' => :'String'
       }
     end
 
@@ -76,20 +107,16 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'FirstPage')
-        self.first_page = attributes[:'FirstPage']
+      if attributes.key?(:'FileInfo')
+        self.file_info = attributes[:'FileInfo']
       end
 
-      if attributes.key?(:'LastPage')
-        self.last_page = attributes[:'LastPage']
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
       end
 
-      if attributes.key?(:'OddPages')
-        self.odd_pages = attributes[:'OddPages']
-      end
-
-      if attributes.key?(:'EvenPages')
-        self.even_pages = attributes[:'EvenPages']
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
       end
 
       if attributes.key?(:'PageNumbers')
@@ -98,26 +125,38 @@ module GroupDocsSignatureCloud
         end
       end
 
+      if attributes.key?(:'PreviewFormat')
+        self.preview_format = attributes[:'PreviewFormat']
+      end
+
+      if attributes.key?(:'HideSignatures')
+        self.hide_signatures = attributes[:'HideSignatures']
+      end
+
+      if attributes.key?(:'OutputPath')
+        self.output_path = attributes[:'OutputPath']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @first_page.nil?
-        invalid_properties.push("invalid value for 'first_page', first_page cannot be nil.")
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
       end
 
-      if @last_page.nil?
-        invalid_properties.push("invalid value for 'last_page', last_page cannot be nil.")
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
-      if @odd_pages.nil?
-        invalid_properties.push("invalid value for 'odd_pages', odd_pages cannot be nil.")
+      if @preview_format.nil?
+        invalid_properties.push("invalid value for 'preview_format', preview_format cannot be nil.")
       end
 
-      if @even_pages.nil?
-        invalid_properties.push("invalid value for 'even_pages', even_pages cannot be nil.")
+      if @hide_signatures.nil?
+        invalid_properties.push("invalid value for 'hide_signatures', hide_signatures cannot be nil.")
       end
 
       return invalid_properties
@@ -126,11 +165,27 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @first_page.nil?
-      return false if @last_page.nil?
-      return false if @odd_pages.nil?
-      return false if @even_pages.nil?
+      return false if @width.nil?
+      return false if @height.nil?
+      return false if @preview_format.nil?
+      preview_format_validator = EnumAttributeValidator.new('String', ["PNG", "JPEG", "BMP"])
+      return false unless preview_format_validator.valid?(@preview_format)
+      return false if @hide_signatures.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] preview_format Object to be assigned
+    def preview_format=(preview_format)
+      validator = EnumAttributeValidator.new('String', ["PNG", "JPEG", "BMP"])
+      if preview_format.to_i == 0
+        unless validator.valid?(preview_format)
+          raise ArgumentError, "invalid value for 'preview_format', must be one of #{validator.allowable_values}."
+        end
+        @preview_format = preview_format
+      else
+        @preview_format = validator.allowable_values[preview_format.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -138,11 +193,13 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          first_page == other.first_page &&
-          last_page == other.last_page &&
-          odd_pages == other.odd_pages &&
-          even_pages == other.even_pages &&
-          page_numbers == other.page_numbers
+          file_info == other.file_info &&
+          width == other.width &&
+          height == other.height &&
+          page_numbers == other.page_numbers &&
+          preview_format == other.preview_format &&
+          hide_signatures == other.hide_signatures &&
+          output_path == other.output_path
     end
 
     # @see the `==` method
@@ -154,7 +211,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [first_page, last_page, odd_pages, even_pages, page_numbers].hash
+      [file_info, width, height, page_numbers, preview_format, hide_signatures, output_path].hash
     end
 
     # Downcases first letter.
