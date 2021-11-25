@@ -43,6 +43,9 @@ module GroupDocsSignatureCloud
     # Options to specify pages for processing
     attr_accessor :pages_setup
 
+    # Specifies Appearance with additional properties for this options instance
+    attr_accessor :appearance
+
     # Gets or sets the signature image file name. This property is used only if ImageStream is not specified
     attr_accessor :image_file_path
 
@@ -134,6 +137,7 @@ module GroupDocsSignatureCloud
         :'page' => :'Page',
         :'all_pages' => :'AllPages',
         :'pages_setup' => :'PagesSetup',
+        :'appearance' => :'Appearance',
         :'image_file_path' => :'ImageFilePath',
         :'left' => :'Left',
         :'top' => :'Top',
@@ -165,6 +169,7 @@ module GroupDocsSignatureCloud
         :'page' => :'Integer',
         :'all_pages' => :'BOOLEAN',
         :'pages_setup' => :'PagesSetup',
+        :'appearance' => :'SignatureAppearance',
         :'image_file_path' => :'String',
         :'left' => :'Integer',
         :'top' => :'Integer',
@@ -211,6 +216,10 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'PagesSetup')
         self.pages_setup = attributes[:'PagesSetup']
+      end
+
+      if attributes.key?(:'Appearance')
+        self.appearance = attributes[:'Appearance']
       end
 
       if attributes.key?(:'ImageFilePath')
@@ -370,7 +379,7 @@ module GroupDocsSignatureCloud
     # @return true if the model is valid
     def valid?
       return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
+      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
       return false unless signature_type_validator.valid?(@signature_type)
       return false if @all_pages.nil?
       return false if @left.nil?
@@ -404,7 +413,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] signature_type Object to be assigned
     def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
+      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
       if signature_type.to_i == 0
         unless validator.valid?(signature_type)
           raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
@@ -508,6 +517,7 @@ module GroupDocsSignatureCloud
           page == other.page &&
           all_pages == other.all_pages &&
           pages_setup == other.pages_setup &&
+          appearance == other.appearance &&
           image_file_path == other.image_file_path &&
           left == other.left &&
           top == other.top &&
@@ -540,7 +550,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border, reason, contact, location, visible, password, certificate_file_path, x_ad_es_type].hash
+      [signature_type, page, all_pages, pages_setup, appearance, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border, reason, contact, location, visible, password, certificate_file_path, x_ad_es_type].hash
     end
 
     # Downcases first letter.
@@ -614,6 +624,24 @@ module GroupDocsSignatureCloud
         ttype = type
         if value.is_a?(Hash) and !value[:signatureType].nil?
           ttype = value[:signatureType] + 'Signature'
+          if value[:signatureType] == 'FormField' and !value[:type].nil?
+            type = value[:type]
+            if type == 'Checkbox'
+              ttype = 'CheckboxFormFieldSignature'
+            end
+            if type == 'Text'
+              ttype = 'TextFormFieldSignature'
+            end
+            if type == 'Combobox'
+              ttype = 'ComboboxFormFieldSignature'
+            end
+            if type == 'DigitalSignature'
+              ttype = 'DigitalFormFieldSignature'
+            end
+            if type == 'Radio'
+              ttype = 'RadioButtonFormFieldSignature'
+            end
+          end
         end      
         temp_model = GroupDocsSignatureCloud.const_get(ttype).new
         temp_model.build_from_hash(value)

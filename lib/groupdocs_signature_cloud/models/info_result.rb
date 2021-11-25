@@ -61,6 +61,9 @@ module GroupDocsSignatureCloud
     # List of document pages descriptions
     attr_accessor :pages
 
+    # Collection of document signatures
+    attr_accessor :signatures
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -73,7 +76,8 @@ module GroupDocsSignatureCloud
         :'date_modified' => :'DateModified',
         :'width_for_max_height' => :'WidthForMaxHeight',
         :'max_page_height' => :'MaxPageHeight',
-        :'pages' => :'Pages'
+        :'pages' => :'Pages',
+        :'signatures' => :'Signatures'
       }
     end
 
@@ -89,7 +93,8 @@ module GroupDocsSignatureCloud
         :'date_modified' => :'DateTime',
         :'width_for_max_height' => :'Integer',
         :'max_page_height' => :'Integer',
-        :'pages' => :'Array<PageInfo>'
+        :'pages' => :'Array<PageInfo>',
+        :'signatures' => :'Array<Signature>'
       }
     end
 
@@ -140,6 +145,12 @@ module GroupDocsSignatureCloud
       if attributes.key?(:'Pages')
         if (value = attributes[:'Pages']).is_a?(Array)
           self.pages = value
+        end
+      end
+
+      if attributes.key?(:'Signatures')
+        if (value = attributes[:'Signatures']).is_a?(Array)
+          self.signatures = value
         end
       end
 
@@ -202,7 +213,8 @@ module GroupDocsSignatureCloud
           date_modified == other.date_modified &&
           width_for_max_height == other.width_for_max_height &&
           max_page_height == other.max_page_height &&
-          pages == other.pages
+          pages == other.pages &&
+          signatures == other.signatures
     end
 
     # @see the `==` method
@@ -214,7 +226,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, extension, file_format, size, pages_count, date_created, date_modified, width_for_max_height, max_page_height, pages].hash
+      [file_info, extension, file_format, size, pages_count, date_created, date_modified, width_for_max_height, max_page_height, pages, signatures].hash
     end
 
     # Downcases first letter.
@@ -288,6 +300,24 @@ module GroupDocsSignatureCloud
         ttype = type
         if value.is_a?(Hash) and !value[:signatureType].nil?
           ttype = value[:signatureType] + 'Signature'
+          if value[:signatureType] == 'FormField' and !value[:type].nil?
+            type = value[:type]
+            if type == 'Checkbox'
+              ttype = 'CheckboxFormFieldSignature'
+            end
+            if type == 'Text'
+              ttype = 'TextFormFieldSignature'
+            end
+            if type == 'Combobox'
+              ttype = 'ComboboxFormFieldSignature'
+            end
+            if type == 'DigitalSignature'
+              ttype = 'DigitalFormFieldSignature'
+            end
+            if type == 'Radio'
+              ttype = 'RadioButtonFormFieldSignature'
+            end
+          end
         end      
         temp_model = GroupDocsSignatureCloud.const_get(ttype).new
         temp_model.build_from_hash(value)

@@ -129,7 +129,7 @@ module GroupDocsSignatureCloud
     # @return true if the model is valid
     def valid?
       return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
+      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
       return false unless signature_type_validator.valid?(@signature_type)
       return false if @all_pages.nil?
       return true
@@ -138,7 +138,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] signature_type Object to be assigned
     def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp"])
+      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
       if signature_type.to_i == 0
         unless validator.valid?(signature_type)
           raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
@@ -243,6 +243,24 @@ module GroupDocsSignatureCloud
         ttype = type
         if value.is_a?(Hash) and !value[:signatureType].nil?
           ttype = value[:signatureType] + 'Signature'
+          if value[:signatureType] == 'FormField' and !value[:type].nil?
+            type = value[:type]
+            if type == 'Checkbox'
+              ttype = 'CheckboxFormFieldSignature'
+            end
+            if type == 'Text'
+              ttype = 'TextFormFieldSignature'
+            end
+            if type == 'Combobox'
+              ttype = 'ComboboxFormFieldSignature'
+            end
+            if type == 'DigitalSignature'
+              ttype = 'DigitalFormFieldSignature'
+            end
+            if type == 'Radio'
+              ttype = 'RadioButtonFormFieldSignature'
+            end
+          end
         end      
         temp_model = GroupDocsSignatureCloud.const_get(ttype).new
         temp_model.build_from_hash(value)

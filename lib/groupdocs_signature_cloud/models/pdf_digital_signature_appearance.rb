@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="verify_digital_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="pdf_digital_signature_appearance.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,44 +28,35 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Defines options to verify Digital signature within a document
-  class VerifyDigitalOptions
+  # Describes appearance of Digital Signature are on PDF documents.
+  class PdfDigitalSignatureAppearance
 
-    # Specifies the signature type of processing
-    attr_accessor :signature_type
+    # Specifies the type of appearance
+    attr_accessor :appearance_type
 
-    # Gets or sets a document page number for processing. Value is optional
-    attr_accessor :page
+    # Get or set background color of signature appearance. By default the value is SystemColors.Windows
+    attr_accessor :background
 
-    # Process all document pages. Type of processing depends on SignatureType For Images Document Type it can be used only for multi-frames images like .tiff
-    attr_accessor :all_pages
+    # Gets or sets contact info label. Default value: \"Contact\". if this value is empty then no contact label will appear on digital signature area.             
+    attr_accessor :contact_info_label
 
-    # Options to specify pages for processing
-    attr_accessor :pages_setup
+    # Gets or sets date signed label. Default value: \"Date\".
+    attr_accessor :date_signed_at_label
 
-    # Password of Digital Certificate if required
-    attr_accessor :password
+    # Gets or sets digital signed label. Default value: \"Digitally signed by\".
+    attr_accessor :digital_signed_label
 
-    # File Guid of Digital Certificate
-    attr_accessor :certificate_file_path
+    # Gets or sets the Font family name to display the labels. Default value is \"Arial\".
+    attr_accessor :font_family_name
 
-    # Comments of Digital Signature to validate Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :comments
+    # Gets or sets the Font size to display the labels. Default value is 10.
+    attr_accessor :font_size
 
-    # Date and time range of Digital Signature to validate. Null value will be ignored. Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_from
+    # Gets or sets location label. Default value: \"Location\". if this value is empty then no location label will appear on digital signature area.
+    attr_accessor :location_label
 
-    # Date and time range of Digital Signature to validate. Null value will be ignored Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_to
-
-    # Reason of Digital Signature to validate Suitable for Pdf document type
-    attr_accessor :reason
-
-    # Signature Contact to validate Suitable for Pdf document type
-    attr_accessor :contact
-
-    # Signature Location to validate Suitable for Pdf document type
-    attr_accessor :location
+    # Gets or sets reason label. Default value: \"Reason\". if this value is empty then no reason label will appear on digital signature area.
+    attr_accessor :reason_label
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -91,36 +82,30 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'signature_type' => :'SignatureType',
-        :'page' => :'Page',
-        :'all_pages' => :'AllPages',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'Password',
-        :'certificate_file_path' => :'CertificateFilePath',
-        :'comments' => :'Comments',
-        :'sign_date_time_from' => :'SignDateTimeFrom',
-        :'sign_date_time_to' => :'SignDateTimeTo',
-        :'reason' => :'Reason',
-        :'contact' => :'Contact',
-        :'location' => :'Location'
+        :'appearance_type' => :'AppearanceType',
+        :'background' => :'Background',
+        :'contact_info_label' => :'ContactInfoLabel',
+        :'date_signed_at_label' => :'DateSignedAtLabel',
+        :'digital_signed_label' => :'DigitalSignedLabel',
+        :'font_family_name' => :'FontFamilyName',
+        :'font_size' => :'FontSize',
+        :'location_label' => :'LocationLabel',
+        :'reason_label' => :'ReasonLabel'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'signature_type' => :'String',
-        :'page' => :'Integer',
-        :'all_pages' => :'BOOLEAN',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'String',
-        :'certificate_file_path' => :'String',
-        :'comments' => :'String',
-        :'sign_date_time_from' => :'DateTime',
-        :'sign_date_time_to' => :'DateTime',
-        :'reason' => :'String',
-        :'contact' => :'String',
-        :'location' => :'String'
+        :'appearance_type' => :'String',
+        :'background' => :'Color',
+        :'contact_info_label' => :'String',
+        :'date_signed_at_label' => :'String',
+        :'digital_signed_label' => :'String',
+        :'font_family_name' => :'String',
+        :'font_size' => :'Float',
+        :'location_label' => :'String',
+        :'reason_label' => :'String'
       }
     end
 
@@ -132,52 +117,40 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'SignatureType')
-        self.signature_type = attributes[:'SignatureType']
+      if attributes.key?(:'AppearanceType')
+        self.appearance_type = attributes[:'AppearanceType']
       end
 
-      if attributes.key?(:'Page')
-        self.page = attributes[:'Page']
+      if attributes.key?(:'Background')
+        self.background = attributes[:'Background']
       end
 
-      if attributes.key?(:'AllPages')
-        self.all_pages = attributes[:'AllPages']
+      if attributes.key?(:'ContactInfoLabel')
+        self.contact_info_label = attributes[:'ContactInfoLabel']
       end
 
-      if attributes.key?(:'PagesSetup')
-        self.pages_setup = attributes[:'PagesSetup']
+      if attributes.key?(:'DateSignedAtLabel')
+        self.date_signed_at_label = attributes[:'DateSignedAtLabel']
       end
 
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
+      if attributes.key?(:'DigitalSignedLabel')
+        self.digital_signed_label = attributes[:'DigitalSignedLabel']
       end
 
-      if attributes.key?(:'CertificateFilePath')
-        self.certificate_file_path = attributes[:'CertificateFilePath']
+      if attributes.key?(:'FontFamilyName')
+        self.font_family_name = attributes[:'FontFamilyName']
       end
 
-      if attributes.key?(:'Comments')
-        self.comments = attributes[:'Comments']
+      if attributes.key?(:'FontSize')
+        self.font_size = attributes[:'FontSize']
       end
 
-      if attributes.key?(:'SignDateTimeFrom')
-        self.sign_date_time_from = attributes[:'SignDateTimeFrom']
+      if attributes.key?(:'LocationLabel')
+        self.location_label = attributes[:'LocationLabel']
       end
 
-      if attributes.key?(:'SignDateTimeTo')
-        self.sign_date_time_to = attributes[:'SignDateTimeTo']
-      end
-
-      if attributes.key?(:'Reason')
-        self.reason = attributes[:'Reason']
-      end
-
-      if attributes.key?(:'Contact')
-        self.contact = attributes[:'Contact']
-      end
-
-      if attributes.key?(:'Location')
-        self.location = attributes[:'Location']
+      if attributes.key?(:'ReasonLabel')
+        self.reason_label = attributes[:'ReasonLabel']
       end
 
     end
@@ -186,12 +159,8 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @signature_type.nil?
-        invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
-      end
-
-      if @all_pages.nil?
-        invalid_properties.push("invalid value for 'all_pages', all_pages cannot be nil.")
+      if @appearance_type.nil?
+        invalid_properties.push("invalid value for 'appearance_type', appearance_type cannot be nil.")
       end
 
       return invalid_properties
@@ -200,24 +169,23 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      return false unless signature_type_validator.valid?(@signature_type)
-      return false if @all_pages.nil?
+      return false if @appearance_type.nil?
+      appearance_type_validator = EnumAttributeValidator.new('String', ["Undefined", "PdfTextAnnotation", "PdfTextSticker", "Image", "DigitalSignature", "PdfDigitalSignature"])
+      return false unless appearance_type_validator.valid?(@appearance_type)
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] signature_type Object to be assigned
-    def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      if signature_type.to_i == 0
-        unless validator.valid?(signature_type)
-          raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
+    # @param [Object] appearance_type Object to be assigned
+    def appearance_type=(appearance_type)
+      validator = EnumAttributeValidator.new('String', ["Undefined", "PdfTextAnnotation", "PdfTextSticker", "Image", "DigitalSignature", "PdfDigitalSignature"])
+      if appearance_type.to_i == 0
+        unless validator.valid?(appearance_type)
+          raise ArgumentError, "invalid value for 'appearance_type', must be one of #{validator.allowable_values}."
         end
-        @signature_type = signature_type
+        @appearance_type = appearance_type
       else
-        @signature_type = validator.allowable_values[signature_type.to_i]
+        @appearance_type = validator.allowable_values[appearance_type.to_i]
       end
     end
 
@@ -226,18 +194,15 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          signature_type == other.signature_type &&
-          page == other.page &&
-          all_pages == other.all_pages &&
-          pages_setup == other.pages_setup &&
-          password == other.password &&
-          certificate_file_path == other.certificate_file_path &&
-          comments == other.comments &&
-          sign_date_time_from == other.sign_date_time_from &&
-          sign_date_time_to == other.sign_date_time_to &&
-          reason == other.reason &&
-          contact == other.contact &&
-          location == other.location
+          appearance_type == other.appearance_type &&
+          background == other.background &&
+          contact_info_label == other.contact_info_label &&
+          date_signed_at_label == other.date_signed_at_label &&
+          digital_signed_label == other.digital_signed_label &&
+          font_family_name == other.font_family_name &&
+          font_size == other.font_size &&
+          location_label == other.location_label &&
+          reason_label == other.reason_label
     end
 
     # @see the `==` method
@@ -249,7 +214,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, password, certificate_file_path, comments, sign_date_time_from, sign_date_time_to, reason, contact, location].hash
+      [appearance_type, background, contact_info_label, date_signed_at_label, digital_signed_label, font_family_name, font_size, location_label, reason_label].hash
     end
 
     # Downcases first letter.

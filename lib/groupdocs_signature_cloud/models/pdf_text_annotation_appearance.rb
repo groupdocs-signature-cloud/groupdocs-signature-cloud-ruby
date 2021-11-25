@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="verify_digital_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="pdf_text_annotation_appearance.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,44 +28,35 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Defines options to verify Digital signature within a document
-  class VerifyDigitalOptions
+  # Describes appearance of PDF text annotation object (Title, Subject, Content).
+  class PdfTextAnnotationAppearance
 
-    # Specifies the signature type of processing
-    attr_accessor :signature_type
+    # Specifies the type of appearance
+    attr_accessor :appearance_type
 
-    # Gets or sets a document page number for processing. Value is optional
-    attr_accessor :page
+    # Represents border appearance
+    attr_accessor :border
 
-    # Process all document pages. Type of processing depends on SignatureType For Images Document Type it can be used only for multi-frames images like .tiff
-    attr_accessor :all_pages
+    # Gets or sets border effect.
+    attr_accessor :border_effect
 
-    # Options to specify pages for processing
-    attr_accessor :pages_setup
+    # Gets or sets border effect intensity. Valid range of value is [0..2].
+    attr_accessor :border_effect_intensity
 
-    # Password of Digital Certificate if required
-    attr_accessor :password
+    # Gets or sets content of annotation object.
+    attr_accessor :contents
 
-    # File Guid of Digital Certificate
-    attr_accessor :certificate_file_path
+    # Gets or sets horizontal corner radius.
+    attr_accessor :h_corner_radius
 
-    # Comments of Digital Signature to validate Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :comments
+    # Gets or sets Subject representing description of the object.
+    attr_accessor :subject
 
-    # Date and time range of Digital Signature to validate. Null value will be ignored. Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_from
+    # Gets or sets a Title that will be displayed in title bar of annotation object.
+    attr_accessor :title
 
-    # Date and time range of Digital Signature to validate. Null value will be ignored Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_to
-
-    # Reason of Digital Signature to validate Suitable for Pdf document type
-    attr_accessor :reason
-
-    # Signature Contact to validate Suitable for Pdf document type
-    attr_accessor :contact
-
-    # Signature Location to validate Suitable for Pdf document type
-    attr_accessor :location
+    # Gets or sets vertical corner radius.
+    attr_accessor :v_corner_radius
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -91,36 +82,30 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'signature_type' => :'SignatureType',
-        :'page' => :'Page',
-        :'all_pages' => :'AllPages',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'Password',
-        :'certificate_file_path' => :'CertificateFilePath',
-        :'comments' => :'Comments',
-        :'sign_date_time_from' => :'SignDateTimeFrom',
-        :'sign_date_time_to' => :'SignDateTimeTo',
-        :'reason' => :'Reason',
-        :'contact' => :'Contact',
-        :'location' => :'Location'
+        :'appearance_type' => :'AppearanceType',
+        :'border' => :'Border',
+        :'border_effect' => :'BorderEffect',
+        :'border_effect_intensity' => :'BorderEffectIntensity',
+        :'contents' => :'Contents',
+        :'h_corner_radius' => :'HCornerRadius',
+        :'subject' => :'Subject',
+        :'title' => :'Title',
+        :'v_corner_radius' => :'VCornerRadius'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'signature_type' => :'String',
-        :'page' => :'Integer',
-        :'all_pages' => :'BOOLEAN',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'String',
-        :'certificate_file_path' => :'String',
-        :'comments' => :'String',
-        :'sign_date_time_from' => :'DateTime',
-        :'sign_date_time_to' => :'DateTime',
-        :'reason' => :'String',
-        :'contact' => :'String',
-        :'location' => :'String'
+        :'appearance_type' => :'String',
+        :'border' => :'BorderLine',
+        :'border_effect' => :'String',
+        :'border_effect_intensity' => :'Integer',
+        :'contents' => :'String',
+        :'h_corner_radius' => :'Integer',
+        :'subject' => :'String',
+        :'title' => :'String',
+        :'v_corner_radius' => :'Integer'
       }
     end
 
@@ -132,52 +117,40 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'SignatureType')
-        self.signature_type = attributes[:'SignatureType']
+      if attributes.key?(:'AppearanceType')
+        self.appearance_type = attributes[:'AppearanceType']
       end
 
-      if attributes.key?(:'Page')
-        self.page = attributes[:'Page']
+      if attributes.key?(:'Border')
+        self.border = attributes[:'Border']
       end
 
-      if attributes.key?(:'AllPages')
-        self.all_pages = attributes[:'AllPages']
+      if attributes.key?(:'BorderEffect')
+        self.border_effect = attributes[:'BorderEffect']
       end
 
-      if attributes.key?(:'PagesSetup')
-        self.pages_setup = attributes[:'PagesSetup']
+      if attributes.key?(:'BorderEffectIntensity')
+        self.border_effect_intensity = attributes[:'BorderEffectIntensity']
       end
 
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
+      if attributes.key?(:'Contents')
+        self.contents = attributes[:'Contents']
       end
 
-      if attributes.key?(:'CertificateFilePath')
-        self.certificate_file_path = attributes[:'CertificateFilePath']
+      if attributes.key?(:'HCornerRadius')
+        self.h_corner_radius = attributes[:'HCornerRadius']
       end
 
-      if attributes.key?(:'Comments')
-        self.comments = attributes[:'Comments']
+      if attributes.key?(:'Subject')
+        self.subject = attributes[:'Subject']
       end
 
-      if attributes.key?(:'SignDateTimeFrom')
-        self.sign_date_time_from = attributes[:'SignDateTimeFrom']
+      if attributes.key?(:'Title')
+        self.title = attributes[:'Title']
       end
 
-      if attributes.key?(:'SignDateTimeTo')
-        self.sign_date_time_to = attributes[:'SignDateTimeTo']
-      end
-
-      if attributes.key?(:'Reason')
-        self.reason = attributes[:'Reason']
-      end
-
-      if attributes.key?(:'Contact')
-        self.contact = attributes[:'Contact']
-      end
-
-      if attributes.key?(:'Location')
-        self.location = attributes[:'Location']
+      if attributes.key?(:'VCornerRadius')
+        self.v_corner_radius = attributes[:'VCornerRadius']
       end
 
     end
@@ -186,12 +159,24 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @signature_type.nil?
-        invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
+      if @appearance_type.nil?
+        invalid_properties.push("invalid value for 'appearance_type', appearance_type cannot be nil.")
       end
 
-      if @all_pages.nil?
-        invalid_properties.push("invalid value for 'all_pages', all_pages cannot be nil.")
+      if @border_effect.nil?
+        invalid_properties.push("invalid value for 'border_effect', border_effect cannot be nil.")
+      end
+
+      if @border_effect_intensity.nil?
+        invalid_properties.push("invalid value for 'border_effect_intensity', border_effect_intensity cannot be nil.")
+      end
+
+      if @h_corner_radius.nil?
+        invalid_properties.push("invalid value for 'h_corner_radius', h_corner_radius cannot be nil.")
+      end
+
+      if @v_corner_radius.nil?
+        invalid_properties.push("invalid value for 'v_corner_radius', v_corner_radius cannot be nil.")
       end
 
       return invalid_properties
@@ -200,24 +185,43 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      return false unless signature_type_validator.valid?(@signature_type)
-      return false if @all_pages.nil?
+      return false if @appearance_type.nil?
+      appearance_type_validator = EnumAttributeValidator.new('String', ["Undefined", "PdfTextAnnotation", "PdfTextSticker", "Image", "DigitalSignature", "PdfDigitalSignature"])
+      return false unless appearance_type_validator.valid?(@appearance_type)
+      return false if @border_effect.nil?
+      border_effect_validator = EnumAttributeValidator.new('String', ["None", "Cloudy"])
+      return false unless border_effect_validator.valid?(@border_effect)
+      return false if @border_effect_intensity.nil?
+      return false if @h_corner_radius.nil?
+      return false if @v_corner_radius.nil?
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] signature_type Object to be assigned
-    def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      if signature_type.to_i == 0
-        unless validator.valid?(signature_type)
-          raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
+    # @param [Object] appearance_type Object to be assigned
+    def appearance_type=(appearance_type)
+      validator = EnumAttributeValidator.new('String', ["Undefined", "PdfTextAnnotation", "PdfTextSticker", "Image", "DigitalSignature", "PdfDigitalSignature"])
+      if appearance_type.to_i == 0
+        unless validator.valid?(appearance_type)
+          raise ArgumentError, "invalid value for 'appearance_type', must be one of #{validator.allowable_values}."
         end
-        @signature_type = signature_type
+        @appearance_type = appearance_type
       else
-        @signature_type = validator.allowable_values[signature_type.to_i]
+        @appearance_type = validator.allowable_values[appearance_type.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] border_effect Object to be assigned
+    def border_effect=(border_effect)
+      validator = EnumAttributeValidator.new('String', ["None", "Cloudy"])
+      if border_effect.to_i == 0
+        unless validator.valid?(border_effect)
+          raise ArgumentError, "invalid value for 'border_effect', must be one of #{validator.allowable_values}."
+        end
+        @border_effect = border_effect
+      else
+        @border_effect = validator.allowable_values[border_effect.to_i]
       end
     end
 
@@ -226,18 +230,15 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          signature_type == other.signature_type &&
-          page == other.page &&
-          all_pages == other.all_pages &&
-          pages_setup == other.pages_setup &&
-          password == other.password &&
-          certificate_file_path == other.certificate_file_path &&
-          comments == other.comments &&
-          sign_date_time_from == other.sign_date_time_from &&
-          sign_date_time_to == other.sign_date_time_to &&
-          reason == other.reason &&
-          contact == other.contact &&
-          location == other.location
+          appearance_type == other.appearance_type &&
+          border == other.border &&
+          border_effect == other.border_effect &&
+          border_effect_intensity == other.border_effect_intensity &&
+          contents == other.contents &&
+          h_corner_radius == other.h_corner_radius &&
+          subject == other.subject &&
+          title == other.title &&
+          v_corner_radius == other.v_corner_radius
     end
 
     # @see the `==` method
@@ -249,7 +250,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, password, certificate_file_path, comments, sign_date_time_from, sign_date_time_to, reason, contact, location].hash
+      [appearance_type, border, border_effect, border_effect_intensity, contents, h_corner_radius, subject, title, v_corner_radius].hash
     end
 
     # Downcases first letter.

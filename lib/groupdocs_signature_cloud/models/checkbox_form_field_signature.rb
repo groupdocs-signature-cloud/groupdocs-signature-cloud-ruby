@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="verify_digital_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="checkbox_form_field_signature.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,44 +28,47 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Defines options to verify Digital signature within a document
-  class VerifyDigitalOptions
+  # Contains check-box input form field signature properties
+  class CheckboxFormFieldSignature
 
-    # Specifies the signature type of processing
+    # Specifies the signature type (Text, Image, Digital, Barcode, QRCode, Stamp)
     attr_accessor :signature_type
 
-    # Gets or sets a document page number for processing. Value is optional
-    attr_accessor :page
+    # Specifies the page signature was found on
+    attr_accessor :page_number
 
-    # Process all document pages. Type of processing depends on SignatureType For Images Document Type it can be used only for multi-frames images like .tiff
-    attr_accessor :all_pages
+    # Unique signature identifier to modify signature in the document over Update or Delete methods. This property will be set automatically after Sign or Search method being called. If this property was saved before it can be set manually to manipulate the signature.
+    attr_accessor :signature_id
 
-    # Options to specify pages for processing
-    attr_accessor :pages_setup
+    # Get or set flag to indicate if this component is Signature or document content. This property is being used with Update method to set element as signature (true) or document element (false).             
+    attr_accessor :is_signature
 
-    # Password of Digital Certificate if required
-    attr_accessor :password
+    # Get or set the signature creation date
+    attr_accessor :created_on
 
-    # File Guid of Digital Certificate
-    attr_accessor :certificate_file_path
+    # Get or set the signature modification date
+    attr_accessor :modified_on
 
-    # Comments of Digital Signature to validate Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :comments
+    # Specifies top position of signature
+    attr_accessor :top
 
-    # Date and time range of Digital Signature to validate. Null value will be ignored. Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_from
+    # Specifies left position of signature
+    attr_accessor :left
 
-    # Date and time range of Digital Signature to validate. Null value will be ignored Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_to
+    # Specifies width of signature
+    attr_accessor :width
 
-    # Reason of Digital Signature to validate Suitable for Pdf document type
-    attr_accessor :reason
+    # Specifies height of signature
+    attr_accessor :height
 
-    # Signature Contact to validate Suitable for Pdf document type
-    attr_accessor :contact
+    # Specifies unique form field name
+    attr_accessor :name
 
-    # Signature Location to validate Suitable for Pdf document type
-    attr_accessor :location
+    # Specifies Form field type
+    attr_accessor :type
+
+    # Gets or sets checked value of form field check-box input
+    attr_accessor :checked
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -92,17 +95,18 @@ module GroupDocsSignatureCloud
     def self.attribute_map
       {
         :'signature_type' => :'SignatureType',
-        :'page' => :'Page',
-        :'all_pages' => :'AllPages',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'Password',
-        :'certificate_file_path' => :'CertificateFilePath',
-        :'comments' => :'Comments',
-        :'sign_date_time_from' => :'SignDateTimeFrom',
-        :'sign_date_time_to' => :'SignDateTimeTo',
-        :'reason' => :'Reason',
-        :'contact' => :'Contact',
-        :'location' => :'Location'
+        :'page_number' => :'PageNumber',
+        :'signature_id' => :'SignatureId',
+        :'is_signature' => :'IsSignature',
+        :'created_on' => :'CreatedOn',
+        :'modified_on' => :'ModifiedOn',
+        :'top' => :'Top',
+        :'left' => :'Left',
+        :'width' => :'Width',
+        :'height' => :'Height',
+        :'name' => :'Name',
+        :'type' => :'Type',
+        :'checked' => :'Checked'
       }
     end
 
@@ -110,17 +114,18 @@ module GroupDocsSignatureCloud
     def self.swagger_types
       {
         :'signature_type' => :'String',
-        :'page' => :'Integer',
-        :'all_pages' => :'BOOLEAN',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'String',
-        :'certificate_file_path' => :'String',
-        :'comments' => :'String',
-        :'sign_date_time_from' => :'DateTime',
-        :'sign_date_time_to' => :'DateTime',
-        :'reason' => :'String',
-        :'contact' => :'String',
-        :'location' => :'String'
+        :'page_number' => :'Integer',
+        :'signature_id' => :'String',
+        :'is_signature' => :'BOOLEAN',
+        :'created_on' => :'DateTime',
+        :'modified_on' => :'DateTime',
+        :'top' => :'Integer',
+        :'left' => :'Integer',
+        :'width' => :'Integer',
+        :'height' => :'Integer',
+        :'name' => :'String',
+        :'type' => :'String',
+        :'checked' => :'BOOLEAN'
       }
     end
 
@@ -136,48 +141,52 @@ module GroupDocsSignatureCloud
         self.signature_type = attributes[:'SignatureType']
       end
 
-      if attributes.key?(:'Page')
-        self.page = attributes[:'Page']
+      if attributes.key?(:'PageNumber')
+        self.page_number = attributes[:'PageNumber']
       end
 
-      if attributes.key?(:'AllPages')
-        self.all_pages = attributes[:'AllPages']
+      if attributes.key?(:'SignatureId')
+        self.signature_id = attributes[:'SignatureId']
       end
 
-      if attributes.key?(:'PagesSetup')
-        self.pages_setup = attributes[:'PagesSetup']
+      if attributes.key?(:'IsSignature')
+        self.is_signature = attributes[:'IsSignature']
       end
 
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
+      if attributes.key?(:'CreatedOn')
+        self.created_on = attributes[:'CreatedOn']
       end
 
-      if attributes.key?(:'CertificateFilePath')
-        self.certificate_file_path = attributes[:'CertificateFilePath']
+      if attributes.key?(:'ModifiedOn')
+        self.modified_on = attributes[:'ModifiedOn']
       end
 
-      if attributes.key?(:'Comments')
-        self.comments = attributes[:'Comments']
+      if attributes.key?(:'Top')
+        self.top = attributes[:'Top']
       end
 
-      if attributes.key?(:'SignDateTimeFrom')
-        self.sign_date_time_from = attributes[:'SignDateTimeFrom']
+      if attributes.key?(:'Left')
+        self.left = attributes[:'Left']
       end
 
-      if attributes.key?(:'SignDateTimeTo')
-        self.sign_date_time_to = attributes[:'SignDateTimeTo']
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
       end
 
-      if attributes.key?(:'Reason')
-        self.reason = attributes[:'Reason']
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'Contact')
-        self.contact = attributes[:'Contact']
+      if attributes.key?(:'Name')
+        self.name = attributes[:'Name']
       end
 
-      if attributes.key?(:'Location')
-        self.location = attributes[:'Location']
+      if attributes.key?(:'Type')
+        self.type = attributes[:'Type']
+      end
+
+      if attributes.key?(:'Checked')
+        self.checked = attributes[:'Checked']
       end
 
     end
@@ -190,8 +199,40 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
       end
 
-      if @all_pages.nil?
-        invalid_properties.push("invalid value for 'all_pages', all_pages cannot be nil.")
+      if @is_signature.nil?
+        invalid_properties.push("invalid value for 'is_signature', is_signature cannot be nil.")
+      end
+
+      if @created_on.nil?
+        invalid_properties.push("invalid value for 'created_on', created_on cannot be nil.")
+      end
+
+      if @modified_on.nil?
+        invalid_properties.push("invalid value for 'modified_on', modified_on cannot be nil.")
+      end
+
+      if @top.nil?
+        invalid_properties.push("invalid value for 'top', top cannot be nil.")
+      end
+
+      if @left.nil?
+        invalid_properties.push("invalid value for 'left', left cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
+      if @type.nil?
+        invalid_properties.push("invalid value for 'type', type cannot be nil.")
+      end
+
+      if @checked.nil?
+        invalid_properties.push("invalid value for 'checked', checked cannot be nil.")
       end
 
       return invalid_properties
@@ -203,7 +244,17 @@ module GroupDocsSignatureCloud
       return false if @signature_type.nil?
       signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
       return false unless signature_type_validator.valid?(@signature_type)
-      return false if @all_pages.nil?
+      return false if @is_signature.nil?
+      return false if @created_on.nil?
+      return false if @modified_on.nil?
+      return false if @top.nil?
+      return false if @left.nil?
+      return false if @width.nil?
+      return false if @height.nil?
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["Text", "Checkbox", "Combobox", "DigitalSignature", "Radio", "None"])
+      return false unless type_validator.valid?(@type)
+      return false if @checked.nil?
       return true
     end
 
@@ -221,23 +272,38 @@ module GroupDocsSignatureCloud
       end
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["Text", "Checkbox", "Combobox", "DigitalSignature", "Radio", "None"])
+      if type.to_i == 0
+        unless validator.valid?(type)
+          raise ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
+        end
+        @type = type
+      else
+        @type = validator.allowable_values[type.to_i]
+      end
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
           signature_type == other.signature_type &&
-          page == other.page &&
-          all_pages == other.all_pages &&
-          pages_setup == other.pages_setup &&
-          password == other.password &&
-          certificate_file_path == other.certificate_file_path &&
-          comments == other.comments &&
-          sign_date_time_from == other.sign_date_time_from &&
-          sign_date_time_to == other.sign_date_time_to &&
-          reason == other.reason &&
-          contact == other.contact &&
-          location == other.location
+          page_number == other.page_number &&
+          signature_id == other.signature_id &&
+          is_signature == other.is_signature &&
+          created_on == other.created_on &&
+          modified_on == other.modified_on &&
+          top == other.top &&
+          left == other.left &&
+          width == other.width &&
+          height == other.height &&
+          name == other.name &&
+          type == other.type &&
+          checked == other.checked
     end
 
     # @see the `==` method
@@ -249,7 +315,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, password, certificate_file_path, comments, sign_date_time_from, sign_date_time_to, reason, contact, location].hash
+      [signature_type, page_number, signature_id, is_signature, created_on, modified_on, top, left, width, height, name, type, checked].hash
     end
 
     # Downcases first letter.

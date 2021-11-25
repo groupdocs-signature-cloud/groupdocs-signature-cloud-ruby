@@ -34,17 +34,22 @@ module GroupDocsSignatureCloud
     # File info
     attr_accessor :file_info
 
+    # Gets or sets flag that includes deleted signatures into Document Info result.
+    attr_accessor :show_deleted_signatures_info
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'file_info' => :'FileInfo'
+        :'file_info' => :'FileInfo',
+        :'show_deleted_signatures_info' => :'ShowDeletedSignaturesInfo'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'file_info' => :'FileInfo'
+        :'file_info' => :'FileInfo',
+        :'show_deleted_signatures_info' => :'BOOLEAN'
       }
     end
 
@@ -60,18 +65,27 @@ module GroupDocsSignatureCloud
         self.file_info = attributes[:'FileInfo']
       end
 
+      if attributes.key?(:'ShowDeletedSignaturesInfo')
+        self.show_deleted_signatures_info = attributes[:'ShowDeletedSignaturesInfo']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @show_deleted_signatures_info.nil?
+        invalid_properties.push("invalid value for 'show_deleted_signatures_info', show_deleted_signatures_info cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @show_deleted_signatures_info.nil?
       return true
     end
 
@@ -80,7 +94,8 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          file_info == other.file_info
+          file_info == other.file_info &&
+          show_deleted_signatures_info == other.show_deleted_signatures_info
     end
 
     # @see the `==` method
@@ -92,7 +107,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info].hash
+      [file_info, show_deleted_signatures_info].hash
     end
 
     # Downcases first letter.
@@ -166,6 +181,24 @@ module GroupDocsSignatureCloud
         ttype = type
         if value.is_a?(Hash) and !value[:signatureType].nil?
           ttype = value[:signatureType] + 'Signature'
+          if value[:signatureType] == 'FormField' and !value[:type].nil?
+            type = value[:type]
+            if type == 'Checkbox'
+              ttype = 'CheckboxFormFieldSignature'
+            end
+            if type == 'Text'
+              ttype = 'TextFormFieldSignature'
+            end
+            if type == 'Combobox'
+              ttype = 'ComboboxFormFieldSignature'
+            end
+            if type == 'DigitalSignature'
+              ttype = 'DigitalFormFieldSignature'
+            end
+            if type == 'Radio'
+              ttype = 'RadioButtonFormFieldSignature'
+            end
+          end
         end      
         temp_model = GroupDocsSignatureCloud.const_get(ttype).new
         temp_model.build_from_hash(value)

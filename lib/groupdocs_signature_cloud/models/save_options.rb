@@ -191,6 +191,24 @@ module GroupDocsSignatureCloud
         ttype = type
         if value.is_a?(Hash) and !value[:signatureType].nil?
           ttype = value[:signatureType] + 'Signature'
+          if value[:signatureType] == 'FormField' and !value[:type].nil?
+            type = value[:type]
+            if type == 'Checkbox'
+              ttype = 'CheckboxFormFieldSignature'
+            end
+            if type == 'Text'
+              ttype = 'TextFormFieldSignature'
+            end
+            if type == 'Combobox'
+              ttype = 'ComboboxFormFieldSignature'
+            end
+            if type == 'DigitalSignature'
+              ttype = 'DigitalFormFieldSignature'
+            end
+            if type == 'Radio'
+              ttype = 'RadioButtonFormFieldSignature'
+            end
+          end
         end      
         temp_model = GroupDocsSignatureCloud.const_get(ttype).new
         temp_model.build_from_hash(value)

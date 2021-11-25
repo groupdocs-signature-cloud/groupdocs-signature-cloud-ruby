@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="verify_digital_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="digital_signature_appearance.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,44 +28,20 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Defines options to verify Digital signature within a document
-  class VerifyDigitalOptions
+  # Describes appearance of Signature Line for Digital Signature. One Signature Line could be applied for only one Digital Signature. Signature Line always is on the first page. This feature may be useful for .docx, .doc, .odt and .xlsx file formats.
+  class DigitalSignatureAppearance
 
-    # Specifies the signature type of processing
-    attr_accessor :signature_type
+    # Specifies the type of appearance
+    attr_accessor :appearance_type
 
-    # Gets or sets a document page number for processing. Value is optional
-    attr_accessor :page
+    # Gets or sets a email that will be displayed in signature line.
+    attr_accessor :email
 
-    # Process all document pages. Type of processing depends on SignatureType For Images Document Type it can be used only for multi-frames images like .tiff
-    attr_accessor :all_pages
+    # Gets or sets signer name for signature line.
+    attr_accessor :signer
 
-    # Options to specify pages for processing
-    attr_accessor :pages_setup
-
-    # Password of Digital Certificate if required
-    attr_accessor :password
-
-    # File Guid of Digital Certificate
-    attr_accessor :certificate_file_path
-
-    # Comments of Digital Signature to validate Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :comments
-
-    # Date and time range of Digital Signature to validate. Null value will be ignored. Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_from
-
-    # Date and time range of Digital Signature to validate. Null value will be ignored Suitable for Spreadsheet and Words Processing document types
-    attr_accessor :sign_date_time_to
-
-    # Reason of Digital Signature to validate Suitable for Pdf document type
-    attr_accessor :reason
-
-    # Signature Contact to validate Suitable for Pdf document type
-    attr_accessor :contact
-
-    # Signature Location to validate Suitable for Pdf document type
-    attr_accessor :location
+    # Gets or sets a title for signature line.
+    attr_accessor :title
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -91,36 +67,20 @@ module GroupDocsSignatureCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'signature_type' => :'SignatureType',
-        :'page' => :'Page',
-        :'all_pages' => :'AllPages',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'Password',
-        :'certificate_file_path' => :'CertificateFilePath',
-        :'comments' => :'Comments',
-        :'sign_date_time_from' => :'SignDateTimeFrom',
-        :'sign_date_time_to' => :'SignDateTimeTo',
-        :'reason' => :'Reason',
-        :'contact' => :'Contact',
-        :'location' => :'Location'
+        :'appearance_type' => :'AppearanceType',
+        :'email' => :'Email',
+        :'signer' => :'Signer',
+        :'title' => :'Title'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'signature_type' => :'String',
-        :'page' => :'Integer',
-        :'all_pages' => :'BOOLEAN',
-        :'pages_setup' => :'PagesSetup',
-        :'password' => :'String',
-        :'certificate_file_path' => :'String',
-        :'comments' => :'String',
-        :'sign_date_time_from' => :'DateTime',
-        :'sign_date_time_to' => :'DateTime',
-        :'reason' => :'String',
-        :'contact' => :'String',
-        :'location' => :'String'
+        :'appearance_type' => :'String',
+        :'email' => :'String',
+        :'signer' => :'String',
+        :'title' => :'String'
       }
     end
 
@@ -132,52 +92,20 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'SignatureType')
-        self.signature_type = attributes[:'SignatureType']
+      if attributes.key?(:'AppearanceType')
+        self.appearance_type = attributes[:'AppearanceType']
       end
 
-      if attributes.key?(:'Page')
-        self.page = attributes[:'Page']
+      if attributes.key?(:'Email')
+        self.email = attributes[:'Email']
       end
 
-      if attributes.key?(:'AllPages')
-        self.all_pages = attributes[:'AllPages']
+      if attributes.key?(:'Signer')
+        self.signer = attributes[:'Signer']
       end
 
-      if attributes.key?(:'PagesSetup')
-        self.pages_setup = attributes[:'PagesSetup']
-      end
-
-      if attributes.key?(:'Password')
-        self.password = attributes[:'Password']
-      end
-
-      if attributes.key?(:'CertificateFilePath')
-        self.certificate_file_path = attributes[:'CertificateFilePath']
-      end
-
-      if attributes.key?(:'Comments')
-        self.comments = attributes[:'Comments']
-      end
-
-      if attributes.key?(:'SignDateTimeFrom')
-        self.sign_date_time_from = attributes[:'SignDateTimeFrom']
-      end
-
-      if attributes.key?(:'SignDateTimeTo')
-        self.sign_date_time_to = attributes[:'SignDateTimeTo']
-      end
-
-      if attributes.key?(:'Reason')
-        self.reason = attributes[:'Reason']
-      end
-
-      if attributes.key?(:'Contact')
-        self.contact = attributes[:'Contact']
-      end
-
-      if attributes.key?(:'Location')
-        self.location = attributes[:'Location']
+      if attributes.key?(:'Title')
+        self.title = attributes[:'Title']
       end
 
     end
@@ -186,12 +114,8 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @signature_type.nil?
-        invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
-      end
-
-      if @all_pages.nil?
-        invalid_properties.push("invalid value for 'all_pages', all_pages cannot be nil.")
+      if @appearance_type.nil?
+        invalid_properties.push("invalid value for 'appearance_type', appearance_type cannot be nil.")
       end
 
       return invalid_properties
@@ -200,24 +124,23 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      return false unless signature_type_validator.valid?(@signature_type)
-      return false if @all_pages.nil?
+      return false if @appearance_type.nil?
+      appearance_type_validator = EnumAttributeValidator.new('String', ["Undefined", "PdfTextAnnotation", "PdfTextSticker", "Image", "DigitalSignature", "PdfDigitalSignature"])
+      return false unless appearance_type_validator.valid?(@appearance_type)
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] signature_type Object to be assigned
-    def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      if signature_type.to_i == 0
-        unless validator.valid?(signature_type)
-          raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
+    # @param [Object] appearance_type Object to be assigned
+    def appearance_type=(appearance_type)
+      validator = EnumAttributeValidator.new('String', ["Undefined", "PdfTextAnnotation", "PdfTextSticker", "Image", "DigitalSignature", "PdfDigitalSignature"])
+      if appearance_type.to_i == 0
+        unless validator.valid?(appearance_type)
+          raise ArgumentError, "invalid value for 'appearance_type', must be one of #{validator.allowable_values}."
         end
-        @signature_type = signature_type
+        @appearance_type = appearance_type
       else
-        @signature_type = validator.allowable_values[signature_type.to_i]
+        @appearance_type = validator.allowable_values[appearance_type.to_i]
       end
     end
 
@@ -226,18 +149,10 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          signature_type == other.signature_type &&
-          page == other.page &&
-          all_pages == other.all_pages &&
-          pages_setup == other.pages_setup &&
-          password == other.password &&
-          certificate_file_path == other.certificate_file_path &&
-          comments == other.comments &&
-          sign_date_time_from == other.sign_date_time_from &&
-          sign_date_time_to == other.sign_date_time_to &&
-          reason == other.reason &&
-          contact == other.contact &&
-          location == other.location
+          appearance_type == other.appearance_type &&
+          email == other.email &&
+          signer == other.signer &&
+          title == other.title
     end
 
     # @see the `==` method
@@ -249,7 +164,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, password, certificate_file_path, comments, sign_date_time_from, sign_date_time_to, reason, contact, location].hash
+      [appearance_type, email, signer, title].hash
     end
 
     # Downcases first letter.
