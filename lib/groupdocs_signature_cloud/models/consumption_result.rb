@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="search_digital_options.rb">
+ # <copyright company="Aspose Pty Ltd" file="consumption_result.rb">
  #   Copyright (c) 2003-2022 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,59 +28,28 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Defines options to search Digital signature within a document
-  class SearchDigitalOptions
+  # Metered license consumption information
+  class ConsumptionResult
 
-    # Specifies the signature type of processing
-    attr_accessor :signature_type
+    # Amount of used credits
+    attr_accessor :credit
 
-    # Gets or sets a document page number for processing. Value is optional
-    attr_accessor :page
-
-    # Process all document pages. Type of processing depends on SignatureType For Images Document Type it can be used only for multi-frames images like .tiff
-    attr_accessor :all_pages
-
-    # Options to specify pages for processing
-    attr_accessor :pages_setup
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Amount of MBs processed
+    attr_accessor :quantity
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'signature_type' => :'SignatureType',
-        :'page' => :'Page',
-        :'all_pages' => :'AllPages',
-        :'pages_setup' => :'PagesSetup'
+        :'credit' => :'Credit',
+        :'quantity' => :'Quantity'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'signature_type' => :'String',
-        :'page' => :'Integer',
-        :'all_pages' => :'BOOLEAN',
-        :'pages_setup' => :'PagesSetup'
+        :'credit' => :'Float',
+        :'quantity' => :'Float'
       }
     end
 
@@ -92,20 +61,12 @@ module GroupDocsSignatureCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'SignatureType')
-        self.signature_type = attributes[:'SignatureType']
+      if attributes.key?(:'Credit')
+        self.credit = attributes[:'Credit']
       end
 
-      if attributes.key?(:'Page')
-        self.page = attributes[:'Page']
-      end
-
-      if attributes.key?(:'AllPages')
-        self.all_pages = attributes[:'AllPages']
-      end
-
-      if attributes.key?(:'PagesSetup')
-        self.pages_setup = attributes[:'PagesSetup']
+      if attributes.key?(:'Quantity')
+        self.quantity = attributes[:'Quantity']
       end
 
     end
@@ -114,12 +75,12 @@ module GroupDocsSignatureCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @signature_type.nil?
-        invalid_properties.push("invalid value for 'signature_type', signature_type cannot be nil.")
+      if @credit.nil?
+        invalid_properties.push("invalid value for 'credit', credit cannot be nil.")
       end
 
-      if @all_pages.nil?
-        invalid_properties.push("invalid value for 'all_pages', all_pages cannot be nil.")
+      if @quantity.nil?
+        invalid_properties.push("invalid value for 'quantity', quantity cannot be nil.")
       end
 
       return invalid_properties
@@ -128,25 +89,9 @@ module GroupDocsSignatureCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      return false unless signature_type_validator.valid?(@signature_type)
-      return false if @all_pages.nil?
+      return false if @credit.nil?
+      return false if @quantity.nil?
       return true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] signature_type Object to be assigned
-    def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
-      if signature_type.to_i == 0
-        unless validator.valid?(signature_type)
-          raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."
-        end
-        @signature_type = signature_type
-      else
-        @signature_type = validator.allowable_values[signature_type.to_i]
-      end
     end
 
     # Checks equality by comparing each attribute.
@@ -154,10 +99,8 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          signature_type == other.signature_type &&
-          page == other.page &&
-          all_pages == other.all_pages &&
-          pages_setup == other.pages_setup
+          credit == other.credit &&
+          quantity == other.quantity
     end
 
     # @see the `==` method
@@ -169,7 +112,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup].hash
+      [credit, quantity].hash
     end
 
     # Downcases first letter.

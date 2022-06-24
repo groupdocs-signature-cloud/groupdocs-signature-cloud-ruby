@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_signature_cloud.rb">
-#   Copyright (c) 2003-2021 Aspose Pty Ltd
+#   Copyright (c) 2003-2022 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,6 +36,7 @@ require_relative 'groupdocs_signature_cloud/models/base_settings'
 require_relative 'groupdocs_signature_cloud/models/border_line'
 require_relative 'groupdocs_signature_cloud/models/brush'
 require_relative 'groupdocs_signature_cloud/models/color'
+require_relative 'groupdocs_signature_cloud/models/consumption_result'
 require_relative 'groupdocs_signature_cloud/models/delete_options'
 require_relative 'groupdocs_signature_cloud/models/delete_result'
 require_relative 'groupdocs_signature_cloud/models/disc_usage'
@@ -120,6 +121,7 @@ require_relative 'groupdocs_signature_cloud/models/verify_qr_code_options'
 require_relative 'groupdocs_signature_cloud/api/file_api'
 require_relative 'groupdocs_signature_cloud/api/folder_api'
 require_relative 'groupdocs_signature_cloud/api/info_api'
+require_relative 'groupdocs_signature_cloud/api/license_api'
 require_relative 'groupdocs_signature_cloud/api/preview_api'
 require_relative 'groupdocs_signature_cloud/api/sign_api'
 require_relative 'groupdocs_signature_cloud/api/storage_api'

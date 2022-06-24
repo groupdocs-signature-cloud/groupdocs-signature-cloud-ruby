@@ -1,20 +1,20 @@
 PATH
   remote: .
   specs:
-    groupdocs_signature_cloud (21.11)
-      addressable (~> 2.5.0, >= 2.5.0)
+    groupdocs_signature_cloud (22.6)
+      addressable (~> 2.8.0, >= 2.8.0)
       faraday (~> 0.14.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.5.2)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
     minitest (5.11.3)
-    multipart-post (2.1.1)
-    public_suffix (3.1.1)
+    multipart-post (2.2.3)
+    public_suffix (4.0.7)
     rake (13.0.1)
 
 PLATFORMS
