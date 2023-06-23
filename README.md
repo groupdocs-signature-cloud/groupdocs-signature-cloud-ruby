@@ -12,7 +12,7 @@ gem install groupdocs_signature_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_signature_cloud", "~> 22.6"
+gem "groupdocs_signature_cloud", "~> 23.6"
 ```
 
 ## Getting Started

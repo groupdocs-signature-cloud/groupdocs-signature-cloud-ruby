@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="color.rb">
- #   Copyright (c) 2003-2022 Aspose Pty Ltd
+ #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,22 +34,17 @@ module GroupDocsSignatureCloud
     # HTML string color representation
     attr_accessor :web
 
-    # Alpha component of color structure
-    attr_accessor :alpha
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'web' => :'Web',
-        :'alpha' => :'Alpha'
+        :'web' => :'Web'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'web' => :'String',
-        :'alpha' => :'Integer'
+        :'web' => :'String'
       }
     end
 
@@ -65,27 +60,18 @@ module GroupDocsSignatureCloud
         self.web = attributes[:'Web']
       end
 
-      if attributes.key?(:'Alpha')
-        self.alpha = attributes[:'Alpha']
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
-      if @alpha.nil?
-        invalid_properties.push("invalid value for 'alpha', alpha cannot be nil.")
-      end
-
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @alpha.nil?
       return true
     end
 
@@ -94,8 +80,7 @@ module GroupDocsSignatureCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          web == other.web &&
-          alpha == other.alpha
+          web == other.web
     end
 
     # @see the `==` method
@@ -107,7 +92,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [web, alpha].hash
+      [web].hash
     end
 
     # Downcases first letter.

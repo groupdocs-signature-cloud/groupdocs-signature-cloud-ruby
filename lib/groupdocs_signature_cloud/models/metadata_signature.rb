@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="digital_signature.rb">
+ # <copyright company="Aspose Pty Ltd" file="metadata_signature.rb">
  #   Copyright (c) 2003-2023 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,8 +28,8 @@
 require 'date'
 
 module GroupDocsSignatureCloud
-  # Contains digital Signature properties
-  class DigitalSignature
+  # Contains Metadata signature properties.
+  class MetadataSignature
 
     # Specifies the signature type (Text, Image, Digital, Barcode, QRCode, Stamp)
     attr_accessor :signature_type
@@ -61,17 +61,29 @@ module GroupDocsSignatureCloud
     # Specifies height of signature
     attr_accessor :height
 
-    # Gets or sets the signing purpose comment
-    attr_accessor :comments
+    # Specifies metadata type.
+    attr_accessor :type
 
-    # Keeps true if this digital signature is valid and the document has not been tampered with
-    attr_accessor :is_valid
+    # Specifies metadata value type.
+    attr_accessor :data_type
 
-    # Gets or sets the time the document was signed
-    attr_accessor :sign_time
+    # Specifies metadata object value
+    attr_accessor :value
 
-    # Pdf digital signature properties
-    attr_accessor :pdf_digital_signature
+    # Specifies unique metadata name
+    attr_accessor :name
+
+    # The identifier of Image Metadata signature. See GroupDocs.Signature.Domain.ImageMetadataSignatures class that contains standard Signature with predefined Id value.
+    attr_accessor :id
+
+    # Size of  Image Metadata value
+    attr_accessor :size
+
+    # Description for standard Image Metadata signature
+    attr_accessor :description
+
+    # The prefix tag of Pdf Metadata signature name. By default this property is set to \"xmp\". Possible values are
+    attr_accessor :tag_prefix
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -107,10 +119,14 @@ module GroupDocsSignatureCloud
         :'left' => :'Left',
         :'width' => :'Width',
         :'height' => :'Height',
-        :'comments' => :'Comments',
-        :'is_valid' => :'IsValid',
-        :'sign_time' => :'SignTime',
-        :'pdf_digital_signature' => :'PdfDigitalSignature'
+        :'type' => :'Type',
+        :'data_type' => :'DataType',
+        :'value' => :'Value',
+        :'name' => :'Name',
+        :'id' => :'Id',
+        :'size' => :'Size',
+        :'description' => :'Description',
+        :'tag_prefix' => :'TagPrefix'
       }
     end
 
@@ -127,10 +143,14 @@ module GroupDocsSignatureCloud
         :'left' => :'Integer',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'comments' => :'String',
-        :'is_valid' => :'BOOLEAN',
-        :'sign_time' => :'DateTime',
-        :'pdf_digital_signature' => :'PdfDigitalSignature'
+        :'type' => :'String',
+        :'data_type' => :'String',
+        :'value' => :'String',
+        :'name' => :'String',
+        :'id' => :'Integer',
+        :'size' => :'Integer',
+        :'description' => :'String',
+        :'tag_prefix' => :'String'
       }
     end
 
@@ -182,20 +202,36 @@ module GroupDocsSignatureCloud
         self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'Comments')
-        self.comments = attributes[:'Comments']
+      if attributes.key?(:'Type')
+        self.type = attributes[:'Type']
       end
 
-      if attributes.key?(:'IsValid')
-        self.is_valid = attributes[:'IsValid']
+      if attributes.key?(:'DataType')
+        self.data_type = attributes[:'DataType']
       end
 
-      if attributes.key?(:'SignTime')
-        self.sign_time = attributes[:'SignTime']
+      if attributes.key?(:'Value')
+        self.value = attributes[:'Value']
       end
 
-      if attributes.key?(:'PdfDigitalSignature')
-        self.pdf_digital_signature = attributes[:'PdfDigitalSignature']
+      if attributes.key?(:'Name')
+        self.name = attributes[:'Name']
+      end
+
+      if attributes.key?(:'Id')
+        self.id = attributes[:'Id']
+      end
+
+      if attributes.key?(:'Size')
+        self.size = attributes[:'Size']
+      end
+
+      if attributes.key?(:'Description')
+        self.description = attributes[:'Description']
+      end
+
+      if attributes.key?(:'TagPrefix')
+        self.tag_prefix = attributes[:'TagPrefix']
       end
 
     end
@@ -236,12 +272,20 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
-      if @is_valid.nil?
-        invalid_properties.push("invalid value for 'is_valid', is_valid cannot be nil.")
+      if @type.nil?
+        invalid_properties.push("invalid value for 'type', type cannot be nil.")
       end
 
-      if @sign_time.nil?
-        invalid_properties.push("invalid value for 'sign_time', sign_time cannot be nil.")
+      if @data_type.nil?
+        invalid_properties.push("invalid value for 'data_type', data_type cannot be nil.")
+      end
+
+      if @id.nil?
+        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+      end
+
+      if @size.nil?
+        invalid_properties.push("invalid value for 'size', size cannot be nil.")
       end
 
       return invalid_properties
@@ -260,8 +304,14 @@ module GroupDocsSignatureCloud
       return false if @left.nil?
       return false if @width.nil?
       return false if @height.nil?
-      return false if @is_valid.nil?
-      return false if @sign_time.nil?
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["None", "Certificate", "Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
+      return false unless type_validator.valid?(@type)
+      return false if @data_type.nil?
+      data_type_validator = EnumAttributeValidator.new('String', ["Undefined", "Boolean", "Integer", "Double", "DateTime", "String"])
+      return false unless data_type_validator.valid?(@data_type)
+      return false if @id.nil?
+      return false if @size.nil?
       return true
     end
 
@@ -276,6 +326,34 @@ module GroupDocsSignatureCloud
         @signature_type = signature_type
       else
         @signature_type = validator.allowable_values[signature_type.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["None", "Certificate", "Image", "Pdf", "Presentation", "Spreadsheet", "WordProcessing"])
+      if type.to_i == 0
+        unless validator.valid?(type)
+          raise ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
+        end
+        @type = type
+      else
+        @type = validator.allowable_values[type.to_i]
+      end
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] data_type Object to be assigned
+    def data_type=(data_type)
+      validator = EnumAttributeValidator.new('String', ["Undefined", "Boolean", "Integer", "Double", "DateTime", "String"])
+      if data_type.to_i == 0
+        unless validator.valid?(data_type)
+          raise ArgumentError, "invalid value for 'data_type', must be one of #{validator.allowable_values}."
+        end
+        @data_type = data_type
+      else
+        @data_type = validator.allowable_values[data_type.to_i]
       end
     end
 
@@ -294,10 +372,14 @@ module GroupDocsSignatureCloud
           left == other.left &&
           width == other.width &&
           height == other.height &&
-          comments == other.comments &&
-          is_valid == other.is_valid &&
-          sign_time == other.sign_time &&
-          pdf_digital_signature == other.pdf_digital_signature
+          type == other.type &&
+          data_type == other.data_type &&
+          value == other.value &&
+          name == other.name &&
+          id == other.id &&
+          size == other.size &&
+          description == other.description &&
+          tag_prefix == other.tag_prefix
     end
 
     # @see the `==` method
@@ -309,7 +391,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page_number, signature_id, is_signature, created_on, modified_on, top, left, width, height, comments, is_valid, sign_time, pdf_digital_signature].hash
+      [signature_type, page_number, signature_id, is_signature, created_on, modified_on, top, left, width, height, type, data_type, value, name, id, size, description, tag_prefix].hash
     end
 
     # Downcases first letter.

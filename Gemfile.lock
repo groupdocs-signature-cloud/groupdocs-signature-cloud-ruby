@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    groupdocs_signature_cloud (22.6)
+    groupdocs_signature_cloud (23.6)
       addressable (~> 2.8.0, >= 2.8.0)
       faraday (~> 0.14.0)
 

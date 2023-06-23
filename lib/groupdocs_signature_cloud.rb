@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_signature_cloud.rb">
-#   Copyright (c) 2003-2022 Aspose Pty Ltd
+#   Copyright (c) 2003-2023 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -82,6 +82,7 @@ require_relative 'groupdocs_signature_cloud/models/image_appearance'
 require_relative 'groupdocs_signature_cloud/models/image_signature'
 require_relative 'groupdocs_signature_cloud/models/info_settings'
 require_relative 'groupdocs_signature_cloud/models/linear_gradient_brush'
+require_relative 'groupdocs_signature_cloud/models/metadata_signature'
 require_relative 'groupdocs_signature_cloud/models/pdf_digital_signature_appearance'
 require_relative 'groupdocs_signature_cloud/models/pdf_text_annotation_appearance'
 require_relative 'groupdocs_signature_cloud/models/pdf_text_sticker_appearance'
