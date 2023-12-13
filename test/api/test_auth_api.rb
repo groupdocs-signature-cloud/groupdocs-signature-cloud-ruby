@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
 
       info_api = init_info_api(app_sid, app_key)
 
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         info_api.get_supported_file_formats
       end
 
@@ -63,7 +63,7 @@ module GroupDocsSignatureCloud
 
       info_api = init_info_api(app_sid, app_key)
 
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         info_api.get_supported_file_formats
       end
 

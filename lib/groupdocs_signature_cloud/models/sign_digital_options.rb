@@ -108,6 +108,9 @@ module GroupDocsSignatureCloud
 
     # XAdES type GroupDocs.Signature.Options.DigitalSignOptions.XAdESType. Default value is None (XAdES is off). At this moment XAdES signature type is supported only for Spreadsheet documents.             
     attr_accessor :x_ad_es_type
+
+    # Options for signing VBA project
+    attr_accessor :digital_vba
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -158,7 +161,8 @@ module GroupDocsSignatureCloud
         :'visible' => :'Visible',
         :'password' => :'Password',
         :'certificate_file_path' => :'CertificateFilePath',
-        :'x_ad_es_type' => :'XAdESType'
+        :'x_ad_es_type' => :'XAdESType',
+        :'digital_vba' => :'DigitalVBA'
       }
     end
 
@@ -190,7 +194,8 @@ module GroupDocsSignatureCloud
         :'visible' => :'BOOLEAN',
         :'password' => :'String',
         :'certificate_file_path' => :'String',
-        :'x_ad_es_type' => :'String'
+        :'x_ad_es_type' => :'String',
+        :'digital_vba' => :'DigitalVBA'
       }
     end
 
@@ -304,6 +309,10 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'XAdESType')
         self.x_ad_es_type = attributes[:'XAdESType']
+      end
+
+      if attributes.key?(:'DigitalVBA')
+        self.digital_vba = attributes[:'DigitalVBA']
       end
 
     end
@@ -538,7 +547,8 @@ module GroupDocsSignatureCloud
           visible == other.visible &&
           password == other.password &&
           certificate_file_path == other.certificate_file_path &&
-          x_ad_es_type == other.x_ad_es_type
+          x_ad_es_type == other.x_ad_es_type &&
+          digital_vba == other.digital_vba
     end
 
     # @see the `==` method
@@ -550,7 +560,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, appearance, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border, reason, contact, location, visible, password, certificate_file_path, x_ad_es_type].hash
+      [signature_type, page, all_pages, pages_setup, appearance, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border, reason, contact, location, visible, password, certificate_file_path, x_ad_es_type, digital_vba].hash
     end
 
     # Downcases first letter.

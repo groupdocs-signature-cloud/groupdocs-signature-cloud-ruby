@@ -25,7 +25,7 @@
 
 # Common files
 require_relative 'groupdocs_signature_cloud/api_client'
-require_relative 'groupdocs_signature_cloud/api_error'
+require_relative 'groupdocs_signature_cloud/api_client_error'
 require_relative 'groupdocs_signature_cloud/version'
 require_relative 'groupdocs_signature_cloud/configuration'
 
@@ -39,6 +39,7 @@ require_relative 'groupdocs_signature_cloud/models/color'
 require_relative 'groupdocs_signature_cloud/models/consumption_result'
 require_relative 'groupdocs_signature_cloud/models/delete_options'
 require_relative 'groupdocs_signature_cloud/models/delete_result'
+require_relative 'groupdocs_signature_cloud/models/digital_vba'
 require_relative 'groupdocs_signature_cloud/models/disc_usage'
 require_relative 'groupdocs_signature_cloud/models/error'
 require_relative 'groupdocs_signature_cloud/models/error_details'

@@ -28,10 +28,9 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'faraday'
-require 'mimemagic'
 require 'addressable'
 require_relative 'version'
-require_relative 'api_error'
+require_relative 'api_client_error'
 
 module GroupDocsSignatureCloud
   #
@@ -69,7 +68,7 @@ module GroupDocsSignatureCloud
       end
 
       unless response.success?
-        raise ApiError.new(:code => response.status, :response_body => response.body)
+        raise ApiClientError.new(:code => response.status, :response_body => response.body)
       end
       
       data = deserialize(response, opts[:return_type]) if opts[:return_type]
@@ -111,7 +110,7 @@ module GroupDocsSignatureCloud
         end
       end
 
-      conn = Faraday.new url, { :params => query_params, :headers => header_params} do |f|
+      conn = Faraday.new url, { :params => query_params, :headers => header_params } do |f|
       f.request :multipart
       f.request :url_encoded
       f.adapter Faraday.default_adapter
@@ -283,7 +282,7 @@ module GroupDocsSignatureCloud
         form_params.each do |key, value|
           case value
           when ::File
-            data[key] = Faraday::UploadIO.new(value.path, MimeMagic.by_magic(value).to_s, key)
+            data[key] = Faraday::UploadIO.new(value.path, "application/octet-stream", key)
           when ::Array, nil
             data[key] = value
           else
