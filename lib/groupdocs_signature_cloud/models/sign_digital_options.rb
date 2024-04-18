@@ -111,6 +111,12 @@ module GroupDocsSignatureCloud
 
     # Options for signing VBA project
     attr_accessor :digital_vba
+
+    # The time the document was signed.
+    attr_accessor :sign_time
+
+    # The signing purpose comment.
+    attr_accessor :comments
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -162,7 +168,9 @@ module GroupDocsSignatureCloud
         :'password' => :'Password',
         :'certificate_file_path' => :'CertificateFilePath',
         :'x_ad_es_type' => :'XAdESType',
-        :'digital_vba' => :'DigitalVBA'
+        :'digital_vba' => :'DigitalVBA',
+        :'sign_time' => :'SignTime',
+        :'comments' => :'Comments'
       }
     end
 
@@ -195,7 +203,9 @@ module GroupDocsSignatureCloud
         :'password' => :'String',
         :'certificate_file_path' => :'String',
         :'x_ad_es_type' => :'String',
-        :'digital_vba' => :'DigitalVBA'
+        :'digital_vba' => :'DigitalVBA',
+        :'sign_time' => :'DateTime',
+        :'comments' => :'String'
       }
     end
 
@@ -313,6 +323,14 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'DigitalVBA')
         self.digital_vba = attributes[:'DigitalVBA']
+      end
+
+      if attributes.key?(:'SignTime')
+        self.sign_time = attributes[:'SignTime']
+      end
+
+      if attributes.key?(:'Comments')
+        self.comments = attributes[:'Comments']
       end
 
     end
@@ -548,7 +566,9 @@ module GroupDocsSignatureCloud
           password == other.password &&
           certificate_file_path == other.certificate_file_path &&
           x_ad_es_type == other.x_ad_es_type &&
-          digital_vba == other.digital_vba
+          digital_vba == other.digital_vba &&
+          sign_time == other.sign_time &&
+          comments == other.comments
     end
 
     # @see the `==` method
@@ -560,7 +580,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [signature_type, page, all_pages, pages_setup, appearance, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border, reason, contact, location, visible, password, certificate_file_path, x_ad_es_type, digital_vba].hash
+      [signature_type, page, all_pages, pages_setup, appearance, image_file_path, left, top, width, height, location_measure_type, size_measure_type, rotation_angle, horizontal_alignment, vertical_alignment, margin, margin_measure_type, transparency, border, reason, contact, location, visible, password, certificate_file_path, x_ad_es_type, digital_vba, sign_time, comments].hash
     end
 
     # Downcases first letter.
