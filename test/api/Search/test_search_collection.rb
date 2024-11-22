@@ -107,7 +107,7 @@ module GroupDocsSignatureCloud
         ps.page_numbers = [1]
         opts.pages_setup = ps
         opts.signature_type = 'Barcode'
-        opts.barcode_type = 'Code39Standard'
+        opts.barcode_type = 'Code39'
         opts.text = '123456789012'
         opts.match_type = 'Contains'
     end

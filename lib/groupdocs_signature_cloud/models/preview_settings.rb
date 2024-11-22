@@ -40,6 +40,9 @@ module GroupDocsSignatureCloud
     # Preview images height
     attr_accessor :height
 
+    # Gets or sets the resolution of the preview images in DPI (dots per inch).
+    attr_accessor :resolution
+
     # Preview page numbers
     attr_accessor :page_numbers
 
@@ -79,6 +82,7 @@ module GroupDocsSignatureCloud
         :'file_info' => :'FileInfo',
         :'width' => :'Width',
         :'height' => :'Height',
+        :'resolution' => :'Resolution',
         :'page_numbers' => :'PageNumbers',
         :'preview_format' => :'PreviewFormat',
         :'hide_signatures' => :'HideSignatures',
@@ -92,6 +96,7 @@ module GroupDocsSignatureCloud
         :'file_info' => :'FileInfo',
         :'width' => :'Integer',
         :'height' => :'Integer',
+        :'resolution' => :'Integer',
         :'page_numbers' => :'Array<Integer>',
         :'preview_format' => :'String',
         :'hide_signatures' => :'BOOLEAN',
@@ -117,6 +122,10 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'Height')
         self.height = attributes[:'Height']
+      end
+
+      if attributes.key?(:'Resolution')
+        self.resolution = attributes[:'Resolution']
       end
 
       if attributes.key?(:'PageNumbers')
@@ -151,6 +160,10 @@ module GroupDocsSignatureCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
+      if @resolution.nil?
+        invalid_properties.push("invalid value for 'resolution', resolution cannot be nil.")
+      end
+
       if @preview_format.nil?
         invalid_properties.push("invalid value for 'preview_format', preview_format cannot be nil.")
       end
@@ -167,6 +180,7 @@ module GroupDocsSignatureCloud
     def valid?
       return false if @width.nil?
       return false if @height.nil?
+      return false if @resolution.nil?
       return false if @preview_format.nil?
       preview_format_validator = EnumAttributeValidator.new('String', ["PNG", "JPEG", "BMP"])
       return false unless preview_format_validator.valid?(@preview_format)
@@ -196,6 +210,7 @@ module GroupDocsSignatureCloud
           file_info == other.file_info &&
           width == other.width &&
           height == other.height &&
+          resolution == other.resolution &&
           page_numbers == other.page_numbers &&
           preview_format == other.preview_format &&
           hide_signatures == other.hide_signatures &&
@@ -211,7 +226,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, width, height, page_numbers, preview_format, hide_signatures, output_path].hash
+      [file_info, width, height, resolution, page_numbers, preview_format, hide_signatures, output_path].hash
     end
 
     # Downcases first letter.
