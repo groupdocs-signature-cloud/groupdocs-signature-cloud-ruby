@@ -34,8 +34,11 @@ module GroupDocsSignatureCloud
     # Specifies the type of appearance
     attr_accessor :appearance_type
 
-    # Get or set background color of signature appearance. By default the value is SystemColors.Windows
+    # Get or set background color of signature appearance. 
     attr_accessor :background
+
+    # Get or set foreground text color of signature appearance. By default the value is Color.FromArgb(76, 100, 255)
+    attr_accessor :foreground
 
     # Gets or sets contact info label. Default value: \"Contact\". if this value is empty then no contact label will appear on digital signature area.             
     attr_accessor :contact_info_label
@@ -84,6 +87,7 @@ module GroupDocsSignatureCloud
       {
         :'appearance_type' => :'AppearanceType',
         :'background' => :'Background',
+        :'foreground' => :'Foreground',
         :'contact_info_label' => :'ContactInfoLabel',
         :'date_signed_at_label' => :'DateSignedAtLabel',
         :'digital_signed_label' => :'DigitalSignedLabel',
@@ -99,6 +103,7 @@ module GroupDocsSignatureCloud
       {
         :'appearance_type' => :'String',
         :'background' => :'Color',
+        :'foreground' => :'Color',
         :'contact_info_label' => :'String',
         :'date_signed_at_label' => :'String',
         :'digital_signed_label' => :'String',
@@ -123,6 +128,10 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'Background')
         self.background = attributes[:'Background']
+      end
+
+      if attributes.key?(:'Foreground')
+        self.foreground = attributes[:'Foreground']
       end
 
       if attributes.key?(:'ContactInfoLabel')
@@ -196,6 +205,7 @@ module GroupDocsSignatureCloud
       self.class == other.class &&
           appearance_type == other.appearance_type &&
           background == other.background &&
+          foreground == other.foreground &&
           contact_info_label == other.contact_info_label &&
           date_signed_at_label == other.date_signed_at_label &&
           digital_signed_label == other.digital_signed_label &&
@@ -214,7 +224,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [appearance_type, background, contact_info_label, date_signed_at_label, digital_signed_label, font_family_name, font_size, location_label, reason_label].hash
+      [appearance_type, background, foreground, contact_info_label, date_signed_at_label, digital_signed_label, font_family_name, font_size, location_label, reason_label].hash
     end
 
     # Downcases first letter.
