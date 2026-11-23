@@ -26,11 +26,7 @@
 #
 module GroupDocsSignatureCloud  
     
-  require 'openssl'    
-    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-
     require "minitest/autorun"
-    require "minitest/unit"
 
     require_relative './../lib/groupdocs_signature_cloud'
     require_relative './test_settings'
@@ -38,20 +34,31 @@ module GroupDocsSignatureCloud
 
     class TestContext < Minitest::Test
 
-      include MiniTest::Assertions
-
       @@test_files_uploaded ||= false
+      @@apis ||= nil
 
       def setup
-        config = Configuration.new(TestSettings::APP_SID, TestSettings::APP_KEY)
-        config.api_base_url = TestSettings::API_BASE_URL
-        #config.debugging = true
+        # API clients are shared between tests, so the access token is requested only once
+        # instead of once per test (that is much faster and does not overload the auth server)
+        @@apis ||= begin
+          config = Configuration.new(TestSettings::APP_SID, TestSettings::APP_KEY)
+          config.api_base_url = TestSettings::API_BASE_URL
+          #config.debugging = true
 
-        @info_api = InfoApi.from_config(config)
-        @sign_api = SignApi.from_config(config)
-        @storage_api = StorageApi.from_config(config)   
-        @folder_api = FolderApi.from_config(config)   
-        @file_api = FileApi.from_config(config)   
+          {
+            info: InfoApi.from_config(config),
+            sign: SignApi.from_config(config),
+            storage: StorageApi.from_config(config),
+            folder: FolderApi.from_config(config),
+            file: FileApi.from_config(config)
+          }
+        end
+
+        @info_api = @@apis[:info]
+        @sign_api = @@apis[:sign]
+        @storage_api = @@apis[:storage]
+        @folder_api = @@apis[:folder]
+        @file_api = @@apis[:file]
 
         upload_test_files()
       end
@@ -67,8 +74,6 @@ module GroupDocsSignatureCloud
 
       def upload_test_files
         unless @@test_files_uploaded then
-          test_file_path = "test\\test_files\\"
-
           TestFile.test_files_list.each do |test_file|
             
             exist_request = ObjectExistsRequest.new(test_file.path)
@@ -76,9 +81,10 @@ module GroupDocsSignatureCloud
             
             if !exist_response.exists then
               @storage_api.config.logger.debug "Uploading: " + test_file.path
-              file = File.open(test_file_path + test_file.path, "r")              
-              upload_request = UploadFileRequest.new test_file.path, file
-              @file_api.upload_file(upload_request)
+              File.open(test_file.local_path, "rb") do |file|
+                upload_request = UploadFileRequest.new test_file.path, file
+                @file_api.upload_file(upload_request)
+              end
             end
           end
           @@test_files_uploaded = true

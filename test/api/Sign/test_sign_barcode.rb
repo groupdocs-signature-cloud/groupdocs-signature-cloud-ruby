@@ -33,7 +33,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_barcode_image
       test_file = TestFile.image_jpg
-      signedFileName = "Output\\ImageBarcodeSigned.jpg"         
+      signedFileName = "Output/ImageBarcodeSigned.jpg"         
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
@@ -41,7 +41,7 @@ module GroupDocsSignatureCloud
 
     def test_sign_barcode_pdf
       test_file = TestFile.pdf_one_page
-      signedFileName = "Output\\PdfBarcodeSigned.pdf"          
+      signedFileName = "Output/PdfBarcodeSigned.pdf"          
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_barcode_presentation
       test_file = TestFile.presentation_pptx
-      signedFileName = "Output\\PresentationBarcodeSigned.pptx"       
+      signedFileName = "Output/PresentationBarcodeSigned.pptx"       
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
@@ -57,7 +57,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_barcode_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
-      signedFileName = "Output\\SpreadsheetBarcodeSigned.xlsx"
+      signedFileName = "Output/SpreadsheetBarcodeSigned.xlsx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
@@ -65,7 +65,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_barcode_wordprocessing
       test_file = TestFile.word_docx
-      signedFileName = "Output\\WordBarcodeSigned.docx"
+      signedFileName = "Output/WordBarcodeSigned.docx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     

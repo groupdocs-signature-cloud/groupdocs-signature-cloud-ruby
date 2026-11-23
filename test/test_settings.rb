@@ -25,14 +25,22 @@
 # --------------------------------------------------------------------------------------------------------------------
 #
 
-module GroupDocsViewerCloud
+module GroupDocsSignatureCloud
+    # Test settings. Values can be overridden with environment variables, so no source file
+    # has to be modified to run the tests against another environment:
+    #   TEST_APP_SID, TEST_APP_KEY, TEST_API_BASE_URL
     class TestSettings
+        def self.setting(name, default)
+            value = ENV[name]
+            value.nil? || value.empty? ? default : value
+        end
+
         #
         # Get your APP_SID and APP_KEY at https://dashboard.groupdocs.cloud/ (free
         # registration is required)
         #
-        APP_SID = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-        APP_KEY = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-        API_BASE_URL = "https://api.groupdocs.cloud"
+        APP_SID = setting("TEST_APP_SID", "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX")
+        APP_KEY = setting("TEST_APP_KEY", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+        API_BASE_URL = setting("TEST_API_BASE_URL", "https://api.groupdocs.cloud")
     end
 end

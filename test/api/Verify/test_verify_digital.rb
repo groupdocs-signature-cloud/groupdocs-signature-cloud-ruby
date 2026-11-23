@@ -36,7 +36,7 @@ module GroupDocsSignatureCloud
     end
 
     def test_verify_digital_pdf
-      test_file = TestFile.pdf_signed
+      test_file = TestFile.pdf_digital_signed
       settings = populate_options(test_file)               
       response = @sign_api.verify_signatures(VerifySignaturesRequest.new settings)
       check_response(response, test_file)        

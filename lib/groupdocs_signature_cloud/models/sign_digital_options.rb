@@ -406,7 +406,7 @@ module GroupDocsSignatureCloud
     # @return true if the model is valid
     def valid?
       return false if @signature_type.nil?
-      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
+      signature_type_validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata", "ImageDigital"])
       return false unless signature_type_validator.valid?(@signature_type)
       return false if @all_pages.nil?
       return false if @left.nil?
@@ -440,7 +440,7 @@ module GroupDocsSignatureCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] signature_type Object to be assigned
     def signature_type=(signature_type)
-      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata"])
+      validator = EnumAttributeValidator.new('String', ["None", "Text", "Image", "Digital", "Barcode", "QRCode", "Stamp", "FormField", "Metadata", "ImageDigital"])
       if signature_type.to_i == 0
         unless validator.valid?(signature_type)
           raise ArgumentError, "invalid value for 'signature_type', must be one of #{validator.allowable_values}."

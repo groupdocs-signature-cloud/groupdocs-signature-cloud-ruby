@@ -33,7 +33,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_stamp_image
       test_file = TestFile.image_jpg
-      signedFileName = "Output\\ImageStampSigned.jpg"         
+      signedFileName = "Output/ImageStampSigned.jpg"         
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
@@ -41,7 +41,7 @@ module GroupDocsSignatureCloud
 
     def test_sign_stamp_pdf
       test_file = TestFile.pdf_one_page
-      signedFileName = "Output\\PdfStampSigned.pdf"          
+      signedFileName = "Output/PdfStampSigned.pdf"          
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_stamp_presentation
       test_file = TestFile.presentation_pptx
-      signedFileName = "Output\\PresentationStampSigned.pptx"       
+      signedFileName = "Output/PresentationStampSigned.pptx"       
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
@@ -57,7 +57,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_stamp_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
-      signedFileName = "Output\\SpreadsheetStampSigned.xlsx"
+      signedFileName = "Output/SpreadsheetStampSigned.xlsx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
@@ -65,7 +65,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_stamp_wordprocessing
       test_file = TestFile.word_docx
-      signedFileName = "Output\\WordStampSigned.docx"
+      signedFileName = "Output/WordStampSigned.docx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     

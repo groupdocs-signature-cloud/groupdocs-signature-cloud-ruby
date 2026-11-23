@@ -60,6 +60,9 @@ module GroupDocsSignatureCloud
 
     # Gets or sets reason label. Default value: \"Reason\". if this value is empty then no reason label will appear on digital signature area.
     attr_accessor :reason_label
+
+    # Gets or sets whether the signature image is drawn in front of the text.
+    attr_accessor :is_foreground_image
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -94,7 +97,8 @@ module GroupDocsSignatureCloud
         :'font_family_name' => :'FontFamilyName',
         :'font_size' => :'FontSize',
         :'location_label' => :'LocationLabel',
-        :'reason_label' => :'ReasonLabel'
+        :'reason_label' => :'ReasonLabel',
+        :'is_foreground_image' => :'IsForegroundImage'
       }
     end
 
@@ -110,7 +114,8 @@ module GroupDocsSignatureCloud
         :'font_family_name' => :'String',
         :'font_size' => :'Float',
         :'location_label' => :'String',
-        :'reason_label' => :'String'
+        :'reason_label' => :'String',
+        :'is_foreground_image' => :'BOOLEAN'
       }
     end
 
@@ -160,6 +165,10 @@ module GroupDocsSignatureCloud
 
       if attributes.key?(:'ReasonLabel')
         self.reason_label = attributes[:'ReasonLabel']
+      end
+
+      if attributes.key?(:'IsForegroundImage')
+        self.is_foreground_image = attributes[:'IsForegroundImage']
       end
 
     end
@@ -212,7 +221,8 @@ module GroupDocsSignatureCloud
           font_family_name == other.font_family_name &&
           font_size == other.font_size &&
           location_label == other.location_label &&
-          reason_label == other.reason_label
+          reason_label == other.reason_label &&
+          is_foreground_image == other.is_foreground_image
     end
 
     # @see the `==` method
@@ -224,7 +234,7 @@ module GroupDocsSignatureCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [appearance_type, background, foreground, contact_info_label, date_signed_at_label, digital_signed_label, font_family_name, font_size, location_label, reason_label].hash
+      [appearance_type, background, foreground, contact_info_label, date_signed_at_label, digital_signed_label, font_family_name, font_size, location_label, reason_label, is_foreground_image].hash
     end
 
     # Downcases first letter.

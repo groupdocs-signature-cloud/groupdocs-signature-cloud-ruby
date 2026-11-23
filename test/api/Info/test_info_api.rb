@@ -77,7 +77,7 @@ module GroupDocsSignatureCloud
       error = assert_raises ApiClientError do
         @info_api.get_info(request)
       end
-      assert_equal "Can't find file located at 'some-folder\\notexist.docx'.", error.message            
+      assert_equal "Can't find file located at 'some-folder/notexist.docx'.", error.message            
     end    
 
   end

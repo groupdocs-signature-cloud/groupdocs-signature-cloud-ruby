@@ -37,7 +37,7 @@ module GroupDocsSignatureCloud
 
     def test_sign_digital_pdf
       test_file = TestFile.pdf_one_page
-      signedFileName = "Output\\PdfDigitalSigned.pdf"          
+      signedFileName = "Output/PdfDigitalSigned.pdf"          
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_digital_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
-      signedFileName = "Output\\SpreadsheetDigitalSigned.xlsx"
+      signedFileName = "Output/SpreadsheetDigitalSigned.xlsx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
@@ -57,7 +57,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_digital_wordprocessing
       test_file = TestFile.word_docx
-      signedFileName = "Output\\WordDigitalSigned.docx"
+      signedFileName = "Output/WordDigitalSigned.docx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     

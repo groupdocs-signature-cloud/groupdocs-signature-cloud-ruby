@@ -33,7 +33,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_collection_image
       test_file = TestFile.image_jpg
-      signedFileName = "Output\\ImageCollectionSigned.jpg"         
+      signedFileName = "Output/ImageCollectionSigned.jpg"         
       settings = populate_options_image(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
@@ -41,7 +41,7 @@ module GroupDocsSignatureCloud
 
     def test_sign_collection_pdf
       test_file = TestFile.pdf_one_page
-      signedFileName = "Output\\PdfCollectionSigned.pdf"          
+      signedFileName = "Output/PdfCollectionSigned.pdf"          
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_collection_presentation
       test_file = TestFile.presentation_pptx
-      signedFileName = "Output\\PresentationCollectionSigned.pptx"       
+      signedFileName = "Output/PresentationCollectionSigned.pptx"       
       settings = populate_options_image(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
@@ -57,7 +57,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_collection_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
-      signedFileName = "Output\\SpreadsheetCollectionSigned.xlsx"
+      signedFileName = "Output/SpreadsheetCollectionSigned.xlsx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
@@ -65,7 +65,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_collection_wordprocessing
       test_file = TestFile.word_docx
-      signedFileName = "Output\\WordCollectionSigned.docx"
+      signedFileName = "Output/WordCollectionSigned.docx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     

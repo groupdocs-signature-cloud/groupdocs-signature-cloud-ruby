@@ -32,8 +32,17 @@ module GroupDocsSignatureCloud
         attr_accessor :password;
         attr_accessor :size;
         
+        # Root folder of the test files on the local disk
+        LOCAL_ROOT = File.join(File.expand_path(File.dirname(__FILE__)), "test_files")
+
+        # Path of the file in the cloud storage (always forward slashes, regardless of the OS)
         def path
             folder + file_name
+        end
+
+        # Absolute path of the file on the local disk
+        def local_path
+            File.join(LOCAL_ROOT, *folder.split("/"), file_name)
         end
 
         def file_info
@@ -46,42 +55,42 @@ module GroupDocsSignatureCloud
         def self.pdf_one_page
             f = TestFile.new
             f.file_name = "01_pages.pdf"
-            f.folder = "Pdf\\"
+            f.folder = "Pdf/"
             f
         end
 
         def self.image_jpg
             f = TestFile.new
             f.file_name = "01_pages.jpg"
-            f.folder = "Images\\"
+            f.folder = "Images/"
             f
         end
 
         def self.presentation_pptx
             f = TestFile.new
             f.file_name = "01_pages.pptx"
-            f.folder = "Presentations\\"
+            f.folder = "Presentations/"
             f
         end
 
         def self.spreadsheet_xlsx
             f = TestFile.new
             f.file_name = "01_pages.xlsx"
-            f.folder = "Spreadsheets\\"
+            f.folder = "Spreadsheets/"
             f
         end
 
         def self.word_docx
             f = TestFile.new
             f.file_name = "01_pages.docx"
-            f.folder = "WordProcessing\\"
+            f.folder = "WordProcessing/"
             f
         end        
 
         def self.image_signed
             f = TestFile.new
             f.file_name = "SignedForVerificationAll.png"
-            f.folder = "Signed\\"
+            f.folder = "Signed/"
             f.size = 27533  
             f
         end
@@ -89,15 +98,23 @@ module GroupDocsSignatureCloud
         def self.pdf_signed
             f = TestFile.new
             f.file_name = "SignedForVerificationAll.pdf"
-            f.folder = "Signed\\"
+            f.folder = "Signed/"
             f.size = 164060
+            f
+        end
+
+        def self.pdf_digital_signed
+            f = TestFile.new
+            f.file_name = "SignedForVerificationDigital.pdf"
+            f.folder = "Signed/"
+            f.size = 581574
             f
         end
 
         def self.presentation_signed
             f = TestFile.new
             f.file_name = "SignedForVerificationAll.pptx"
-            f.folder = "Signed\\"
+            f.folder = "Signed/"
             f.size = 43205
             f
         end
@@ -105,7 +122,7 @@ module GroupDocsSignatureCloud
         def self.spreadsheet_signed
             f = TestFile.new
             f.file_name = "SignedForVerificationAll.xlsx"
-            f.folder = "Signed\\"
+            f.folder = "Signed/"
             f.size = 318157
             f
         end
@@ -113,7 +130,7 @@ module GroupDocsSignatureCloud
         def self.wordprocessing_signed
             f = TestFile.new
             f.file_name = "SignedForVerificationAll.docx"
-            f.folder = "Signed\\"
+            f.folder = "Signed/"
             f.size = 1358290
             f
         end
@@ -121,28 +138,28 @@ module GroupDocsSignatureCloud
         def self.additional_signature01
             f = TestFile.new
             f.file_name = "signature_01.jpg"
-            f.folder = "Additional\\"  
+            f.folder = "Additional/"  
             f
         end
 
         def self.additional_pfx
             f = TestFile.new
-            f.file_name = "SherlockHolmes.pfx"
-            f.folder = "Additional\\"  
+            f.file_name = "TestCertificate.pfx"
+            f.folder = "Additional/"  
             f
         end
         
         def self.image_sign
             f = TestFile.new
             f.file_name = "JohnSmithSign.png"
-            f.folder = "Additional\\"     
+            f.folder = "Additional/"     
             f
         end
 
         def self.not_exist
             f = TestFile.new
             f.file_name = "notexist.docx"
-            f.folder = "some-folder\\"     
+            f.folder = "some-folder/"     
             f
         end        
 
@@ -155,6 +172,7 @@ module GroupDocsSignatureCloud
                 self.word_docx,
                 self.image_signed,
                 self.pdf_signed,
+                self.pdf_digital_signed,
                 self.presentation_signed,
                 self.spreadsheet_signed,
                 self.wordprocessing_signed,

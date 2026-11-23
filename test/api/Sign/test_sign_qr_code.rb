@@ -33,7 +33,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_qr_code_image
       test_file = TestFile.image_jpg
-      signedFileName = "Output\\ImageQRcodeSigned.jpg"         
+      signedFileName = "Output/ImageQRcodeSigned.jpg"         
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)    
@@ -41,7 +41,7 @@ module GroupDocsSignatureCloud
 
     def test_sign_qr_code_pdf
       test_file = TestFile.pdf_one_page
-      signedFileName = "Output\\PdfQRcodeSigned.pdf"          
+      signedFileName = "Output/PdfQRcodeSigned.pdf"          
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)        
@@ -49,7 +49,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_qr_code_presentation
       test_file = TestFile.presentation_pptx
-      signedFileName = "Output\\PresentationQRcodeSigned.pptx"       
+      signedFileName = "Output/PresentationQRcodeSigned.pptx"       
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)       
@@ -57,7 +57,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_qr_code_spreadsheet
       test_file = TestFile.spreadsheet_xlsx
-      signedFileName = "Output\\SpreadsheetQRcodeSigned.xlsx"
+      signedFileName = "Output/SpreadsheetQRcodeSigned.xlsx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)      
@@ -65,7 +65,7 @@ module GroupDocsSignatureCloud
     
     def test_sign_qr_code_wordprocessing
       test_file = TestFile.word_docx
-      signedFileName = "Output\\WordQRcodeSigned.docx"
+      signedFileName = "Output/WordQRcodeSigned.docx"
       settings = populate_options(signedFileName, test_file)               
       response = @sign_api.create_signatures(CreateSignaturesRequest.new settings)
       check_response(response, signedFileName)     

@@ -45,9 +45,10 @@ module GroupDocsSignatureCloud
       assert_equal false, response.exists
 
       # Upload file back
-      file = File.open("test\\test_files\\" + test_file.path, "r")
-      upload_request = UploadFileRequest.new test_file.path, file
-      @file_api.upload_file(upload_request)
+      File.open(test_file.local_path, "rb") do |file|
+        upload_request = UploadFileRequest.new test_file.path, file
+        @file_api.upload_file(upload_request)
+      end
 
       # Check file exists
       request = ObjectExistsRequest.new test_file.path

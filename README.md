@@ -12,7 +12,7 @@ gem install groupdocs_signature_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_signature_cloud", "~> 25.6"
+gem "groupdocs_signature_cloud", "~> 26.11"
 ```
 
 ## Getting Started
@@ -38,6 +38,21 @@ response.formats.each do |format|
   puts("#{format.file_format} (#{format.extension})") 
 end
 ```
+
+## Supported platforms
+Ruby 2.5 or later (including Ruby 3.x and 4.x) on Windows, Linux and macOS.
+
+## Running tests
+```shell
+bundle install
+
+# offline unit tests, no credentials required
+bundle exec rake test:unit
+
+# all tests, including API tests that talk to the cloud
+TEST_APP_SID=<app_sid> TEST_APP_KEY=<app_key> bundle exec rake test
+```
+The API base URL can be overridden with `TEST_API_BASE_URL` (default is `https://api.groupdocs.cloud`).
 
 ## Licensing
 GroupDocs.Signature Cloud Ruby SDK licensed under [MIT License](LICENSE).
